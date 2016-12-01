@@ -36,7 +36,6 @@ void Sensor::read(){
 //    Serial.print(i);
 //    Serial.print(" = ");
 //    Serial.println(analog);
-//    delay(750);
   digitalWrite(this->digitalPin, LOW);
 
   if(analog>=this->cap){

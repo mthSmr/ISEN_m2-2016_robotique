@@ -39,7 +39,7 @@ public:
     //for demo
     void dodger(ControlPanel const*, Led const*);
     void lineFollower();
-    void joystick();
+    void joystick(ControlPanel const *buttonPanel, Led const *leds);
     
     //user programs
     void firmata();

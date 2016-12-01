@@ -20,6 +20,7 @@
 
 class Menu {
     int choice;
+    int tempChoice;
     int locations;
     
 public:    

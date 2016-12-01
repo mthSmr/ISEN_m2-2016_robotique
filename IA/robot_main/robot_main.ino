@@ -23,9 +23,9 @@ Motor motor_l = Motor(9,8,10);
 Motor motor_r = Motor(7,6,5);
 
 //------Sensors-------://
-Sensor sensorAvG = Sensor(37, A10, 140, SensorType::infraR, -1); 
-Sensor sensorAvM = Sensor(39, A11, 140, SensorType::infraR, 0);
-Sensor sensorAvD = Sensor(41, A12, 140, SensorType::infraR, 1);
+Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
+Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
+Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
 
 //------LEDs-------://
     Led frontLeds = Led(44,5);

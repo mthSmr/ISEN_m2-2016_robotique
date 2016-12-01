@@ -20,12 +20,14 @@
 
 Menu::Menu() {
     this->locations = 0;
-    this->choice =-1;
+    this->choice = 0;
+    this->tempChoice = 0;
 }
 
 Menu::Menu(int locationsNbr){
     this->locations = locationsNbr;
-    this->choice = -1;
+    this->choice = 0;
+    this->tempChoice = 0;
 }
 
 
@@ -46,7 +48,8 @@ void Menu::setLocations(int locationsNbr){
 
 void Menu::runChoice(Program const *robot, ControlPanel const *buttonPanel, Led const *leds){
         
-        
+        Serial.print("choice = ");
+            Serial.println(this->choice);
         switch(this->choice){
             
             case 0 : // bleu:evitement d'obstacle
@@ -54,6 +57,7 @@ void Menu::runChoice(Program const *robot, ControlPanel const *buttonPanel, Led 
                 break;
                 
             case 1 : // orange:suiveur de ligne
+                robot->joystick(buttonPanel, leds);
                 break;
                 
             case 2: //user progrm
@@ -66,20 +70,21 @@ void Menu::runChoice(Program const *robot, ControlPanel const *buttonPanel, Led 
             default:
                 break;
         }
-    
+    this->choice = 0;
+    this->tempChoice = 0;
 }
 
 void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led const *leds){
-     int tempChoice = 0; 
+  
      switch(buttonPanel->analyze()){
         
             case 1 : // rightBtn
-                this->choice++;
+                this->tempChoice++;
                 delay(250);
                 break;
                 
             case 2: // leftBtn
-                this->choice--;
+                this->tempChoice--;
                 delay(250);
                 break;
                 
@@ -92,7 +97,6 @@ void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led co
                 break;
                 
             case 5 : // validateBtn
-                this->choice=tempChoice;
                 runChoice(robot,buttonPanel,leds);
                 break;
                 
@@ -100,16 +104,15 @@ void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led co
                 break;
         }
 
-        tempChoice = abs(choice)%locations;
+        choice = abs(this->tempChoice)%locations;
         
-        if (tempChoice == 0){
+        if (choice == 0){
           leds->setColor(0, 128, 255);//bleu:evitement d'obstacle
           
         }
-        if(tempChoice == 1){
+        if(choice == 1){
           leds->setColor(231, 1, 62);//orange:suiveur de ligne
         }
-        
     
 }
 
