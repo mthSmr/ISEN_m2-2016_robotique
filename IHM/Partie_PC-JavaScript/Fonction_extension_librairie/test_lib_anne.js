@@ -272,7 +272,18 @@
   }
   
   function ledOn(numLed, R, G, B) {
-    var msg = new Uint8Array([numLed, R, G, B]);
+    var msg = new Uint8Array([LED,numLed, R, G, B]);
+    device.send(msg.buffer);
+  }
+
+  function motor(direction, quelMoteur, pwmMot, temps){
+    var motur;
+    if (quelMoteur === "Droite"){
+motur = 0b00000000;
+    }else if(quelMoteur === "Gauche"){
+      motur = 0b00000001;
+    }
+    var msg = new Uint8Array([MOTOR, direction, motur, pwmMot, temps])
     device.send(msg.buffer);
   }
 

@@ -280,6 +280,10 @@ void FirmataClass::processInput(void)
       case REPORT_VERSION:
         Firmata.printVersion();
         break;
+      case MOTOR:
+      case LED:
+            waitForData = 5;
+            break;    
     }
   }
 }
