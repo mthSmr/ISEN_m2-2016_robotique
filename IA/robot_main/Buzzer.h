@@ -24,6 +24,8 @@ public:
     Buzzer();
     Buzzer(int); //definition du pin speaker
     
+    void PlaySon();
+    void PlaySon(int);
     
 };
 

@@ -51,8 +51,6 @@ Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
     Program robot = Program(2,3);
 
 
-    
-
 void setup() {
     
     //------motor init-------://
@@ -81,8 +79,15 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  //------Partie de CrashTEST------//
+  
+  speaker_main.PlaySon(440);
+  
+  
+/*
   //------menu-------://
     
     menu.runMenu(&robot,&controls,&frontLeds);
     //robot.dodger(&controls,&frontLeds);
+*/
 }

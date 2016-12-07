@@ -24,5 +24,17 @@ Buzzer::Buzzer(int newPin) {
     pinMode(this->pin, INPUT); //definition du pin Buzzer
 }
 
+void Buzzer::PlaySon(){          //Par defaut on fait rien
+  
+}
 
+void Buzzer::PlaySon(int frequency){          //Joue un seul Son
+  
+  if(frequency!=0){ 
+        tone(this->pin,frequency); //A MODIFIER VITE
+    } else
+    {
+      noTone(this->pin);
+    }
+  }
   
