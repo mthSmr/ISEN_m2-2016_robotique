@@ -12,3 +12,20 @@
 #define SON_H
 
 #include <vector>
+
+class Son {
+
+public:
+    int pin;
+    
+public:
+    //Son ne pas oublier la fonction qui défini le pin
+    //Les fonctions qui jour les son.
+    Son();
+    Son(int);
+    
+    
+
+};
+
+#endif /* SON_H */
