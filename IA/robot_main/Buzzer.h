@@ -5,27 +5,26 @@
  */
 
 /* 
- * File:   Led.h
+ * File:   Buzzer.h
  */
 
-#ifndef SON_H
-#define SON_H
+#ifndef BUZZER_H
+#define BUZZER_H
 
 #include <vector>
 
-class Son {
+class Buzzer {
 
 public:
     int pin;
     
 public:
     //Son ne pas oublier la fonction qui défini le pin
-    //Les fonctions qui jour les son.
-    Son();
-    Son(int);
+    //Les fonctions qui jour les Buzzer.
+    Buzzer();
+    Buzzer(int); //definition du pin speaker
     
     
-
 };
 
-#endif /* SON_H */
+#endif /* Buzzer_H */
