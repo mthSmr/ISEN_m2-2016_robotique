@@ -15,6 +15,11 @@
 #include <vector> 
 #include "Arduino.h"
 
+//Les Mélodies
+
+
+
+
 
 Buzzer::Buzzer() {          //Par defaut on fait rien.
 }
@@ -31,10 +36,36 @@ void Buzzer::PlaySon(){          //Par defaut on fait rien
 void Buzzer::PlaySon(int frequency){          //Joue un seul Son
   
   if(frequency!=0){ 
-        tone(this->pin,frequency); //A MODIFIER VITE
+        tone(this->pin,frequency); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
     } else
     {
       noTone(this->pin);
     }
   }
+
+void Buzzer::PlayMelody(int melody){
+
+  switch (melody)
+    {
+      case WELCOMSONG:
+              this->PlaySon(523); //do
+              delay(300);
+              this->PlaySon(0);
+              delay(100);
+              this->PlaySon(523); //do
+              delay(300);
+              this->PlaySon(0);
+              delay(100);
+              this->PlaySon(523); //do
+              delay(300);
+              this->PlaySon(0);
+              delay(100);
+        break;
+      default:
+       //On Joue Rien...
+       break;
+}
+  
+  
+}
   

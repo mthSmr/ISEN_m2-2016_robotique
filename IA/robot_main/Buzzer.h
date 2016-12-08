@@ -13,6 +13,8 @@
 
 #include <vector>
 
+#define WELCOMSONG 1
+
 class Buzzer {
 
 public:
@@ -26,6 +28,9 @@ public:
     
     void PlaySon();
     void PlaySon(int);
+
+    void PlayMelody();
+    void PlayMelody(int);
     
 };
 
