@@ -11,6 +11,7 @@
 #include "ControlPanel.h"
 #include "Menu.h"
 #include "Led.h"
+#include "Buzzer.h"
 
 
 
@@ -40,12 +41,15 @@ Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
 //------Controls-------://
     ControlPanel controls(5);
 
+//------Son------------://
+    Buzzer speaker_main = Buzzer(11);
+
 //------menu-------://
     Menu menu = Menu(2);
     
 //------robot-------://
     Program robot = Program(2,3);
-    
+
 
 void setup() {
     
@@ -70,10 +74,15 @@ void setup() {
     robot.addSensor(&sensorAvD);
 
     frontLeds.setColor(0,0,0);
+
+    //-------Son de bienvenu----://
+    speaker_main.PlayMelody(WELCOMSONG);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  //------Partie de CrashTEST------//
 
   //------menu-------://
     
