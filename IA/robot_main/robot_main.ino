@@ -74,6 +74,9 @@ void setup() {
     robot.addSensor(&sensorAvD);
 
     frontLeds.setColor(0,0,0);
+
+    //-------Son de bienvenu----://
+    speaker_main.PlayMelody(WELCOMSONG);
 }
 
 void loop() {
@@ -81,17 +84,8 @@ void loop() {
 
   //------Partie de CrashTEST------//
 
-  //Test1
-  speaker_main.PlaySon(440);
-  delay(1000);
-  speaker_main.PlaySon(0);
-  delay(1000);
-  //Test2 
-  speaker_main.PlayMelody(WELCOMSONG);
-/*
   //------menu-------://
     
     menu.runMenu(&robot,&controls,&frontLeds);
     //robot.dodger(&controls,&frontLeds);
-*/
 }

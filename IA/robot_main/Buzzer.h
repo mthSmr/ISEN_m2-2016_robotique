@@ -13,7 +13,9 @@
 
 #include <vector>
 
-#define WELCOMSONG 1
+#define WELCOMSONG 1    //Son de bienvenu
+#define MENUNEXT 2      //A Chaque Changement De Menu
+
 
 class Buzzer {
 
