@@ -86,6 +86,6 @@ void loop() {
 
   //------menu-------://
     
-    menu.runMenu(&robot,&controls,&frontLeds);
+    menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
     //robot.dodger(&controls,&frontLeds);
 }
