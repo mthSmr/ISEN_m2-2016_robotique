@@ -26,6 +26,7 @@
 #include <Servo.h>
 #include <Wire.h>
 #include <Firmata.h>
+#include "buzzer.h"
 
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
@@ -35,8 +36,14 @@
 #define I2C_10BIT_ADDRESS_MODE_MASK B00100000
 #define I2C_MAX_QUERIES             8
 #define I2C_REGISTER_NOT_SPECIFIED  -1
+
+// AJOUT FONCTIONALITES SCRATCH
 #define MOTOR 0xA1
 #define LED 0xA2
+#define BUZZER 0xA3
+#define EMOTIONS 0xA4
+
+Buzzer buzzer(11);
 
 // the minimum interval for sampling analog input
 #define MINIMUM_SAMPLING_INTERVAL 10
@@ -352,25 +359,6 @@ void digitalWriteCallback(byte port, int value)
   }
 }
 
-void systemMotorCallback(int arg0, int arg1, int arg2, int arg3){
-/*   Serial1.begin(57600);
-   Firmata.begin(Serial1);
-    Serial1.println(arg0);
-    delay(1);
-    Serial1.println(arg1);
-    delay(1);
-    Serial1.println(arg2);
-    delay(1);
-    Serial1.println(arg3);*/
-    digitalWrite(13,HIGH);
-/*    delay(1000);
-    digitalWrite(13,LOW);
-    delay(1000);
-    digitalWrite(13,HIGH);
-    delay(1000);
-    digitalWrite(13,LOW);*/
-}
-
 // -----------------------------------------------------------------------------
 /* sets bits in a bit array (int) to toggle the reporting of the analogIns
  */
@@ -612,24 +600,24 @@ void sysexCallback(byte command, byte argc, byte *argv)
       break;
 
       case MOTOR:
-      if (argv[0]== 1)
-      {
-        digitalWrite(13,HIGH);
-        if (argv[1]== 1)
+        if (argv[0]== 1)
         {
-          digitalWrite(24,HIGH);
-          digitalWrite(26,LOW);
+          digitalWrite(13,HIGH);
+          if (argv[1]== 1)
+          {
+            digitalWrite(24,HIGH);
+            digitalWrite(26,LOW);
+          }
+          else if (argv[1] == 0 )
+          {
+            digitalWrite(24,LOW);
+            digitalWrite(26,HIGH);         
+          }       
+          analogWrite(2,(argv[2]*255)/100);
+          delay(argv[3]*1000);
+          analogWrite(10,0);
+          digitalWrite(2,LOW);
         }
-        else if (argv[1] == 0 )
-        {
-          digitalWrite(24,LOW);
-          digitalWrite(26,HIGH);         
-        }       
-        analogWrite(2,(argv[2]*255)/100);
-        delay(argv[3]*1000);
-        analogWrite(10,0);
-        digitalWrite(2,LOW);
-      }
       break;
       case LED:
         for (int i = 0; i<argv[0]; i++)
@@ -637,6 +625,18 @@ void sysexCallback(byte command, byte argc, byte *argv)
         strip.setPixelColor(i, argv[1], argv[2], argv[3]);
         strip.show(); // on affiche
         }
+      break;
+      case BUZZER:
+        strip.setPixelColor(1, 10, 10, 10);
+        strip.show(); // on affiche
+        buzzer.PlayMelody(1);
+        delay(1000);
+        strip.setPixelColor(1, 0,0,0);
+        strip.show(); // on affiche
+
+      break;
+      case EMOTIONS:
+      break;
   }
 }
 
@@ -727,7 +727,7 @@ void setup()
   Firmata.attach(SET_PIN_MODE, setPinModeCallback);
   Firmata.attach(START_SYSEX, sysexCallback);
   Firmata.attach(SYSTEM_RESET, systemResetCallback);
-  Firmata.attach(MOTOR, systemMotorCallback);
+//  Firmata.attach(MOTOR, systemMotorCallback);
 //  Firmata.attach(LED, systemLedCallback);
   
 
@@ -754,21 +754,16 @@ void loop()
 {
   byte pin, analogPin;
 
-  /* DIGITALREAD - as fast as possible, check for changes and output them to the
-   * FTDI buffer using Serial.print()  */
   checkDigitalInputs();
 
-  /* STREAMREAD - processing incoming messagse as soon as possible, while still
-   * checking digital inputs.  */
   while (Firmata.available())
     Firmata.processInput();
 
   // TODO - ensure that Stream buffer doesn't go over 60 bytes
-
+  
   currentMillis = millis();
   if (currentMillis - previousMillis > samplingInterval) {
     previousMillis += samplingInterval;
-    /* ANALOGREAD - do all analogReads() at the configured sampling interval */
     for (pin = 0; pin < TOTAL_PINS; pin++) {
       if (IS_PIN_ANALOG(pin) && pinConfig[pin] == ANALOG) {
         analogPin = PIN_TO_ANALOG(pin);
@@ -784,4 +779,6 @@ void loop()
       }
     }
   }
+  
+
 }
