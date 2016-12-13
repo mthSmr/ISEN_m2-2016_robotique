@@ -28,8 +28,10 @@
         ANALOG_MAPPING_RESPONSE = 0x6A,
         CAPABILITY_QUERY = 0x6B,
         CAPABILITY_RESPONSE = 0x6C;
-    MOTOR = 0xA1;
-    LED = 0xA2;
+
+        MOTOR = 0xA1;
+        LED = 0xA2;
+        BUZZER = 0xA3;
 
     var INPUT = 0x00,
         OUTPUT = 0x01,
@@ -216,7 +218,7 @@
                     clearTimeout(watchdog);
                     watchdog = null;
                     connected = true;
-                    setTimeout(init, 200);
+                    setTimeout(init, 500); // ADD avant 200
                 }
                 pinging = false;
                 pingCount = 0;
@@ -270,39 +272,6 @@
                 }
             }
         }
-    }
-
-    function ledOn(numLed, R, G, B) {
-        var msg = new Uint8Array([START_SYSEX,LED,numLed, R, G, B,END_SYSEX]);
-        device.send(msg.buffer);
-        console.log(msg);
-    }
-
-    function motor(quelMoteur, direction, pwmMot, temps){
-        var moteur;
-        var dir;
-
-        console.log(quelMoteur);
-        console.log(direction);
-
-        if (quelMoteur == "left"){
-            moteur = 0;
-        }
-        else if (quelMoteur == 'right'){
-            moteur = 1;
-        }
-        
-        if (direction == 'forward'){
-            dir = 0;
-        }
-        else if (direction == 'backward'){
-            dir = 1;
-        }
-
-        var msg = new Uint8Array([START_SYSEX, MOTOR, moteur, dir, pwmMot, temps, END_SYSEX]);
-        device.send(msg.buffer);
-        console.log(msg);
-
     }
 
     function pinMode(pin, mode) {
@@ -381,6 +350,47 @@
         
     }
 
+    function ledOn(numLed, R, G, B) {
+        var msg = new Uint8Array([START_SYSEX,LED,numLed, R, G, B,END_SYSEX]);
+        device.send(msg.buffer);
+        console.log(msg);
+    }
+
+    function motor(quelMoteur, direction, pwmMot, temps){
+        var moteur;
+        var dir;
+
+        console.log(quelMoteur);
+        console.log(direction);
+
+        if (quelMoteur == "left"){
+            moteur = 0;
+        }
+        else if (quelMoteur == 'right'){
+            moteur = 1;
+        }
+        
+        if (direction == 'forward'){
+            dir = 0;
+        }
+        else if (direction == 'backward'){
+            dir = 1;
+        }
+
+        var msg = new Uint8Array([START_SYSEX, MOTOR, moteur, dir, pwmMot, temps, END_SYSEX]);
+        device.send(msg.buffer);
+        console.log(msg);
+
+    }
+
+    function buzzer(numMelodie) {
+
+        var msg = new Uint8Array([START_SYSEX,BUZZER, numMelodie,END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+
+    }
+
     ext.ledOn = function(numLed, R, G, B){
         ledOn(numLed, R, G, B); 
     }
@@ -389,6 +399,14 @@
         motor(quelMoteur, direction, pwmMot, temps); 
     }
 
+    ext.buzzer = function (numMelodie) {
+
+        if (numMelodie < 0) numMelodie = 1;
+        if (numMelodie > 10) numMelodie = 10;
+
+        buzzer(numMelodie);
+
+    }
 
     ext.whenConnected = function() {
         if (notifyConnection) return true;
@@ -622,7 +640,8 @@
             ['-'],
             ['r', 'map %n from %n %n to %n %n', 'mapValues', 50, 0, 100, -240, 240],
             [' ', 'set LED %m.numLed to R: %n G: %n B: %n', 'ledOn'],
-            [' ', 'Motor %m.quelMoteur move %m.direction with PWM %n during %n', 'motor','left','backward',20,5]
+            [' ', 'Motor %m.quelMoteur move %m.direction with PWM %n during %n', 'motor','left','backward',20,5],
+            [' ', 'Buzzer mélodie %m.melodie', 'buzzer', 1]
         ]
     };
 
@@ -638,7 +657,8 @@
             servos: ['servo A', 'servo B', 'servo C', 'servo D'],
             numLed: ['1', '5','10','15','20','24'],
             quelMoteur: ['left', 'right'],
-            direction: ['forward', 'backward']
+            direction: ['forward', 'backward'],
+            melodie: [1,2,3]
         }
     };
 
