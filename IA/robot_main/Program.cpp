@@ -144,7 +144,9 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds){
 }
 
 void Program::firmataProcess(){
-	
+	FirmataProcess scratchProgramming = FirmataProcess();
+	scratchProgramming.
+
 }
 
 void Program::arduino(){
