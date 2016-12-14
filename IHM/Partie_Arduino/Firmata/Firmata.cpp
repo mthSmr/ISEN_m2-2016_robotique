@@ -90,6 +90,10 @@ void FirmataClass::printVersion(void)
   FirmataStream->write(FIRMATA_MAJOR_VERSION);
   FirmataStream->write(FIRMATA_MINOR_VERSION);
 }
+void FirmataClass::printTest(void)  //AJOUT
+{
+  FirmataStream->write(42);
+}
 
 void FirmataClass::blinkVersion(void)
 {
@@ -246,6 +250,14 @@ void FirmataClass::processInput(void)
           if (currentReportDigitalCallback)
             (*currentReportDigitalCallback)(multiByteChannel, storedInputData[0]);
           break;
+/*        case MOTOR:
+          if (currentMotorCallback)
+            (*currentMotorCallback)(storedInputData[3],storedInputData[2],storedInputData[1], storedInputData[0]);
+          break;
+        case LED:
+          if (currentLedCallback)
+            (*currentLedCallback)(storedInputData[3],storedInputData[2],storedInputData[1], storedInputData[0]);
+          break;*/
       }
       executeMultiByteCommand = 0;
     }
@@ -280,10 +292,12 @@ void FirmataClass::processInput(void)
       case REPORT_VERSION:
         Firmata.printVersion();
         break;
-      case MOTOR:
+/*      case MOTOR:
       case LED:
-            waitForData = 5;
-            break;    
+            waitForData = 4;
+            executeMultiByteCommand = command;
+            Firmata.printTest();
+        break;  */  
     }
   }
 }
@@ -373,6 +387,14 @@ void FirmataClass::attach(byte command, callbackFunction newFunction)
     case SET_PIN_MODE: currentPinModeCallback = newFunction; break;
   }
 }
+
+/*void FirmataClass::attach(byte command, callbackTestFunction newFunction) //AJOUT
+{
+  switch (command) {
+    case MOTOR: currentMotorCallback = newFunction; break;  
+    case LED: currentLedCallback = newFunction; break;  
+  }
+}*/
 
 void FirmataClass::attach(byte command, systemResetCallbackFunction newFunction)
 {
