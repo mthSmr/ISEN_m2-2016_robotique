@@ -27,6 +27,9 @@ Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1);
 Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
 Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
 
+Sensor sensorDessG = Sensor(40, A0, 990, SensorType::lum, 10);
+Sensor sensorDessD = Sensor(42, A1, 700, SensorType::lum, 11);
+
 //------LEDs-------://
     Led frontLeds = Led(44,5);
 
@@ -41,7 +44,7 @@ Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
     ControlPanel controls(5);
 
 //------menu-------://
-    Menu menu = Menu(2);
+    Menu menu = Menu(3);
     
 //------robot-------://
     Program robot = Program(2,3);
@@ -68,6 +71,8 @@ void setup() {
     robot.addSensor(&sensorAvG);
     robot.addSensor(&sensorAvM);
     robot.addSensor(&sensorAvD);
+    robot.addSensor(&sensorDessG);
+    robot.addSensor(&sensorDessD);
 
     frontLeds.setColor(0,0,0);
 }
@@ -78,5 +83,5 @@ void loop() {
   //------menu-------://
     
     menu.runMenu(&robot,&controls,&frontLeds);
-    //robot.dodger(&controls,&frontLeds);
+    //robot.lineFollower(&controls,&frontLeds);
 }

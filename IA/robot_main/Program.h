@@ -38,7 +38,7 @@ public:
     
     //for demo
     void dodger(ControlPanel const*, Led const*);
-    void lineFollower();
+    void lineFollower(ControlPanel const*, Led const*);
     void joystick(ControlPanel const *buttonPanel, Led const *leds);
     
     //user programs
@@ -48,6 +48,9 @@ public:
     bool checkRight();
     bool checkCenter();
     void updateSensor();
+    void updateSensorUnder();
+    bool checkLineLeft();
+    bool checkLineRight();
 
 };
 
