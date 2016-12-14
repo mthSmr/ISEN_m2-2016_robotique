@@ -46,7 +46,7 @@ void Menu::setLocations(int locationsNbr){
 
 //utilitary
 
-void Menu::runChoice(Program const *robot, ControlPanel const *buttonPanel, Led const *leds){
+void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led *const leds){
         
         Serial.print("choice = ");
             Serial.println(this->choice);
@@ -74,7 +74,7 @@ void Menu::runChoice(Program const *robot, ControlPanel const *buttonPanel, Led 
     this->tempChoice = 0;
 }
 
-void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led const *leds){
+void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const leds){
   
      switch(buttonPanel->analyze()){
         

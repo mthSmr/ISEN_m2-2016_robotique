@@ -31,8 +31,8 @@ public:
     int getLocations();
      
     //utilitary
-    void runMenu(Program const*, ControlPanel const*, Led const*);
-    void runChoice(Program const*, ControlPanel const*, Led const*);
+    void runMenu(Program *const, ControlPanel *const, Led *const);
+    void runChoice(Program *const, ControlPanel *const, Led *const);
     
 private:
     //setters

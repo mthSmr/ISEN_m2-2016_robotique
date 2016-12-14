@@ -246,10 +246,6 @@ void FirmataClass::processInput(void)
           if (currentReportDigitalCallback)
             (*currentReportDigitalCallback)(multiByteChannel, storedInputData[0]);
           break;
-		case MOTOR:
-			if (currentReportDigitalCallback)
-				(*currentReportDigitalCallback)(multiByteChannel, storedInputData[0]);
-			break;
       }
       executeMultiByteCommand = 0;
     }
@@ -287,7 +283,6 @@ void FirmataClass::processInput(void)
       case MOTOR:
       case LED:
             waitForData = 5;
-			executeMultiByteCommand = command;
             break;    
     }
   }
