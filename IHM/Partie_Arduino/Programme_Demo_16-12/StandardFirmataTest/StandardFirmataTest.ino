@@ -602,21 +602,35 @@ void sysexCallback(byte command, byte argc, byte *argv)
       case MOTOR:
         if (argv[0]== 1)
         {
-          digitalWrite(13,HIGH);
           if (argv[1]== 1)
           {
             digitalWrite(24,HIGH);
-            digitalWrite(26,LOW);
+            digitalWrite(22,LOW);
           }
           else if (argv[1] == 0 )
           {
             digitalWrite(24,LOW);
-            digitalWrite(26,HIGH);         
+            digitalWrite(22,HIGH);         
           }       
           analogWrite(2,(argv[2]*255)/100);
           delay(argv[3]*1000);
-          analogWrite(10,0);
           digitalWrite(2,LOW);
+        }
+        if (argv[0]== 0)
+        {
+          if (argv[1]== 1)
+          {
+            digitalWrite(28,HIGH);
+            digitalWrite(26,LOW);
+          }
+          else if (argv[1] == 0 )
+          {
+            digitalWrite(28,LOW);
+            digitalWrite(26,HIGH);         
+          }       
+          analogWrite(3,(argv[2]*255)/100);
+          delay(argv[3]*1000);
+          digitalWrite(3,LOW);
         }
       break;
       case LED:
@@ -627,13 +641,7 @@ void sysexCallback(byte command, byte argc, byte *argv)
         }
       break;
       case BUZZER:
-        strip.setPixelColor(1, 10, 10, 10);
-        strip.show(); // on affiche
-        buzzer.PlayMelody(1);
-        delay(1000);
-        strip.setPixelColor(1, 0,0,0);
-        strip.show(); // on affiche
-
+        buzzer.PlayMelody(argv[0]);
       break;
       case EMOTIONS:
       break;
@@ -752,15 +760,20 @@ void setup()
  *============================================================================*/
 void loop()
 {
-  byte pin, analogPin;
 
+  
+  byte pin, analogPin;
   checkDigitalInputs();
 
   while (Firmata.available())
     Firmata.processInput();
 
-  // TODO - ensure that Stream buffer doesn't go over 60 bytes
+
+
   
+  // TODO - ensure that Stream buffer doesn't go over 60 bytes
+
+/*
   currentMillis = millis();
   if (currentMillis - previousMillis > samplingInterval) {
     previousMillis += samplingInterval;
@@ -779,6 +792,6 @@ void loop()
       }
     }
   }
-  
+*/ 
 
 }

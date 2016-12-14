@@ -123,7 +123,7 @@
         // ping device regularly to check connection
         pinger = setInterval(function() {
             if (pinging) {
-                if (++pingCount > 6) {
+                if (++pingCount > 6) { // ADD avant 6
                     clearInterval(pinger);
                     pinger = null;
                     connected = false;
@@ -140,7 +140,7 @@
                 queryFirmware();
                 pinging = true;
             }
-        }, 100);
+        }, 2000); // ADD avant 100
     }
 
     function hasCapability(pin, mode) {

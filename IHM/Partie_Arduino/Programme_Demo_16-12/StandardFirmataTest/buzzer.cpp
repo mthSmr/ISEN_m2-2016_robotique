@@ -73,6 +73,23 @@ int Buzzer::PlayMelody(int melody){
               this->PlaySon(0);
               delay(delayAttente/2);
         break;
+        case MENUNEXT:
+              this->PlaySon(sii); //do
+              delay(delayRythme/2);
+              this->PlaySon(0);
+              delay(delayAttente/2);
+              this->PlaySon(sii); //do
+              delay(delayRythme/2);
+              this->PlaySon(0);
+              delay(delayAttente);
+              this->PlaySon(doo); //do
+              delay(delayRythme);
+              this->PlaySon(0);
+              delay(delayAttente);
+              this->PlaySon(doo); //do
+              delay(delayRythme);
+              this->PlaySon(0);
+              delay(delayAttente/2);
       default:
        //On Joue Rien...
        break;
