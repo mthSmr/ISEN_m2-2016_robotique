@@ -12,6 +12,7 @@
 #include "ControlPanel.h"
 #include "Menu.h"
 #include "Led.h"
+#include "Buzzer.h"
 
 
 
@@ -46,12 +47,15 @@ Sensor *const sensorAvD_p = &sensorAvD;
 //------Controls-------://
     ControlPanel controls(5);
 
+//------Son------------://
+    Buzzer speaker_main = Buzzer(11);
+
 //------menu-------://
     Menu menu = Menu(2);
     
 //------robot-------://
     Program robot = Program(2,3);
-    
+
 
 void setup() {
     
@@ -76,13 +80,18 @@ void setup() {
     robot.addSensor(sensorAvD_p);
 
     frontLeds.setColor(0,0,0);
+
+    //-------Son de bienvenu----://
+    speaker_main.PlayMelody(WELCOMSONG);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
+  //------Partie de CrashTEST------//
+
   //------menu-------://
     
-    menu.runMenu(&robot,&controls,&frontLeds);
+    menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
     //robot.dodger(&controls,&frontLeds);
 }
