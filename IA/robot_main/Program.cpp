@@ -143,9 +143,25 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds){
 	delay(750);
 }
 
-void Program::firmataProcess(){
+void Program::firmataProcess(ControlPanel *const buttonPanel, Led *const leds)
+{
 	FirmataProcess scratchProgramming = FirmataProcess();
+	scratchProgramming.init();
+	//leds->setColor(66, 29,136);
+	bool loop = true;
 
+	while (loop) {
+		switch (buttonPanel->analyze()) {
+
+			case 5: // validateBtn
+				loop = false;
+				break;
+			default:
+				//delay(50);
+				scratchProgramming.processInput;
+
+		}
+	}
 }
 
 void Program::arduino(){

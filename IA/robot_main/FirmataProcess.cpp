@@ -1,11 +1,4 @@
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
-#endif
-
-
 /* utility functions */
 void wireWrite(byte data)
 {
@@ -25,7 +18,7 @@ byte wireRead()
 #endif
 }
 
-void readAndReportData(byte address, int theRegister, byte numBytes) {
+void FirmataProcess::readAndReportData(byte address, int theRegister, byte numBytes) {
 	// allow I2C requests that don't require a register read
 	// for example, some devices using an interrupt pin to signify new data available
 	// do not always require the register read so upon interrupt you call Wire.requestFrom()
@@ -35,7 +28,7 @@ void readAndReportData(byte address, int theRegister, byte numBytes) {
 		Wire.endTransmission();
 		// do not set a value of 0
 
-		if (this->i2cReadDelayTime > 0) {
+		if (i2cReadDelayTime > 0) {
 			// delay is necessary for some devices such as WiiNunchuck
 			delayMicroseconds(i2cReadDelayTime);
 		}
@@ -65,7 +58,7 @@ void readAndReportData(byte address, int theRegister, byte numBytes) {
 	Firmata.sendSysex(SYSEX_I2C_REPLY, numBytes + 2, i2cRxData);
 }
 
-void outputPort(byte portNumber, byte portValue, byte forceSend)
+void FirmataProcess::outputPort(byte portNumber, byte portValue, byte forceSend)
 {
 	// pins not configured as INPUT are cleared to zeros
 	portValue = portValue & portConfigInputs[portNumber];
@@ -76,11 +69,12 @@ void outputPort(byte portNumber, byte portValue, byte forceSend)
 	}
 }
 
-/* -----------------------------------------------------------------------------
-* check all the active digital inputs for change of state, then add any events
-* to the Serial output queue using Serial.print() */
-void checkDigitalInputs(void)
+void FirmataProcess::checkDigitalInputs(void)
 {
+	/* -----------------------------------------------------------------------------
+	* check all the active digital inputs for change of state, then add any events
+	* to the Serial output queue using Serial.print() */
+
 	/* Using non-looping code allows constants to be given to readPort().
 	* The compiler will apply substantial optimizations if the inputs
 	* to readPort() are compile-time constants. */
@@ -102,12 +96,13 @@ void checkDigitalInputs(void)
 	if (TOTAL_PORTS > 15 && reportPINs[15]) outputPort(15, readPort(15, portConfigInputs[15]), false);
 }
 
-// -----------------------------------------------------------------------------
-/* sets the pin mode to the correct state and sets the relevant bits in the
-* two bit-arrays that track Digital I/O and PWM status
-*/
-void setPinModeCallback(byte pin, int mode)
+void FirmataProcess::setPinModeCallback(byte pin, int mode)
 {
+	// -----------------------------------------------------------------------------
+	/* sets the pin mode to the correct state and sets the relevant bits in the
+	* two bit-arrays that track Digital I/O and PWM status
+	*/
+
 	if (pinConfig[pin] == IGNORE)
 		return;
 
@@ -172,7 +167,7 @@ void setPinModeCallback(byte pin, int mode)
 	// TODO: save status to EEPROM here, if changed
 }
 
-void analogWriteCallback(byte pin, int value)
+void FirmataProcess::analogWriteCallback(byte pin, int value)
 {
 	if (pin < TOTAL_PINS) {
 		switch (pinConfig[pin]) {
@@ -185,7 +180,7 @@ void analogWriteCallback(byte pin, int value)
 	}
 }
 
-void digitalWriteCallback(byte port, int value)
+void FirmataProcess::digitalWriteCallback(byte port, int value)
 {
 	byte pin, lastPin, mask = 1, pinWriteMask = 0;
 
@@ -209,13 +204,7 @@ void digitalWriteCallback(byte port, int value)
 	}
 }
 
-
-// -----------------------------------------------------------------------------
-/* sets bits in a bit array (int) to toggle the reporting of the analogIns
-*/
-//void FirmataClass::setAnalogPinReporting(byte pin, byte state) {
-//}
-void reportAnalogCallback(byte analogPin, int value)
+void FirmataProcess::reportAnalogCallback(byte analogPin, int value)
 {
 	if (analogPin < TOTAL_ANALOG_PINS) {
 		if (value == 0) {
@@ -236,7 +225,7 @@ void reportAnalogCallback(byte analogPin, int value)
 	// TODO: save status to EEPROM here, if changed
 }
 
-void reportDigitalCallback(byte port, int value)
+void FirmataProcess::reportDigitalCallback(byte port, int value)
 {
 	if (port < TOTAL_PORTS) {
 		reportPINs[port] = (byte)value;
@@ -253,11 +242,82 @@ void reportDigitalCallback(byte port, int value)
 	// pins configured as analog
 }
 
+void FirmataProcess::enableI2CPins()
+{
+	byte i;
+	// is there a faster way to do this? would probaby require importing
+	// Arduino.h to get SCL and SDA pins
+	for (i = 0; i < TOTAL_PINS; i++) {
+		if (IS_PIN_I2C(i)) {
+			// mark pins as i2c so they are ignore in non i2c data requests
+			setPinModeCallback(i, I2C);
+		}
+	}
+
+	isI2CEnabled = true;
+
+	Wire.begin();
+}
+
+void FirmataProcess::disableI2CPins() 
+{
+	/* disable the i2c pins so they can be used for other functions */
+	isI2CEnabled = false;
+	// disable read continuous mode for all devices
+	queryIndex = -1;
+}
+
+void FirmataProcess::systemResetCallback()
+{
+	isResetting = true;
+
+	// initialize a defalt state
+	// TODO: option to load config from EEPROM instead of default
+
+	if (isI2CEnabled) {
+		disableI2CPins();
+	}
+
+	for (byte i = 0; i < TOTAL_PORTS; i++) {
+		reportPINs[i] = false;    // by default, reporting off
+		portConfigInputs[i] = 0;  // until activated
+		previousPINs[i] = 0;
+	}
+
+	for (byte i = 0; i < TOTAL_PINS; i++) {
+		// pins with analog capability default to analog input
+		// otherwise, pins default to digital output
+		if (IS_PIN_ANALOG(i)) {
+			// turns off pullup, configures everything
+			setPinModeCallback(i, ANALOG);
+		}
+		else {
+			// sets the output to 0, configures portConfigInputs
+			setPinModeCallback(i, OUTPUT);
+		}
+
+	}
+	// by default, do not report any analog inputs
+	analogInputsToReport = 0;
+
+
+	/* send digital inputs to set the initial state on the host computer,
+	* since once in the loop(), this firmware will only send on change */
+	/*
+	TODO: this can never execute, since no pins default to digital input
+	but it will be needed when/if we support EEPROM stored config
+	for (byte i=0; i < TOTAL_PORTS; i++) {
+	outputPort(i, readPort(i, portConfigInputs[i]), true);
+	}
+	*/
+	isResetting = false;
+}
+
 /*==============================================================================
 * SYSEX-BASED commands
 *============================================================================*/
 
-void sysexCallback(byte command, byte argc, byte *argv)
+void FirmataProcess::sysexCallback(byte command, byte argc, byte *argv)
 {
 	byte mode;
 	byte slaveAddress;
@@ -444,106 +504,11 @@ void sysexCallback(byte command, byte argc, byte *argv)
 
 }
 
-void enableI2CPins()
-{
-	byte i;
-	// is there a faster way to do this? would probaby require importing
-	// Arduino.h to get SCL and SDA pins
-	for (i = 0; i < TOTAL_PINS; i++) {
-		if (IS_PIN_I2C(i)) {
-			// mark pins as i2c so they are ignore in non i2c data requests
-			setPinModeCallback(i, I2C);
-		}
-	}
-
-	isI2CEnabled = true;
-
-	Wire.begin();
-}
-
-/* disable the i2c pins so they can be used for other functions */
-void disableI2CPins() {
-	isI2CEnabled = false;
-	// disable read continuous mode for all devices
-	queryIndex = -1;
-}
-
 /*==============================================================================
-* SETUP()
+* PROCESS INPUTS
 *============================================================================*/
 
-void systemResetCallback()
-{
-	isResetting = true;
-
-	// initialize a defalt state
-	// TODO: option to load config from EEPROM instead of default
-
-	if (isI2CEnabled) {
-		disableI2CPins();
-	}
-
-	for (byte i = 0; i < TOTAL_PORTS; i++) {
-		reportPINs[i] = false;    // by default, reporting off
-		portConfigInputs[i] = 0;  // until activated
-		previousPINs[i] = 0;
-	}
-
-	for (byte i = 0; i < TOTAL_PINS; i++) {
-		// pins with analog capability default to analog input
-		// otherwise, pins default to digital output
-		if (IS_PIN_ANALOG(i)) {
-			// turns off pullup, configures everything
-			setPinModeCallback(i, ANALOG);
-		}
-		else {
-			// sets the output to 0, configures portConfigInputs
-			setPinModeCallback(i, OUTPUT);
-		}
-
-	}
-	// by default, do not report any analog inputs
-	analogInputsToReport = 0;
-
-
-	/* send digital inputs to set the initial state on the host computer,
-	* since once in the loop(), this firmware will only send on change */
-	/*
-	TODO: this can never execute, since no pins default to digital input
-	but it will be needed when/if we support EEPROM stored config
-	for (byte i=0; i < TOTAL_PORTS; i++) {
-	outputPort(i, readPort(i, portConfigInputs[i]), true);
-	}
-	*/
-	isResetting = false;
-}
-
-void FirmataProcess::init()
-{
-	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
-
-	Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
-	Firmata.attach(DIGITAL_MESSAGE, digitalWriteCallback);
-	Firmata.attach(REPORT_ANALOG, reportAnalogCallback);
-	Firmata.attach(REPORT_DIGITAL, reportDigitalCallback);
-	Firmata.attach(SET_PIN_MODE, setPinModeCallback);
-	Firmata.attach(START_SYSEX, sysexCallback);
-	Firmata.attach(SYSTEM_RESET, systemResetCallback);
-
-	// to use a port other than Serial, such as Serial1 on an Arduino Leonardo or Mega,
-	// Call begin(baud) on the alternate serial port and pass it to Firmata to begin like this:
-	// Serial1.begin(57600);
-	// Firmata.begin(Serial1);
-	// then comment out or remove lines 701 - 704 below
-
-	Firmata.begin(57600);
-	while (!Serial) {
-		; // wait for serial port to connect. Only needed for ATmega32u4-based boards (Leonardo, etc).
-	}
-	systemResetCallback();  // reset to default config
-}
-
-FirmataProcess::FirmataProcess()
+void FirmataProcess::processInput()
 {
 	byte pin, analogPin;
 
@@ -577,4 +542,35 @@ FirmataProcess::FirmataProcess()
 			}
 		}
 	}
+}
+
+void FirmataProcess::init()
+{
+	//FirmataClass firmata = FirmataClass();
+	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
+
+	Firmata.attach(ANALOG_MESSAGE, this->analogWriteCallback);
+	Firmata.attach(DIGITAL_MESSAGE, this->digitalWriteCallback);
+	Firmata.attach(REPORT_ANALOG, this->reportAnalogCallback);
+	Firmata.attach(REPORT_DIGITAL, this->reportDigitalCallback);
+	Firmata.attach(SET_PIN_MODE, this->setPinModeCallback);
+	Firmata.attach(START_SYSEX, this->sysexCallback);
+	Firmata.attach(SYSTEM_RESET, this->systemResetCallback);
+
+	// to use a port other than Serial, such as Serial1 on an Arduino Leonardo or Mega,
+	// Call begin(baud) on the alternate serial port and pass it to Firmata to begin like this:
+	// Serial1.begin(57600);
+	// Firmata.begin(Serial1);
+	// then comment out or remove lines 701 - 704 below
+
+	Firmata.begin(57600);
+	while (!Serial) {
+		; // wait for serial port to connect. Only needed for ATmega32u4-based boards (Leonardo, etc).
+	}
+	systemResetCallback();  // reset to default config
+}
+
+FirmataProcess::FirmataProcess()
+{
+
 }

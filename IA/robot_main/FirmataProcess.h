@@ -3,8 +3,9 @@
 #ifndef _FIRMATAPROCESS_h
 #define _FIRMATAPROCESS_h
 
-#include <Lib\Wire\Wire.h>
-#include <Lib\Firmata\Firmata.h>
+//#include <Lib\Wire\Wire.h>
+//#include <Lib\Firmata\Firmata.h>
+#include "MyFirmata.h"
 
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
@@ -32,28 +33,26 @@
 
 class FirmataProcess
 {
- protected:
-
- public:
+ private:
 
 	 /* analog inputs */
 	 int analogInputsToReport = 0;  // bitwise array to store pin reporting
 
-	/* pins configuration */
+									/* pins configuration */
 	 byte pinConfig[TOTAL_PINS];         // configuration of every pin
 	 byte portConfigInputs[TOTAL_PORTS]; // each bit: 1 = pin in INPUT, 0 = anything else
 	 int  pinState[TOTAL_PINS];           // any value that has been written
 
-	/* digital input ports */
+										  /* digital input ports */
 	 byte reportPINs[TOTAL_PORTS];       // 1 = report this port, 0 = silence
 	 byte previousPINs[TOTAL_PORTS];     // previous 8 bits sent
 
-	/* timer variables */
+										 /* timer variables */
 	 unsigned long currentMillis;        // store the current value from millis()
 	 unsigned long previousMillis;       // for comparison with currentMillis
 	 unsigned int samplingInterval = 19; // how often to run the main loop (in ms)
 
-	/* i2c data */
+										 /* i2c data */
 	 struct i2c_device_info {
 		 byte addr;
 		 int reg;
@@ -71,13 +70,27 @@ class FirmataProcess
 
 	 boolean isResetting = false;
 
-	 /*==============================================================================
-	 * FUNCTIONS
-	 *============================================================================*/
-	 
+ public:
+
 	 FirmataProcess();
 
+	 //	Main functions
 	 void init();
+	 void processInput();
+
+	 //utilitary 
+	 void readAndReportData(byte address, int theRegister, byte numBytes);
+	 void outputPort(byte portNumber, byte portValue, byte forceSend);
+	 void checkDigitalInputs(void);
+	 void setPinModeCallback(byte pin, int mode);
+	 void analogWriteCallback(byte pin, int value);
+	 void digitalWriteCallback(byte port, int value);
+	 void reportAnalogCallback(byte analogPin, int value);
+	 void reportDigitalCallback(byte port, int value);
+	 void sysexCallback(byte command, byte argc, byte *argv);
+	 void enableI2CPins();
+	 void disableI2CPins();
+	 void systemResetCallback();
 };
 
 

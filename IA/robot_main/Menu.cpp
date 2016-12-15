@@ -60,11 +60,12 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
                 robot->joystick(buttonPanel, leds);
                 break;
                 
-            case 2: //user progrm
+            case 2: //	user progrm
                 
                 break;
                 
-            case 3 : // 
+            case 3 : // scratch programmation
+				robot->firmataProcess(buttonPanel, leds);
                 break;
                 
             default:
