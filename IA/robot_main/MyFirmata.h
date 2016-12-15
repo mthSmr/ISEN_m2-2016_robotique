@@ -117,11 +117,9 @@
 #define ENCODER                 0x09 // same as PIN_MODE_ENCODER
 #define IGNORE                  0x7F // same as PIN_MODE_IGNORE
 
-#define MOTOR                   0xA1  //set the motors
-#define LED                     0xA2  //set the leds
-
 extern "C" {
   // callback function types
+/*  typedef void (*callbackTestFunction)(int,int,int,int);*/
   typedef void (*callbackFunction)(byte, int);
   typedef void (*systemResetCallbackFunction)(void);
   typedef void (*stringCallbackFunction)(char *);
@@ -140,6 +138,7 @@ class FirmataClass
     /* querying functions */
     void printVersion(void);
     void blinkVersion(void);
+    void printTest(void); //AJOUT
     void printFirmwareVersion(void);
     //void setFirmwareVersion(byte major, byte minor);  // see macro below
     void setFirmwareNameAndVersion(const char *name, byte major, byte minor);
@@ -159,6 +158,7 @@ class FirmataClass
     void write(byte c);
     /* attach & detach callback functions to messages */
     void attach(byte command, callbackFunction newFunction);
+/*    void attach(byte command, callbackTestFunction newFunction);*/
     void attach(byte command, systemResetCallbackFunction newFunction);
     void attach(byte command, stringCallbackFunction newFunction);
     void attach(byte command, sysexCallbackFunction newFunction);
@@ -200,6 +200,8 @@ class FirmataClass
     callbackFunction currentReportDigitalCallback;
     callbackFunction currentPinModeCallback;
     callbackFunction currentPinValueCallback;
+//    callbackTestFunction currentMotorCallback;  //AJOUT
+//    callbackTestFunction currentLedCallback;    //AJOUT
     systemResetCallbackFunction currentSystemResetCallback;
     stringCallbackFunction currentStringCallback;
     sysexCallbackFunction currentSysexCallback;
@@ -209,7 +211,7 @@ class FirmataClass
     /* private methods ------------------------------ */
     void processSysexMessage(void);
     void systemReset(void);
-    void strobeBlinkPin(byte pin, int count, int onInterval, int offInterval);
+    void strobeBlinkPin(int count, int onInterval, int offInterval); //byte pin, 
 };
 
 extern FirmataClass Firmata;

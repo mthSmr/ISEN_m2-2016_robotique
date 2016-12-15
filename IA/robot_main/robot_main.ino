@@ -1,4 +1,5 @@
 
+#include "FirmataProcess.h"
 #include <StandardCplusplus.h>
 #include <vector>
 
@@ -22,11 +23,16 @@ int locations = 2;
 //------Motors-------://
 Motor motor_l = Motor(9,8,10);
 Motor motor_r = Motor(7,6,5);
+Motor *const motor_l_p = &motor_l;
+Motor *const motor_r_p = &motor_r;
 
 //------Sensors-------://
 Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
 Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
 Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
+Sensor *const sensorAvG_p = &sensorAvG;
+Sensor *const sensorAvM_p = &sensorAvM;
+Sensor *const sensorAvD_p = &sensorAvD;
 
 //------LEDs-------://
     Led frontLeds = Led(44,5);
@@ -67,11 +73,11 @@ void setup() {
     controls.addButton(btn_up);
     controls.addButton(btn_valid);
 
-    robot.addMotor(&motor_l);
-    robot.addMotor(&motor_r);
-    robot.addSensor(&sensorAvG);
-    robot.addSensor(&sensorAvM);
-    robot.addSensor(&sensorAvD);
+    robot.addMotor(motor_l_p);
+    robot.addMotor(motor_r_p);
+    robot.addSensor(sensorAvG_p);
+    robot.addSensor(sensorAvM_p);
+    robot.addSensor(sensorAvD_p);
 
     frontLeds.setColor(0,0,0);
 

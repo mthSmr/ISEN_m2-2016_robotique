@@ -17,6 +17,8 @@
 #include "Button.h"
 #include "Program.h"
 #include "Led.h"
+#include "Firmata\Firmata.h"
+
 
 
 Program::Program() {
@@ -27,15 +29,15 @@ Program::Program(int motorNbr, int sensorNbr){
   this->sensorList.reserve(sensorNbr);
 }
 
-void Program::addMotor(Motor const *newMotor){
+void Program::addMotor(Motor *const newMotor){
     this->motorList.push_back(newMotor);
 }
 
-void Program::addSensor(Sensor const *newSensor){
+void Program::addSensor(Sensor *const newSensor){
     this->sensorList.push_back(newSensor);
 }
 
-void Program::dodger(ControlPanel const *buttonPanel, Led const *leds){
+void Program::dodger(ControlPanel *const buttonPanel, Led *const leds){
           delay(250);
           leds->setColor(1, 250, 49);//bleu foncé
       
@@ -44,31 +46,31 @@ void Program::dodger(ControlPanel const *buttonPanel, Led const *leds){
         this->updateSensor();
         
         if (this->checkCenter()){
-            this->motorList[0]->setDirection(false);
-            this->motorList[1]->setDirection(true);
-            this->motorList[0]->setSpeed(0);
-            this->motorList[1]->setSpeed(75);
+            motorList[0]->setDirection(false);
+            motorList[1]->setDirection(true);
+            motorList[0]->setSpeed(0);
+            motorList[1]->setSpeed(75);
             delay(1000);
         }
         else if (this->checkLeft()){
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(false);
-            this->motorList[0]->setSpeed(75);
-            this->motorList[1]->setSpeed(0);
+			motorList[0]->setDirection(true);
+			motorList[1]->setDirection(false);
+            motorList[0]->setSpeed(75);
+            motorList[1]->setSpeed(0);
             delay(250);
         }
         else if (this->checkRight()) {
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(false);
-			this->motorList[0]->setSpeed(0);
-			this->motorList[1]->setSpeed(75);
+			motorList[0]->setDirection(true);
+			motorList[1]->setDirection(false);
+			motorList[0]->setSpeed(0);
+			motorList[1]->setSpeed(75);
 			delay(250);
         } 
         else{
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(false);
-			this->motorList[0]->setSpeed(125);
-			this->motorList[1]->setSpeed(75);
+			motorList[0]->setDirection(true);
+			motorList[1]->setDirection(false);
+			motorList[0]->setSpeed(125);
+			motorList[1]->setSpeed(75);
         }
         
     }
@@ -83,18 +85,17 @@ void Program::lineFollower(){
     
 }
 
-void Program::joystick(ControlPanel const *buttonPanel, Led const *leds){
+void Program::joystick(ControlPanel *const buttonPanel, Led *const leds){
   
 	leds->setColor(136, 29, 66);
 	bool loop = true;
                 
   while(loop){
-    //buttonPanel->analyze();
+    
     delay(250);
     switch(buttonPanel->analyze()){
         
             case 1 : // rightBtn
-                //delay(250);
                 leds->setColor(88, 0, 41);//bleu foncé
                 this->motorList[0]->setDirection(true);
                 this->motorList[1]->setDirection(false);
@@ -103,33 +104,27 @@ void Program::joystick(ControlPanel const *buttonPanel, Led const *leds){
                 break;
                 
             case 2: // leftBtn
-                //delay(250);
                 leds->setColor(44, 255, 117);//bleu ciel
                 this->motorList[0]->setDirection(true);
                 this->motorList[1]->setDirection(false);
                 this->motorList[0]->setSpeed(0);
                 this->motorList[1]->setSpeed(75);
-                //delay(250);
                 break;
                 
             case 3 : // downBtn
-                //delay(250);
                 leds->setColor(121, 249, 28);//violet
                 this->motorList[0]->setDirection(false);
                 this->motorList[1]->setDirection(true);
                 this->motorList[0]->setSpeed(125);
                 this->motorList[1]->setSpeed(75);
-                //delay(250);
                 break;
                 
             case 4 : // upBtn
-                //delay(250);
                 leds->setColor(129, 83, 20);//framboise
                 this->motorList[0]->setDirection(true);
                 this->motorList[1]->setDirection(false);
                 this->motorList[0]->setSpeed(125);
                 this->motorList[1]->setSpeed(75);
-                //delay(250);
                 break;
                 
             case 5 : // validateBtn
@@ -148,8 +143,25 @@ void Program::joystick(ControlPanel const *buttonPanel, Led const *leds){
 	delay(750);
 }
 
-void Program::firmata(){
-    
+void Program::firmataProcess(ControlPanel *const buttonPanel, Led *const leds)
+{
+	FirmataProcess scratchProgramming = FirmataProcess();
+	scratchProgramming.init();
+	//leds->setColor(66, 29,136);
+	bool loop = true;
+
+	while (loop) {
+		switch (buttonPanel->analyze()) {
+
+			case 5: // validateBtn
+				loop = false;
+				break;
+			default:
+				//delay(50);
+				scratchProgramming.processInput;
+
+		}
+	}
 }
 
 void Program::arduino(){
@@ -167,7 +179,7 @@ bool Program::checkRight() {
   bool result = false;
   for(int i = 0; i< this->sensorList.size(); i++)
   {
-    if (this->sensorList[i]->value && this->sensorList[i]->position < 0)
+    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() < 0)
     {
       result = true;
     }
@@ -180,7 +192,7 @@ bool Program::checkLeft() {
   bool result = false;
   for(int i = 0; i< this->sensorList.size(); i++)
   {
-    if (this->sensorList[i]->value && this->sensorList[i]->position > 0)
+    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() > 0)
     {
       result = true;
     }
@@ -193,7 +205,7 @@ bool Program::checkCenter() {
   bool result = false;
   for(int i = 0; i< this->sensorList.size(); i++)
   {
-    if (this->sensorList[i]->value && this->sensorList[i]->position == 0)
+    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() == 0)
     {
       result = true;
     }

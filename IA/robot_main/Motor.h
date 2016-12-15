@@ -15,6 +15,7 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+#include <ctime>
 
 #include "Arduino.h"
 #include "ControlPanel.h"
@@ -23,26 +24,33 @@
 
 class Motor {
     
-    public: 
+private:
+
       int pinInput1; // Commande de sens moteur, Input 1
       int pinInput2; // Commande de sens moteur, Input 2  
       int en;  // Commande de vitesse moteur, Output Enabled1
       float speed;
-      bool direction; //direction is forward? TRUE/FALSE because it's usually forward
+      bool direction; //direction is forward? TRUE/FALSE
       
+
 public:
     
     Motor(int, int, int);
     Motor(int, int, int, float, bool);
     
     //getter
-    bool init();
     float getSpeed();
     bool getDirection();
     
     //setter
     void setSpeed(float);
     void setDirection(bool);
+
+	//utilitary 
+	bool init();
+	void moveForward(int distance);
+	void moveBackward(int distance);
+	void stop();
 
 };
 

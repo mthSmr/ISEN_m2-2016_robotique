@@ -23,9 +23,9 @@
 
 
 class Program {
-
-  std::vector<const Motor*> motorList;
-  std::vector<const Sensor*> sensorList;
+	
+  std::vector<Motor*> motorList;
+  std::vector<Sensor*> sensorList;
     
 public:
     
@@ -33,17 +33,19 @@ public:
     Program(int,int);
 
     //utilitaire
-    void addMotor(Motor const*);
-    void addSensor(Sensor const*);
+    void addMotor(Motor *const);
+    void addSensor(Sensor *const);
     
     //for demo
-    void dodger(ControlPanel const*, Led const*);
+    void dodger(ControlPanel *const, Led *const);
     void lineFollower();
-    void joystick(ControlPanel const *buttonPanel, Led const *leds);
+    void joystick(ControlPanel *const buttonPanel, Led *const leds);
     
     //user programs
-    void firmata();
+    void firmataProcess(ControlPanel *const buttonPanel, Led *const leds);
     void arduino();
+
+	//others
     bool checkLeft();
     bool checkRight();
     bool checkCenter();
