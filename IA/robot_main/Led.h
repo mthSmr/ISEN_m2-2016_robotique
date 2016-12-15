@@ -40,7 +40,6 @@ public:
     bool init();
     std::vector<int> getColor();
     void setColor(int, int, int);
-
 };
 
 #endif /* LED_H */

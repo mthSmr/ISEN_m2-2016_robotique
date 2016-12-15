@@ -14,6 +14,7 @@
 #include "Led.h"
 #include "ControlPanel.h"
 #include "Program.h"
+#include "Buzzer.h"
 
 #ifndef MENU_H
 #define MENU_H
@@ -31,7 +32,7 @@ public:
     int getLocations();
      
     //utilitary
-    void runMenu(Program const*, ControlPanel const*, Led const*);
+    void runMenu(Program const*, ControlPanel const*, Led const*,Buzzer const*);
     void runChoice(Program const*, ControlPanel const*, Led const*);
     
 private:

@@ -46,3 +46,5 @@ void Led::setColor(int newR, int newV, int newB){
     }
     this->strip.show();
 }
+
+

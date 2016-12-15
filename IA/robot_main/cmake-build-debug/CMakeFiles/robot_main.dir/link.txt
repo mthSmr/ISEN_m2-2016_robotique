@@ -1,0 +1,3 @@
+"D:\Documents\Program_Files\CLion 2016.3\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\robot_main.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\robot_main.dir/objects.a @CMakeFiles\robot_main.dir\objects1.rsp
+C:\MinGW\bin\g++.exe  -g   -Wl,--whole-archive CMakeFiles\robot_main.dir/objects.a -Wl,--no-whole-archive  -o robot_main.exe -Wl,--out-implib,librobot_main.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\robot_main.dir\linklibs.rsp

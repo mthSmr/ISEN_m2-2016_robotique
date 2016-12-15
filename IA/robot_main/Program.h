@@ -23,27 +23,47 @@
 
 
 class Program {
-
-  std::vector<const Motor*> motorList;
-  std::vector<const Sensor*> sensorList;
+	
+  std::vector<Motor*> motorList;
+  std::vector<Sensor*> sensorList;
+  std::vector<Led*> ledList;
+  ControlPanel* controls;
     
 public:
     
     Program();
     Program(int,int);
 
+	//getters
+	std::vector<Motor*> getMotorList();
+	std::vector<Sensor*> getSensorList();
+	std::vector<Led*> getLedList();
+	ControlPanel getControls();
+
+	//setters
+	void setControls(ControlPanel* newControlPanel);
+
     //utilitaire
-    void addMotor(Motor const*);
-    void addSensor(Sensor const*);
+    void addMotor(Motor *const);
+    void addSensor(Sensor *const);
+	void addLed(Led *const);
     
     //for demo
+<<<<<<< HEAD
     void dodger(ControlPanel const*, Led const*);
     void lineFollower(ControlPanel const*, Led const*);
     void joystick(ControlPanel const *buttonPanel, Led const *leds);
+=======
+    void dodger(ControlPanel *const, Led *const);
+    void lineFollower();
+    void joystick(ControlPanel *const buttonPanel, Led *const leds);
+>>>>>>> 654878e6af959c4e6257359ef5d6a25794150749
     
     //user programs
-    void firmata();
+    void firmataProcess(ControlPanel *const buttonPanel, Led *const leds);
     void arduino();
+
+	//others
     bool checkLeft();
     bool checkRight();
     bool checkCenter();
