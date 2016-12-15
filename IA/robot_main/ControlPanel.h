@@ -36,7 +36,7 @@ public:
     void addButton(Button); 
     void reserve(int);
     void controlRead();
-    int toBinary();
+    //int toBinary();
     int analyze();
 };
 

@@ -499,8 +499,7 @@ void FirmataProcess::sysexCallback(byte command, byte argc, byte *argv)
 		break;
 
 	case LED:
-		//std::vector<Led*> ledList = 
-			this->robot->getLedList[argv[0]].setColor(argv[1], argv[2], argv[3]);
+		//std::vector<Led*> ledList = this->robot->getLedList()[argv[0]].setColor(argv[1], argv[2], argv[3]);
 		break;
 	}
 
