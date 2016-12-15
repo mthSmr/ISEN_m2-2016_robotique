@@ -44,7 +44,7 @@ std::vector<Led*> Program::getLedList()
 	return ledList;
 }
 
-ControlPanel Program::getControls()
+ControlPanel* Program::getControls()
 {
 	return controls;
 }

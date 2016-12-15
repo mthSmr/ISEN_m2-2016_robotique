@@ -38,7 +38,7 @@ public:
 	std::vector<Motor*> getMotorList();
 	std::vector<Sensor*> getSensorList();
 	std::vector<Led*> getLedList();
-	ControlPanel getControls();
+	ControlPanel* getControls();
 
 	//setters
 	void setControls(ControlPanel* newControlPanel);
