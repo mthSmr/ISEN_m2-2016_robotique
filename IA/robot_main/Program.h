@@ -33,8 +33,9 @@ public:
     Program(int,int);
 
     //utilitaire
-    void addMotor(Motor const*);
-    void addSensor(Sensor const*);
+    void addMotor(Motor *const);
+    void addSensor(Sensor *const);
+	  void addLed(Led *const);
     
     //for demo
     void dodger(ControlPanel const*, Led const*);
@@ -42,7 +43,7 @@ public:
     void joystick(ControlPanel const *buttonPanel, Led const *leds);
     
     //user programs
-    void firmata();
+    void firmataProcess(ControlPanel *const buttonPanel, Led *const leds);
     void arduino();
     bool checkLeft();
     bool checkRight();
