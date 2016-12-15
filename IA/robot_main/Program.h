@@ -49,15 +49,9 @@ public:
 	void addLed(Led *const);
     
     //for demo
-<<<<<<< HEAD
-    void dodger(ControlPanel const*, Led const*);
-    void lineFollower(ControlPanel const*, Led const*);
-    void joystick(ControlPanel const *buttonPanel, Led const *leds);
-=======
     void dodger(ControlPanel *const, Led *const);
-    void lineFollower();
-    void joystick(ControlPanel *const buttonPanel, Led *const leds);
->>>>>>> 654878e6af959c4e6257359ef5d6a25794150749
+    void lineFollower(ControlPanel *const, Led *const);
+    void joystick(ControlPanel const *buttonPanel, Led const *leds);
     
     //user programs
     void firmataProcess(ControlPanel *const buttonPanel, Led *const leds);
