@@ -38,7 +38,7 @@ public:
 	std::vector<Motor*> getMotorList();
 	std::vector<Sensor*> getSensorList();
 	std::vector<Led*> getLedList();
-	ControlPanel getControls();
+	ControlPanel* getControls();
 
 	//setters
 	void setControls(ControlPanel* newControlPanel);
@@ -50,7 +50,7 @@ public:
     
     //for demo
     void dodger(ControlPanel *const, Led *const);
-    void lineFollower(ControlPanel const*, Led const*);
+    void lineFollower(ControlPanel *const, Led *const);
     void joystick(ControlPanel *const buttonPanel, Led *const leds);
     
     //user programs

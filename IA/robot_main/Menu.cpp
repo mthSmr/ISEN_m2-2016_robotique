@@ -61,13 +61,11 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
                 robot->joystick(buttonPanel, leds);
                 break;
                 
-
             case 2: // orange:suiveur de ligne
                 robot->lineFollower(buttonPanel, leds);
                 break;
                 
-            case 3 : // user progrm
-
+            case 3 : // scratch programmation
                 break;
                 
             default:
@@ -77,7 +75,7 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
     this->tempChoice = 0;
 }
 
-void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led const *leds, Buzzer const *buzzer ){
+void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const leds, Buzzer *const buzzer ){
   
      switch(buttonPanel->analyze()){
         

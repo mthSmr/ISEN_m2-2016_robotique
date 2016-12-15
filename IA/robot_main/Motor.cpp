@@ -95,6 +95,7 @@ bool Motor::init() {
 	pinMode(this->pinInput2, OUTPUT);
 }
 
+/*
 void Motor::moveForward(int distance)
 {
 	int begin = time_t() ;
@@ -128,7 +129,7 @@ void Motor::moveBackward(int distance)
 	//arret du moteur
 	setSpeed(0);
 }
-
+*/
 void Motor::stop()
 {
 	setSpeed(0);
