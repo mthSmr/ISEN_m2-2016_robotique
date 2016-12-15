@@ -57,16 +57,17 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
                 robot->dodger(buttonPanel, leds);
                 break;
                 
-            case 1 : // orange:suiveur de ligne
+            case 1 : // vert:joystick
                 robot->joystick(buttonPanel, leds);
                 break;
                 
-            case 2: //	user progrm
-                
+
+            case 2: // orange:suiveur de ligne
+                robot->lineFollower(buttonPanel, leds);
                 break;
                 
-            case 3 : // scratch programmation
-				robot->firmataProcess(buttonPanel, leds);
+            case 3 : // user progrm
+
                 break;
                 
             default:
@@ -118,7 +119,10 @@ void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led co
           
         }
         if(choice == 1){
-          leds->setColor(231, 1, 62);//orange:suiveur de ligne
+          leds->setColor(0, 0, 100);//vert:joystick
+        }
+        if (choice == 2){
+          leds-> setColor(231, 1, 62);//orange:suiveur de ligne
         }
     
 }

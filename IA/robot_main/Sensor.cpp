@@ -43,6 +43,7 @@ void Sensor::read(){
   }else{
     this->value = false ;
   }
+  //Serial.println(value);
   
 }
 

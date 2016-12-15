@@ -113,14 +113,54 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
     this->motorList[1]->setSpeed(0);
 }
 
-void Program::lineFollower(){
-                //leds->setColor(254, 0, 27);//orange foncé
-    
+void Program::lineFollower(ControlPanel const *buttonPanel, Led const *leds){
+
+    delay(250);
+    leds->setColor(136, 29, 66);//orange
+    int pwm = 100;
+          
+    do{         
+        this->updateSensorUnder();
+        
+        if (this->checkLineLeft() && !(this->checkLineRight())){
+            this->motorList[0]->setDirection(true);
+            this->motorList[1]->setDirection(false);
+            this->motorList[0]->setSpeed(0);
+            this->motorList[1]->setSpeed(pwm);
+            Serial.println("gauche dans le noir");
+        }
+        else if (this->checkLineRight() && !(this->checkLineLeft())){
+            this->motorList[0]->setDirection(true);
+            this->motorList[1]->setDirection(false);
+            this->motorList[0]->setSpeed(pwm);
+            this->motorList[1]->setSpeed(0);
+            Serial.println("droit dans le noir");
+        }
+        else if (this->checkLineRight() && this->checkLineLeft()) {
+            this->motorList[0]->setDirection(true);
+            this->motorList[1]->setDirection(false);
+            this->motorList[0]->setSpeed(pwm);
+            this->motorList[1]->setSpeed(pwm);
+            Serial.println("les deux sont noirs");
+        } 
+        else{
+            this->motorList[0]->setDirection(true);
+            this->motorList[1]->setDirection(false);
+            this->motorList[0]->setSpeed(pwm);
+            this->motorList[1]->setSpeed(pwm);
+            Serial.println("les deux sont blancs");
+        }
+        
+    }
+    while(buttonPanel->analyze() != 5);
+    delay(250);
+    this->motorList[0]->setSpeed(0);
+    this->motorList[1]->setSpeed(0);
 }
 
 void Program::joystick(ControlPanel *const buttonPanel, Led *const leds){
   
-	leds->setColor(136, 29, 66);
+	leds->setColor(0, 0, 255);
 	bool loop = true;
                 
   while(loop){
@@ -208,6 +248,13 @@ void Program::updateSensor() {
   }
 }
 
+void Program::updateSensorUnder() {
+  for(int i = 3; i <= 4; i++)
+  {
+    this->sensorList[i]->read();
+  }
+}
+
 bool Program::checkRight() {
   bool result = false;
   for(int i = 0; i< this->sensorList.size(); i++)
@@ -245,5 +292,27 @@ bool Program::checkCenter() {
   }
 
   return result;
+}
+
+bool Program::checkLineLeft(){
+  bool result = false;
+  //Serial.println(this->sensorList[3]->value);
+  if (this->sensorList[3]->value && this->sensorList[3]->position == 10)
+  {
+    result = true;
+  }
+
+  return result; 
+}
+
+bool Program::checkLineRight(){
+  bool result = false;
+  //Serial.println(this->sensorList[4]->value);
+  if (this->sensorList[4]->value && this->sensorList[4]->position == 11)
+  {
+    result = true;
+  }
+
+  return result;   
 }
 

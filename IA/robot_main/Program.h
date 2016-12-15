@@ -62,6 +62,9 @@ public:
     bool checkRight();
     bool checkCenter();
     void updateSensor();
+    void updateSensorUnder();
+    bool checkLineLeft();
+    bool checkLineRight();
 
 };
 

@@ -34,6 +34,9 @@ Sensor *const sensorAvG_p = &sensorAvG;
 Sensor *const sensorAvM_p = &sensorAvM;
 Sensor *const sensorAvD_p = &sensorAvD;
 
+Sensor sensorDessG = Sensor(40, A0, 990, SensorType::lum, 10);
+Sensor sensorDessD = Sensor(42, A1, 700, SensorType::lum, 11);
+
 //------LEDs-------://
     Led frontLeds = Led(44,5);
 	Led *const frontLeds_p = &frontLeds;
@@ -52,7 +55,7 @@ Sensor *const sensorAvD_p = &sensorAvD;
     Buzzer speaker_main = Buzzer(11);
 
 //------menu-------://
-    Menu menu = Menu(2);
+    Menu menu = Menu(3);
     
 //------robot-------://
     Program robot = Program(2,3);
@@ -79,8 +82,10 @@ void setup() {
     robot.addSensor(&sensorAvG);
     robot.addSensor(&sensorAvM);
     robot.addSensor(&sensorAvD);
-	robot.addLed(&frontLeds);
-	robot.setControls(&controls);
+    robot.addSensor(&sensorDessG);
+    robot.addSensor(&sensorDessD);
+    robot.addLed(&frontLeds);
+    robot.setControls(&controls);
 
     frontLeds.setColor(0,0,0);
 
@@ -95,6 +100,11 @@ void loop() {
 
   //------menu-------://
     
+<<<<<<< HEAD
     menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
     //robot.dodger(&controls,&frontLeds);
+=======
+    menu.runMenu(&robot,&controls,&frontLeds);
+    //robot.lineFollower(&controls,&frontLeds);
+>>>>>>> SuiviDeLigne_instable
 }
