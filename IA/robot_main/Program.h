@@ -26,15 +26,27 @@ class Program {
 	
   std::vector<Motor*> motorList;
   std::vector<Sensor*> sensorList;
+  std::vector<Led*> ledList;
+  ControlPanel* controls;
     
 public:
     
     Program();
     Program(int,int);
 
+	//getters
+	std::vector<Motor*> getMotorList();
+	std::vector<Sensor*> getSensorList();
+	std::vector<Led*> getLedList();
+	ControlPanel getControls();
+
+	//setters
+	void setControls(ControlPanel* newControlPanel);
+
     //utilitaire
     void addMotor(Motor *const);
     void addSensor(Sensor *const);
+	void addLed(Led *const);
     
     //for demo
     void dodger(ControlPanel *const, Led *const);

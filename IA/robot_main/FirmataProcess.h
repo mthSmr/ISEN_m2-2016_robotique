@@ -3,9 +3,10 @@
 #ifndef _FIRMATAPROCESS_h
 #define _FIRMATAPROCESS_h
 
-//#include <Lib\Wire\Wire.h>
-//#include <Lib\Firmata\Firmata.h>
-#include "MyFirmata.h"
+#include "Lib\Wire\Wire.h"
+#include "Lib\Firmata\Firmata.h"
+#include "Program.h"
+
 
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
@@ -70,12 +71,14 @@ class FirmataProcess
 
 	 boolean isResetting = false;
 
+	 Program *robot;
+
  public:
 
 	 FirmataProcess();
 
 	 //	Main functions
-	 void init();
+	 void init(Program*);
 	 void processInput();
 
 	 //utilitary 
@@ -91,8 +94,11 @@ class FirmataProcess
 	 void enableI2CPins();
 	 void disableI2CPins();
 	 void systemResetCallback();
+	 void wireWrite(byte data);
+	 byte wireRead();
 };
 
 
 #endif
+
 

@@ -17,7 +17,7 @@
 #include "Button.h"
 #include "Program.h"
 #include "Led.h"
-#include "Firmata\Firmata.h"
+#include "Lib\Firmata\Firmata.h"
 
 
 
@@ -29,15 +29,48 @@ Program::Program(int motorNbr, int sensorNbr){
   this->sensorList.reserve(sensorNbr);
 }
 
-void Program::addMotor(Motor *const newMotor){
+std::vector<Motor*> Program::getMotorList()
+{
+	return motorList;
+}
+
+std::vector<Sensor*> Program::getSensorList()
+{
+	return sensorList;
+}
+
+std::vector<Led*> Program::getLedList()
+{
+	return ledList;
+}
+
+ControlPanel Program::getControls()
+{
+	return controls;
+}
+
+void Program::setControls(ControlPanel* newControlPanel)
+{
+	this->controls = newControlPanel;
+}
+
+void Program::addMotor(Motor *const newMotor)
+{
     this->motorList.push_back(newMotor);
 }
 
-void Program::addSensor(Sensor *const newSensor){
+void Program::addSensor(Sensor *const newSensor)
+{
     this->sensorList.push_back(newSensor);
 }
 
-void Program::dodger(ControlPanel *const buttonPanel, Led *const leds){
+void Program::addLed(Led * const newLeds)
+{
+	this->ledList.push_back(newLeds);
+}
+
+void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
+{
           delay(250);
           leds->setColor(1, 250, 49);//bleu foncé
       
@@ -158,7 +191,7 @@ void Program::firmataProcess(ControlPanel *const buttonPanel, Led *const leds)
 				break;
 			default:
 				//delay(50);
-				scratchProgramming.processInput;
+				scratchProgramming.processInput();
 
 		}
 	}

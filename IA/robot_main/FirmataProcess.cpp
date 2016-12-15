@@ -1,6 +1,7 @@
+#include "FirmataProcess.h"
 
 /* utility functions */
-void wireWrite(byte data)
+void FirmataProcess::wireWrite(byte data)
 {
 #if ARDUINO >= 100
 	Wire.write((byte)data);
@@ -9,7 +10,7 @@ void wireWrite(byte data)
 #endif
 }
 
-byte wireRead()
+byte FirmataProcess::wireRead()
 {
 #if ARDUINO >= 100
 	return Wire.read();
@@ -498,7 +499,8 @@ void FirmataProcess::sysexCallback(byte command, byte argc, byte *argv)
 		break;
 
 	case LED:
-		frontLeds.setColor(argv[1], argv[2], argv[3]);
+		//std::vector<Led*> ledList = 
+			this->robot->getLedList[argv[0]].setColor(argv[1], argv[2], argv[3]);
 		break;
 	}
 
@@ -544,9 +546,10 @@ void FirmataProcess::processInput()
 	}
 }
 
-void FirmataProcess::init()
+void FirmataProcess::init(Program *newRobot)
 {
-	//FirmataClass firmata = FirmataClass();
+	this->robot = newRobot;
+
 	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
 
 	Firmata.attach(ANALOG_MESSAGE, this->analogWriteCallback);

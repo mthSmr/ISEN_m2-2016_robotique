@@ -36,6 +36,7 @@ Sensor *const sensorAvD_p = &sensorAvD;
 
 //------LEDs-------://
     Led frontLeds = Led(44,5);
+	Led *const frontLeds_p = &frontLeds;
 
 //------buttons-------://
     Button btn_up = Button(22);
@@ -73,11 +74,13 @@ void setup() {
     controls.addButton(btn_up);
     controls.addButton(btn_valid);
 
-    robot.addMotor(motor_l_p);
-    robot.addMotor(motor_r_p);
-    robot.addSensor(sensorAvG_p);
-    robot.addSensor(sensorAvM_p);
-    robot.addSensor(sensorAvD_p);
+    robot.addMotor(&motor_l);
+    robot.addMotor(&motor_r);
+    robot.addSensor(&sensorAvG);
+    robot.addSensor(&sensorAvM);
+    robot.addSensor(&sensorAvD);
+	robot.addLed(&frontLeds);
+	robot.setControls(&controls);
 
     frontLeds.setColor(0,0,0);
 
