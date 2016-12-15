@@ -5,61 +5,6 @@
 #include "WProgram.h"
 #endif
 
-#include ""
-#include <Wire.h>
-
-#define I2C_WRITE                   B00000000
-#define I2C_READ                    B00001000
-#define I2C_READ_CONTINUOUSLY       B00010000
-#define I2C_STOP_READING            B00011000
-#define I2C_READ_WRITE_MODE_MASK    B00011000
-#define I2C_10BIT_ADDRESS_MODE_MASK B00100000
-#define I2C_MAX_QUERIES             8
-#define I2C_REGISTER_NOT_SPECIFIED  -1
-
-// the minimum interval for sampling analog input
-#define MINIMUM_SAMPLING_INTERVAL 10
-
-#define LED 0xA2
-
-/*==============================================================================
-* GLOBAL VARIABLES
-*============================================================================*/
-
-/* analog inputs */
-int analogInputsToReport = 0; // bitwise array to store pin reporting
-
-							  /* digital input ports */
-byte reportPINs[TOTAL_PORTS];       // 1 = report this port, 0 = silence
-byte previousPINs[TOTAL_PORTS];     // previous 8 bits sent
-
-									/* pins configuration */
-byte pinConfig[TOTAL_PINS];         // configuration of every pin
-byte portConfigInputs[TOTAL_PORTS]; // each bit: 1 = pin in INPUT, 0 = anything else
-int pinState[TOTAL_PINS];           // any value that has been written
-
-									/* timer variables */
-unsigned long currentMillis;        // store the current value from millis()
-unsigned long previousMillis;       // for comparison with currentMillis
-unsigned int samplingInterval = 19; // how often to run the main loop (in ms)
-
-									/* i2c data */
-struct i2c_device_info {
-	byte addr;
-	int reg;
-	byte bytes;
-};
-
-/* for i2c read continuous more */
-i2c_device_info query[I2C_MAX_QUERIES];
-
-byte i2cRxData[32];
-boolean isI2CEnabled = false;
-signed char queryIndex = -1;
-// default delay time between i2c read request and Wire.requestFrom()
-unsigned int i2cReadDelayTime = 0;
-
-boolean isResetting = false;
 
 /* utility functions */
 void wireWrite(byte data)
@@ -80,10 +25,6 @@ byte wireRead()
 #endif
 }
 
-/*==============================================================================
-* FUNCTIONS
-*============================================================================*/
-
 void readAndReportData(byte address, int theRegister, byte numBytes) {
 	// allow I2C requests that don't require a register read
 	// for example, some devices using an interrupt pin to signify new data available
@@ -93,7 +34,8 @@ void readAndReportData(byte address, int theRegister, byte numBytes) {
 		wireWrite((byte)theRegister);
 		Wire.endTransmission();
 		// do not set a value of 0
-		if (i2cReadDelayTime > 0) {
+
+		if (this->i2cReadDelayTime > 0) {
 			// delay is necessary for some devices such as WiiNunchuck
 			delayMicroseconds(i2cReadDelayTime);
 		}
@@ -576,7 +518,7 @@ void systemResetCallback()
 	isResetting = false;
 }
 
-void setup()
+void FirmataProcess::init()
 {
 	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
 
@@ -601,10 +543,7 @@ void setup()
 	systemResetCallback();  // reset to default config
 }
 
-/*==============================================================================
-* LOOP()
-*============================================================================*/
-void loop()
+FirmataProcess::FirmataProcess()
 {
 	byte pin, analogPin;
 
@@ -638,8 +577,4 @@ void loop()
 			}
 		}
 	}
-}
-
-FirmataProcess::FirmataProcess()
-{
 }

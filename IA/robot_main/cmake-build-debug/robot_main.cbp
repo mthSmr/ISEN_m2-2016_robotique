@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="robot_main"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="robot_main">
+				<Option output="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/robot_main.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 robot_main"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="robot_main/fast">
+				<Option output="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/robot_main.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include/c++/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 robot_main/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/.vs/robot_main/v14/.suo">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Button.cpp">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Button.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/ControlPanel.cpp">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/ControlPanel.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Button.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Button.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/ControlPanel.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/ControlPanel.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Led.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Led.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Menu.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Menu.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Motor.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Motor.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Program.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Program.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Sensor.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/Sensor.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/board.buildinfo">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/core.a">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/robot_main.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/robot_main.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/robot_main.elf">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/robot_main.hex">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/robot_main.ino.elf">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Debug/robot_main.ino.hex">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Led.cpp">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Led.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Menu.cpp">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Menu.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Motor.cpp">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Motor.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Program.cpp">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Program.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Button.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Button.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/ControlPanel.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/ControlPanel.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Led.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Led.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Menu.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Menu.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Motor.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Motor.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Program.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Program.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Sensor.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/Sensor.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/board.buildinfo">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/core.a">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/robot_main.cpp.d">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/robot_main.cpp.o">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/robot_main.elf">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/robot_main.hex">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/robot_main.ino.elf">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Release/robot_main.ino.hex">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Sensor.cpp">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/Sensor.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/SensorType.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/__vm/.robot_main.vsarduino.h">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/__vm/Compile.vmps.xml">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/__vm/Configuration.Debug.vmps.xml">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/__vm/Configuration.Release.vmps.xml">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/__vm/Upload.vmps.xml">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/robot_main.ino">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/robot_main.sln">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/robot_main.vcxproj">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/robot_main.vcxproj.filters">
+			<Option target="robot_main"/>
+		</Unit>
+		<Unit filename="D:/Documents/ISEN/5eme_Annee/Projet_M2/3_Programmation/ISEN_m2-2016_robotique/IA/robot_main/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
