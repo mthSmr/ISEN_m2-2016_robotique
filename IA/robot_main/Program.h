@@ -50,7 +50,7 @@ public:
     
     //for demo
     void dodger(ControlPanel *const, Led *const);
-    void lineFollower();
+    void lineFollower(ControlPanel const*, Led const*);
     void joystick(ControlPanel *const buttonPanel, Led *const leds);
     
     //user programs
