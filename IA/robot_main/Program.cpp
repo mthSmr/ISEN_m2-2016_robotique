@@ -113,7 +113,7 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
     this->motorList[1]->setSpeed(0);
 }
 
-void Program::lineFollower(ControlPanel const *buttonPanel, Led const *leds){
+void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds){
 
     delay(250);
     leds->setColor(136, 29, 66);//orange
@@ -216,6 +216,7 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds){
 	delay(750);
 }
 
+/*
 void Program::firmataProcess(ControlPanel *const buttonPanel, Led *const leds)
 {
 	FirmataProcess scratchProgramming = FirmataProcess();
@@ -236,6 +237,7 @@ void Program::firmataProcess(ControlPanel *const buttonPanel, Led *const leds)
 		}
 	}
 }
+*/
 
 void Program::arduino(){
     
@@ -297,7 +299,7 @@ bool Program::checkCenter() {
 bool Program::checkLineLeft(){
   bool result = false;
   //Serial.println(this->sensorList[3]->value);
-  if (this->sensorList[3]->value && this->sensorList[3]->position == 10)
+  if (this->sensorList[3]->getValue() && this->sensorList[3]->getPosition() == 10)
   {
     result = true;
   }
@@ -308,7 +310,7 @@ bool Program::checkLineLeft(){
 bool Program::checkLineRight(){
   bool result = false;
   //Serial.println(this->sensorList[4]->value);
-  if (this->sensorList[4]->value && this->sensorList[4]->position == 11)
+  if (this->sensorList[4]->getValue() && this->sensorList[4]->getPosition() == 11)
   {
     result = true;
   }

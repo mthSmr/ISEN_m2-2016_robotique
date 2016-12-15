@@ -1,5 +1,4 @@
 
-#include "FirmataProcess.h"
 #include <StandardCplusplus.h>
 #include <vector>
 
@@ -21,25 +20,25 @@ int choice = -1;
 int locations = 2;
 
 //------Motors-------://
-Motor motor_l = Motor(9,8,10);
-Motor motor_r = Motor(7,6,5);
-Motor *const motor_l_p = &motor_l;
-Motor *const motor_r_p = &motor_r;
+    Motor motor_l = Motor(9,8,10);
+    Motor motor_r = Motor(7,6,5);
+//    Motor *const motor_l_p = &motor_l;
+//    Motor *const motor_r_p = &motor_r;
 
 //------Sensors-------://
-Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
-Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
-Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
-Sensor *const sensorAvG_p = &sensorAvG;
-Sensor *const sensorAvM_p = &sensorAvM;
-Sensor *const sensorAvD_p = &sensorAvD;
+    Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
+    Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
+    Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
+    //Sensor *const sensorAvG_p = &sensorAvG;
+    //Sensor *const sensorAvM_p = &sensorAvM;
+    //Sensor *const sensorAvD_p = &sensorAvD;
 
-Sensor sensorDessG = Sensor(40, A0, 990, SensorType::lum, 10);
-Sensor sensorDessD = Sensor(42, A1, 700, SensorType::lum, 11);
+    Sensor sensorDessG = Sensor(40, A0, 990, SensorType::lum, 10);
+    Sensor sensorDessD = Sensor(42, A1, 700, SensorType::lum, 11);
 
 //------LEDs-------://
     Led frontLeds = Led(44,5);
-	Led *const frontLeds_p = &frontLeds;
+	  //Led *const frontLeds_p = &frontLeds;
 
 //------buttons-------://
     Button btn_up = Button(22);
@@ -82,13 +81,10 @@ void setup() {
     robot.addSensor(&sensorAvG);
     robot.addSensor(&sensorAvM);
     robot.addSensor(&sensorAvD);
-<<<<<<< HEAD
     robot.addSensor(&sensorDessG);
     robot.addSensor(&sensorDessD);
-=======
-	robot.addLed(&frontLeds);
-	robot.setControls(&controls);
->>>>>>> 654878e6af959c4e6257359ef5d6a25794150749
+	  robot.addLed(&frontLeds);
+	  robot.setControls(&controls);
 
     frontLeds.setColor(0,0,0);
 
@@ -97,17 +93,11 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
   //------Partie de CrashTEST------//
 
   //------menu-------://
     
-<<<<<<< HEAD
-    menu.runMenu(&robot,&controls,&frontLeds);
+    menu.runMenu(&robot,&controls,&frontLeds, &speaker_main);
     //robot.lineFollower(&controls,&frontLeds);
-=======
-    menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
     //robot.dodger(&controls,&frontLeds);
->>>>>>> 654878e6af959c4e6257359ef5d6a25794150749
 }

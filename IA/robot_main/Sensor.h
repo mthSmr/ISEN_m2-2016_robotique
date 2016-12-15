@@ -19,8 +19,8 @@ private:
     int digitalPin;
     int analogPin;
     int cap;
-	int position;
-	bool value;
+	  int position;
+	  bool value;
     
 
 public:
