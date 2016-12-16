@@ -25,17 +25,20 @@ Sensor::Sensor(int newDigitalPin, int newAnalogPin, int newCap, SensorType type,
     this->cap = newCap;
     this->position = pos;
     setType(type);
+    pinMode(this->digitalPin, OUTPUT);
 }
 
 void Sensor::read(){
   int analog;
     // print out the value you read:
   digitalWrite(this->digitalPin, HIGH);
+  delay(5);
   analog = analogRead(analogPin);
 //  Serial.print("capteur ");
 //    Serial.print(i);
 //    Serial.print(" = ");
 //    Serial.println(analog);
+  delay(5);
   digitalWrite(this->digitalPin, LOW);
 
   if(analog>=this->cap){

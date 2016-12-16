@@ -26,15 +26,15 @@ int locations = 2;
 //    Motor *const motor_r_p = &motor_r;
 
 //------Sensors-------://
-    Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
+    Sensor sensorAvG = Sensor(41, A10, 130, SensorType::infraR, -1); 
     Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
-    Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
+    Sensor sensorAvD = Sensor(37, A12, 130, SensorType::infraR, 1);
     //Sensor *const sensorAvG_p = &sensorAvG;
     //Sensor *const sensorAvM_p = &sensorAvM;
     //Sensor *const sensorAvD_p = &sensorAvD;
 
-    Sensor sensorDessG = Sensor(40, A0, 990, SensorType::lum, 10);
-    Sensor sensorDessD = Sensor(42, A1, 700, SensorType::lum, 11);
+    Sensor sensorDessG = Sensor(40, A0, 500, SensorType::lum, 10);
+    Sensor sensorDessD = Sensor(42, A1, 500, SensorType::lum, 11);
 
 //------LEDs-------://
     Led frontLeds = Led(44,5);
@@ -54,10 +54,10 @@ int locations = 2;
     Buzzer speaker_main = Buzzer(11);
 
 //------menu-------://
-    Menu menu = Menu(3);
+    Menu menu = Menu(3);      // 3 Menu 
     
 //------robot-------://
-    Program robot = Program(2,3);
+    Program robot = Program(2,7);   // 2 Moteurs et 7 capteurs
 
 
 void setup() {
@@ -89,7 +89,7 @@ void setup() {
     frontLeds.setColor(0,0,0);
 
     //-------Son de bienvenu----://
-    speaker_main.PlayMelody(WELCOMSONG);
+    speaker_main.PlayMelody(FACILE);
 }
 
 void loop() {

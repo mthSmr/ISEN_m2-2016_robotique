@@ -10,8 +10,10 @@
 
 #ifndef BUZZER_H
 #define BUZZER_H
+#define FACILE 4
 
 #include <vector>
+
 
 #define WELCOMSONG 1    //Son de bienvenu
 #define MENUNEXT 2      //A Chaque Changement De Menu

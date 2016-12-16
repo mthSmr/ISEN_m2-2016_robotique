@@ -73,6 +73,7 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
 {
           delay(250);
           leds->setColor(1, 250, 49);//bleu foncé
+          int pwm = 140;
       
     do{ 
           
@@ -82,13 +83,13 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
             motorList[0]->setDirection(false);
             motorList[1]->setDirection(true);
             motorList[0]->setSpeed(0);
-            motorList[1]->setSpeed(75);
+            motorList[1]->setSpeed(pwm);
             delay(1000);
         }
         else if (this->checkLeft()){
 			motorList[0]->setDirection(true);
 			motorList[1]->setDirection(false);
-            motorList[0]->setSpeed(75);
+            motorList[0]->setSpeed(pwm);
             motorList[1]->setSpeed(0);
             delay(250);
         }
@@ -96,14 +97,14 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
 			motorList[0]->setDirection(true);
 			motorList[1]->setDirection(false);
 			motorList[0]->setSpeed(0);
-			motorList[1]->setSpeed(75);
+			motorList[1]->setSpeed(pwm);
 			delay(250);
         } 
         else{
 			motorList[0]->setDirection(true);
 			motorList[1]->setDirection(false);
-			motorList[0]->setSpeed(125);
-			motorList[1]->setSpeed(75);
+			motorList[0]->setSpeed(pwm);
+			motorList[1]->setSpeed(pwm);
         }
         
     }
@@ -117,7 +118,7 @@ void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds){
 
     delay(250);
     leds->setColor(136, 29, 66);//orange
-    int pwm = 100;
+    int pwm = 130;
           
     do{         
         this->updateSensorUnder();
@@ -127,28 +128,28 @@ void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds){
             this->motorList[1]->setDirection(false);
             this->motorList[0]->setSpeed(0);
             this->motorList[1]->setSpeed(pwm);
-            Serial.println("gauche dans le noir");
+            //Serial.println("gauche dans le noir");
         }
         else if (this->checkLineRight() && !(this->checkLineLeft())){
             this->motorList[0]->setDirection(true);
             this->motorList[1]->setDirection(false);
             this->motorList[0]->setSpeed(pwm);
             this->motorList[1]->setSpeed(0);
-            Serial.println("droit dans le noir");
+            //Serial.println("droit dans le noir");
         }
         else if (this->checkLineRight() && this->checkLineLeft()) {
             this->motorList[0]->setDirection(true);
             this->motorList[1]->setDirection(false);
             this->motorList[0]->setSpeed(pwm);
             this->motorList[1]->setSpeed(pwm);
-            Serial.println("les deux sont noirs");
+            //Serial.println("les deux sont noirs");
         } 
         else{
             this->motorList[0]->setDirection(true);
             this->motorList[1]->setDirection(false);
             this->motorList[0]->setSpeed(pwm);
             this->motorList[1]->setSpeed(pwm);
-            Serial.println("les deux sont blancs");
+            //Serial.println("les deux sont blancs");
         }
         
     }
@@ -244,7 +245,7 @@ void Program::arduino(){
 }
 
 void Program::updateSensor() {
-  for(int i = 0; i< this->sensorList.size(); i++)
+  for(int i = 0; i< 3; i++)
   {
     this->sensorList[i]->read();
   }
@@ -259,7 +260,7 @@ void Program::updateSensorUnder() {
 
 bool Program::checkRight() {
   bool result = false;
-  for(int i = 0; i< this->sensorList.size(); i++)
+  for(int i = 0; i< 3; i++)
   {
     if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() < 0)
     {
@@ -272,7 +273,7 @@ bool Program::checkRight() {
 
 bool Program::checkLeft() {
   bool result = false;
-  for(int i = 0; i< this->sensorList.size(); i++)
+  for(int i = 0; i< 3; i++)
   {
     if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() > 0)
     {
@@ -285,7 +286,7 @@ bool Program::checkLeft() {
 
 bool Program::checkCenter() {
   bool result = false;
-  for(int i = 0; i< this->sensorList.size(); i++)
+  for(int i = 0; i< 3; i++)
   {
     if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() == 0)
     {
