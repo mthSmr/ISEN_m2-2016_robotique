@@ -15,7 +15,8 @@
 #include "Menu.h"
 #include "Button.h"
 #include "ControlPanel.h"
-#include "Buzzer.h"
+#include "arduino.h"
+#include <StandardCplusplus.h>
 
 
 
@@ -47,7 +48,7 @@ void Menu::setLocations(int locationsNbr){
 
 //utilitary
 
-void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led *const leds){
+void Menu::runChoice(Program const *robot, ControlPanel const *buttonPanel, Led const *leds){
         
         Serial.print("choice = ");
             Serial.println(this->choice);
@@ -61,12 +62,11 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
                 robot->joystick(buttonPanel, leds);
                 break;
                 
-            case 2: //	user progrm
+            case 2: //user progrm
                 
                 break;
                 
-            case 3 : // scratch programmation
-				robot->firmataProcess(buttonPanel, leds);
+            case 3 : // 
                 break;
                 
             default:
@@ -76,34 +76,29 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
     this->tempChoice = 0;
 }
 
-void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led const *leds, Buzzer const *buzzer ){
+void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led const *leds){
   
      switch(buttonPanel->analyze()){
         
             case 1 : // rightBtn
                 this->tempChoice++;
-                buzzer->PlayMelody(MENUNEXT);
                 delay(250);
                 break;
                 
             case 2: // leftBtn
                 this->tempChoice--;
-                buzzer->PlayMelody(MENUNEXT);
                 delay(250);
                 break;
                 
             case 3 : // downBtn
-                buzzer->PlayMelody(MENUNEXT);
                 delay(250);
                 break;
                 
             case 4 : // upBtn
-                buzzer->PlayMelody(MENUNEXT);
                 delay(250);
                 break;
                 
             case 5 : // validateBtn
-                buzzer->PlayMelody(VALIDATE);
                 runChoice(robot,buttonPanel,leds);
                 break;
                 

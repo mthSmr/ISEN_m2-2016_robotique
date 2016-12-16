@@ -55,7 +55,7 @@ void Buzzer::PlayMelody(int melody){
   
   switch (melody)
     {
-      case WELCOMSONG: //[1]
+      case WELCOMSONG:
               this->PlaySon(doo); //do
               delay(delayRythme);
               this->PlaySon(0);
@@ -73,29 +73,7 @@ void Buzzer::PlayMelody(int melody){
               this->PlaySon(0);
               delay(delayAttente/2);
         break;
-       case MENUNEXT: //A TESTER... [2]
-              this->PlaySon(doo); //do
-              delay(delayRythme/2);
-              this->PlaySon(0);
-        break;      
       default:
-        case VALIDATE: //A TESTER... [3]
-              this->PlaySon(doo); //do
-              delay(delayRythme/2);
-              this->PlaySon(0);
-              delay(delayRythme/2);
-              this->PlaySon(mii); //do
-              delay(delayRythme/2);
-              this->PlaySon(0);
-              delay(delayRythme/2);
-              this->PlaySon(sol); //do
-              delay(delayRythme/2);
-              this->PlaySon(0);
-              delay(delayRythme/2);
-              this->PlaySon(doo*2); //do
-              delay(delayRythme/2);
-              this->PlaySon(0);
-        break; 
        //On Joue Rien...
        break;
 }

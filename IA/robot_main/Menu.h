@@ -11,10 +11,11 @@
  * Created on 18 octobre 2016, 15:11
  */
 
+#include "arduino.h"
 #include "Led.h"
 #include "ControlPanel.h"
 #include "Program.h"
-#include "Buzzer.h"
+#include <StandardCplusplus.h>
 
 #ifndef MENU_H
 #define MENU_H
@@ -32,7 +33,7 @@ public:
     int getLocations();
      
     //utilitary
-    void runMenu(Program const*, ControlPanel const*, Led const*,Buzzer const*);
+    void runMenu(Program const*, ControlPanel const*, Led const*);
     void runChoice(Program const*, ControlPanel const*, Led const*);
     
 private:

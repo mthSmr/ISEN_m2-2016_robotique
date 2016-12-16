@@ -13,17 +13,17 @@
 #include "SensorType.h"
 
 class Sensor {
-
-private:
+    
     SensorType type;
     int digitalPin;
     int analogPin;
     int cap;
-	int position;
-	bool value;
+    
     
 
 public:
+    int position;
+    bool value;
     Sensor();
     Sensor(int, int, int, SensorType, int);
     
@@ -33,14 +33,17 @@ public:
     int getPosition();
     int getCap();
 
+    //utilitaire
+    void read();
+    
+private:
     //setter
     void setType(SensorType type);
     void setPosition(int pos );
     void setCap(int);
-
-	//utilitaire
-	void read();
-
+    /* /!\should not exist/!\ --> you don't want to set a value for your sensor
+    void setValue(float value);
+     */
 
 };
 

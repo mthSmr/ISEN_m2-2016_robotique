@@ -15,7 +15,6 @@
 
 #define WELCOMSONG 1    //Son de bienvenu
 #define MENUNEXT 2      //A Chaque Changement De Menu
-#define VALIDATE 3      //quand on appuis sur le bouton au milieu.
 
 
 class Buzzer {
