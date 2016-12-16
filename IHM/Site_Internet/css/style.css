@@ -1,0 +1,36 @@
+/* Global Styles */
+
+.couleurBleu {
+	color : #0000FF;
+}
+
+.center {
+	display:inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.center2 {
+	text-align: center;
+}
+
+.size20px {
+	font-size : 20px;
+	text-align: center;
+}
+
+.size35px {
+	font-size : 35px;
+}
+
+.size45px {
+	font-size : 45px;
+}
+
+.size60px {
+	font-size : 60px;
+}
+
+.size80px {
+	font-size : 80px;
+}
