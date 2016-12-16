@@ -14,7 +14,6 @@
 #include <Adafruit_NeoPixel.h>
 #include "Arduino.h"
 #include "Motor.h"
-#include "time.h"
 
 
 
@@ -95,6 +94,7 @@ bool Motor::init() {
 	pinMode(this->pinInput2, OUTPUT);
 }
 
+/*
 void Motor::moveForward(int distance)
 {
 	int begin = time_t() ;
@@ -133,6 +133,6 @@ void Motor::stop()
 {
 	setSpeed(0);
 }
-
+*/
 
 

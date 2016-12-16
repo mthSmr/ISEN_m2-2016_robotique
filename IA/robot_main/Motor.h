@@ -15,7 +15,7 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#include <ctime>
+//#include <ctime>
 
 #include "Arduino.h"
 #include "ControlPanel.h"
@@ -48,9 +48,9 @@ public:
 
 	//utilitary 
 	bool init();
-	void moveForward(int distance);
-	void moveBackward(int distance);
-	void stop();
+	//void moveForward(int distance);
+	//void moveBackward(int distance);
+	//void stop();
 
 };
 
