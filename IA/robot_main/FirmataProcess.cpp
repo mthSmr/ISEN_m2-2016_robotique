@@ -551,13 +551,13 @@ void FirmataProcess::init(Program *newRobot)
 
 	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
 
-	Firmata.attach(ANALOG_MESSAGE, this->analogWriteCallback);
-	Firmata.attach(DIGITAL_MESSAGE, this->digitalWriteCallback);
-	Firmata.attach(REPORT_ANALOG, this->reportAnalogCallback);
-	Firmata.attach(REPORT_DIGITAL, this->reportDigitalCallback);
-	Firmata.attach(SET_PIN_MODE, this->setPinModeCallback);
-	Firmata.attach(START_SYSEX, this->sysexCallback);
-	Firmata.attach(SYSTEM_RESET, this->systemResetCallback);
+	Firmata.attach(ANALOG_MESSAGE, &(analogWriteCallback));
+	Firmata.attach(DIGITAL_MESSAGE, &(digitalWriteCallback));
+	Firmata.attach(REPORT_ANALOG, &(reportAnalogCallback));
+	Firmata.attach(REPORT_DIGITAL, &(reportDigitalCallback));
+	Firmata.attach(SET_PIN_MODE, &(setPinModeCallback));
+	Firmata.attach(START_SYSEX, &(sysexCallback));
+	Firmata.attach(SYSTEM_RESET, &(systemResetCallback));
 
 	// to use a port other than Serial, such as Serial1 on an Arduino Leonardo or Mega,
 	// Call begin(baud) on the alternate serial port and pass it to Firmata to begin like this:

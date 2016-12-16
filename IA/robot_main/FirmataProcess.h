@@ -85,12 +85,19 @@ class FirmataProcess
 	 void readAndReportData(byte address, int theRegister, byte numBytes);
 	 void outputPort(byte portNumber, byte portValue, byte forceSend);
 	 void checkDigitalInputs(void);
+
+	 //CallBack functions
 	 void setPinModeCallback(byte pin, int mode);
 	 void analogWriteCallback(byte pin, int value);
 	 void digitalWriteCallback(byte port, int value);
 	 void reportAnalogCallback(byte analogPin, int value);
 	 void reportDigitalCallback(byte port, int value);
 	 void sysexCallback(byte command, byte argc, byte *argv);
+	 
+	 //CallBack functions pointers
+	 void* setPinModeCallback_p = &setPinModeCallback;  //shit!
+
+	 //others
 	 void enableI2CPins();
 	 void disableI2CPins();
 	 void systemResetCallback();
