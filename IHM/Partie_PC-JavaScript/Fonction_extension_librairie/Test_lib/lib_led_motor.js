@@ -612,7 +612,7 @@
             ['-'],
             ['r', 'map %n from %n %n to %n %n', 'mapValues', 50, 0, 100, -240, 240],
             [' ', 'set LED %m.numLed to R: %n G: %n B: %n', 'ledOn'],
-            [' ', 'Motor %m.quelMoteur move %m.direction with PWM %n during %n', 'Motor']
+            [' ', 'Motor %m.quelMoteur move %m.direction with PWM %n during %n', 'motor']
         ]
     };
 

@@ -11,7 +11,7 @@
 #ifndef LED_H
 #define LED_H
 
-#include <Adafruit_NeoPixel.h>
+#include <Adafruit_NeoPixel.h> //Ajouter en local ce truc crétin !!! 
 #include <StandardCplusplus.h>
 #include <vector>
 
