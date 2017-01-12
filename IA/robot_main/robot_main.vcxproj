@@ -89,7 +89,6 @@
     <ClInclude Include="ControlPanel.h">
       <FileType>CppCode</FileType>
     </ClInclude>
-    <ClInclude Include="FirmataProcess.h" />
     <ClInclude Include="Led.h">
       <FileType>CppCode</FileType>
     </ClInclude>
@@ -117,7 +116,6 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
-    <ClCompile Include="FirmataProcess.cpp" />
     <ClCompile Include="Led.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Message.cpp" />

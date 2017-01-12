@@ -11,7 +11,8 @@
 #ifndef BUZZER_H
 #define BUZZER_H
 
-#include "StandardCplusplus-master\vector"
+#include "StandardCplusplus.h"
+#include <vector>
 
 #define WELCOMSONG 1    //Son de bienvenu
 #define MENUNEXT 2      //A Chaque Changement De Menu

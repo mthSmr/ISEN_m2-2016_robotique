@@ -23,11 +23,14 @@ See file LICENSE.txt for further informations on licensing terms.
 Last updated by Jeff Hoefs: August 9th, 2015
 */
 
-#include <utility.h>
+/*#include <utility.h>
 #include <unwind-cxx.h>
 #include <system_configuration.h>
-#include <StandardCplusplus.h>
+*/
+
+#include "StandardCplusplus.h"
 #include <vector>
+
 
 #include "Arduino.h"
 #include "SensorType.h"

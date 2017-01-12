@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\libraries\StandardCplusplus-master;C:\Program Files (x86)\Arduino\libraries\StandardCplusplus-master\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;D:\Documents\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Documents\Arduino\Scratch_Firmata_lib;C:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>D:\Documents\Arduino\Scratch_Firmata_lib\__vm\.Scratch_Firmata_lib.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>D:\Mathilde\Documents\Arduino\libraries\StandardCplusplus;D:\Mathilde\Documents\Arduino\libraries\Adafruit_NeoPixel-master;D:\Programme\Arduino\libraries\Firmata;D:\Programme\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;D:\Mathilde\Documents\Arduino\libraries\StandardCplusplus\utility;D:\Programme\Arduino\libraries;D:\Programme\Arduino\hardware\arduino\avr\libraries;D:\Mathilde\Documents\Arduino\libraries;D:\Programme\Arduino\hardware\arduino\avr\cores\arduino;D:\Programme\Arduino\hardware\arduino\avr\variants\mega;D:\Mathilde\Documents\projet_robotique\ISEN_m2-2016_robotique\IHM\Scratch_Firmata_lib;D:\Programme\Arduino\hardware\tools\avr/avr/include/;D:\Programme\Arduino\hardware\tools\avr//avr/include/avr/;D:\Programme\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\Mathilde\Documents\projet_robotique\ISEN_m2-2016_robotique\IHM\Scratch_Firmata_lib\__vm\.Scratch_Firmata_lib.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10606;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -82,7 +82,10 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Buzzer.h" />
     <ClInclude Include="Led.h" />
+    <ClInclude Include="Lib\Firmata\src\Firmata.h" />
+    <ClInclude Include="Lib\Wire\Wire.h" />
     <ClInclude Include="Motor.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="SensorType.h" />
     <ClInclude Include="__vm\.Scratch_Firmata_lib.vsarduino.h" />
@@ -93,6 +96,9 @@
     <ClCompile Include="Led.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Sensor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Scratch_Firmata_lib.rc" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
