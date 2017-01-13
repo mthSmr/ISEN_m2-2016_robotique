@@ -23,14 +23,18 @@ See file LICENSE.txt for further informations on licensing terms.
 Last updated by Jeff Hoefs: August 9th, 2015
 */
 
-/*#include <utility.h>
+#include <Wire.h>
+#include <Firmata.h>
+#include <Boards.h>
+
+#include <Adafruit_NeoPixel.h>
+
+#include <utility.h>
 #include <unwind-cxx.h>
 #include <system_configuration.h>
-*/
 
-#include "StandardCplusplus.h"
+#include <StandardCplusplus.h>
 #include <vector>
-
 
 #include "Arduino.h"
 #include "SensorType.h"
@@ -39,9 +43,6 @@ Last updated by Jeff Hoefs: August 9th, 2015
 #include "Button.h"
 #include "Led.h"
 #include "Buzzer.h"
-
-#include "Lib/Firmata/src/Firmata.h"
-#include "Lib/Wire/Wire.h"
 
 
 using namespace std;

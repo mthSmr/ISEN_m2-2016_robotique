@@ -11,10 +11,11 @@
 #ifndef LED_H
 #define LED_H
 
-#include "Adafruit_NeoPixel-master\Adafruit_NeoPixel.h"
+
 #include <StandardCplusplus.h>
 #include <vector> 
 
+#include <Adafruit_NeoPixel.h>
 
 class Led {
 

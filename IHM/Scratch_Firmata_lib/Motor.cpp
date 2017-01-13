@@ -10,7 +10,9 @@
  * 
  * Created on 17 octobre 2016, 16:53
  */
-#include "Adafruit_NeoPixel-master\Adafruit_NeoPixel.h"
+
+#include <Adafruit_NeoPixel.h>
+
 #include "Arduino.h"
 #include "Motor.h"
 

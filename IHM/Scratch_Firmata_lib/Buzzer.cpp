@@ -12,8 +12,11 @@
  */
 
 #include <StandardCplusplus.h>
-#include "Buzzer.h"
 #include <vector> 
+
+#include <Adafruit_NeoPixel.h>
+
+#include "Buzzer.h"
 #include "Arduino.h"
 
 
