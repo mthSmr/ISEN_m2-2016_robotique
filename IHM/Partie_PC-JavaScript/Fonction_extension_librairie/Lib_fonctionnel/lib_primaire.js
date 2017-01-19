@@ -337,9 +337,15 @@
         device.send(msg.buffer);
         console.log(msg);
     }
-    
-    // pour la catégorie LED, 3 fonctions: couleurLed, ledOn et expression
-    // donc dans le msg: Start_Sysex, LED, NUMERO DE LA FONCTION, arguments...
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    /*                                  LED                                     */
+    //////////////////////////////////////////////////////////////////////////////
+    /*  pour la catégorie LED, 3 fonctions: couleurLed, ledOn et expression
+        donc dans le msg: Start_Sysex, LED, NUMERO DE LA FONCTION, arguments... */
+
+    ////    fonctions   ////
 
     function couleurLed(numLed, R, G, B) {
         var msg = new Uint8Array([START_SYSEX,LED, 1, numLed, R, G, B,END_SYSEX]);
@@ -353,24 +359,56 @@
         device.send(msg.buffer);
     }
 
+    ext.couleurLed = function (numLed, R, G, B) {
+        var threshold = 255;
+        if (R > threshold) R = 255;
+        if (R < 0) R = 0;
+        if (G > threshold) G = 255;
+        if (G < 0) G = 0;
+        if (B > threshold) B = 255;
+        if (B < 0) B = 0;
+        couleurLed(numLed, R, G, B);
+    }
+
+    ext.ledOn = function (numLed, val) {
+        if (val == "On") etat = 1;
+        if (val == "Off") etat = 0;
+        ledOn(numLed);
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    /*                             MATRICES A LEDS                              */
+    //////////////////////////////////////////////////////////////////////////////
+
+    ////    fonctions   ////
+
+    function expression(emotion) {
+        var msg = new Uint8Array([START_SYSEX, LED, 3, emotion, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+
+
+    ////       ext.     ////
+
+    ext.expression = function (emotion) {
+        expression(emotion);
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    /*                                 MOTEURS                                  */
+    //////////////////////////////////////////////////////////////////////////////
+
+    ////    fonctions   ////
+
     function motor(moteur, direction, pwmMot, temps){
         var msg = new Uint8Array([START_SYSEX, MOTOR, 1, moteur, direction, pwmMot, temps, END_SYSEX]);
         console.log(msg);
         device.send(msg.buffer);
     }
 
-    function buzzer(numMelodie) {
-        var msg = new Uint8Array([START_SYSEX,BUZZER, numMelodie,END_SYSEX]);
-        console.log(msg);
-        device.send(msg.buffer);
-    }
-    
-    function expression(emotion) {
-        var msg = new Uint8Array([START_SYSEX,LED, 3, emotion,END_SYSEX]);
-        console.log(msg);
-        device.send(msg.buffer);
-    }
-    
     function mouvementVitesse(mvt, pwm) {
         var msg = new Uint8Array([START_SYSEX, MOTOR, 2, mvt, pwm, END_SYSEX]);
         console.log(msg);
@@ -388,60 +426,35 @@
         console.log(msg);
         device.send(msg.buffer);
     }
-    
-    ext.couleurLed = function(numLed, R, G, B){
-        var threshold = 255;
-        if (R > threshold) R = 255;
-        if (R < 0) R = 0;
-        if (G > threshold) G = 255;
-        if (G < 0) G = 0;
-        if (B > threshold) B = 255;
-        if (B < 0) B = 0;       
-        couleurLed(numLed, R, G, B); 
-    }
-    
-    ext.ledOn = function(numLed, val){
-        if (val == "On") etat = 1;
-        if (val == "Off") etat = 0;
-        ledOn(numLed);
-    }
 
-    ext.motor = function(quelMoteur, direction, pwmMot, temps){
+
+    ////       ext.     ////
+
+    ext.motor = function (quelMoteur, direction, pwmMot, temps) {
         //var moteur;
         //var dir;
-        if (quelMoteur == 'gauche'){
+        if (quelMoteur == 'gauche') {
             moteur = 0;
         }
-        else if (quelMoteur == 'droit'){
+        else if (quelMoteur == 'droit') {
             moteur = 1;
         }
 
-        if (direction == 'avance'){
+        if (direction == 'avance') {
             dir = 0;
         }
-        else if (direction == 'recule'){
+        else if (direction == 'recule') {
             dir = 1;
         }
         var threshold = 255;
         if (pwm > threshold) pwmMot = 255;
         if (pwm < 0) pwmMot = 0;
-        if (temps > 120) temps = 120;        
-        if (temps < 0) temps = 0;  
+        if (temps > 120) temps = 120;
+        if (temps < 0) temps = 0;
 
-        motor(moteur, dir, pwmMot, temps); 
+        motor(moteur, dir, pwmMot, temps);
     }
-
-    ext.buzzer = function (numMelodie) {
-        if (numMelodie < 0) numMelodie = 1;
-        if (numMelodie > 10) numMelodie = 10;
-        buzzer(numMelodie);
-    }
-    
-    ext.expression = function(emotion) {
-        expression(emotion);
-    }
-    
-    ext.mouvementVitesse = function(mvt, pwm) {
+    ext.mouvementVitesse = function (mvt, pwm) {
         if (mvt == 'avancer') mvt = 0;
         else if (mvt == 'reculer') mvt = 1;
         else if (mvt == 'tourner') mvt = 2;
@@ -451,22 +464,133 @@
         if (pwm < 0) pwm = 0;
         mouvementVitesse(mvt, pwm);
     }
-    
-    ext.mouvementDistance = function(direction, distance) {
-        if (direction == 'avance'){
+
+    ext.mouvementDistance = function (direction, distance) {
+        if (direction == 'avance') {
             dir = 0;
         }
-        else if (direction == 'recule'){
+        else if (direction == 'recule') {
             dir = 1;
         }
-        if (distance < 0 ) distance = 0;
+        if (distance < 0) distance = 0;
         if (distance > 30) distance = 30;
         mouvementDistance(dir, distance);
     }
-    
-    ext.tourner = function(angle) {
+
+    ext.tourner = function (angle) {
         tourner(angle); // Repasse à 0 si l'angle est supérieur à 256. Allez savoir pourquoi
     }
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    /*                                 BUZZERS                                  */
+    //////////////////////////////////////////////////////////////////////////////
+
+    ////    fonctions   ////
+
+    function buzzerRythme(time) {
+        var msg = new Uint8Array([START_SYSEX, BUZZER, time, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+
+    function buzzerAttente(time) {
+        var msg = new Uint8Array([START_SYSEX, BUZZER, time, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+
+    function playSon(frequency) {
+        var msg = new Uint8Array([START_SYSEX, BUZZER, frequency, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+    function playSonDelay(frequency, time) {
+        var msg = new Uint8Array([START_SYSEX, BUZZER, frequency, time, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+    function playNote(octave, note) {
+        var msg = new Uint8Array([START_SYSEX, BUZZER, octave, note, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+    function playNoteDemiTone(octave, note, tone) {
+        var msg = new Uint8Array([START_SYSEX, BUZZER, octave, note, tone, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+    function playMelody(num) {
+        var msg = new Uint8Array([START_SYSEX, BUZZER, num, END_SYSEX]);
+        console.log(msg);
+        device.send(msg.buffer);
+    }
+
+    ////       ext.     ////
+
+    ext.buzzer = function (numMelodie) {
+        if (numMelodie < 0) numMelodie = 1;
+        if (numMelodie > 10) numMelodie = 10;
+        buzzer(numMelodie);
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////
+    /*                                 BOUTONS                                  */
+    //////////////////////////////////////////////////////////////////////////////
+
+    ////    fonctions   ////
+
+
+    ////       ext.     ////
+
+    // ext.whenButton = function(btn, state) {
+    //     var hw = hwList.search(btn);
+    //     if (!hw) return;
+    //     if (state === 'pressed')
+    //         return digitalRead(hw.pin);
+    //     else if (state === 'released')
+    //         return !digitalRead(hw.pin);
+    // };
+
+    // ext.isButtonPressed = function(btn) {
+    //     var hw = hwList.search(btn);
+    //     if (!hw) return;
+    //     return digitalRead(hw.pin);
+    // };
+
+    ext.quandBouton = function (bouton, etatBouton) {
+        var indice = buttonList.indexOf(bouton);
+        var pin = buttonList[indice + 1];
+        if (!pin) return;
+        if (etatBouton === 'pressé')
+            return digitalRead(pin);
+        else if (etatBouton === 'relaché')
+            return !digitalRead(pin);
+    }
+
+    ext.boutonPresse = function (bouton) {
+        var indice = buttonList.indexOf(bouton);
+        var pin = buttonList[indice + 1];
+        if (!pin) return;
+        return digitalRead(pin);
+    }
+
+    ext.whenInput = function (name, op, val) {
+        var hw = hwList.search(name);
+        if (!hw) return;
+        if (op == '>')
+            return analogRead(hw.pin) > val;
+        else if (op == '<')
+            return analogRead(hw.pin) < val;
+        else if (op == '=')
+            return analogRead(hw.pin) == val;
+        else
+            return false;
+    };
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////
     
     ext.whenConnected = function() {
         if (notifyConnection) return true;
@@ -524,50 +648,7 @@
         return analogRead(hw.pin);
     };
 
-    // ext.whenButton = function(btn, state) {
-    //     var hw = hwList.search(btn);
-    //     if (!hw) return;
-    //     if (state === 'pressed')
-    //         return digitalRead(hw.pin);
-    //     else if (state === 'released')
-    //         return !digitalRead(hw.pin);
-    // };
-
-    // ext.isButtonPressed = function(btn) {
-    //     var hw = hwList.search(btn);
-    //     if (!hw) return;
-    //     return digitalRead(hw.pin);
-    // };
     
-    ext.quandBouton = function(bouton, etatBouton){
-        var indice = buttonList.indexOf(bouton); 
-        var pin = buttonList[indice+1];
-        if (!pin) return;
-        if (etatBouton === 'pressé')
-            return digitalRead(pin);
-        else if (etatBouton === 'relaché')
-            return !digitalRead(pin);
-    }
-    
-    ext.boutonPresse = function(bouton) {
-        var indice = buttonList.indexOf(bouton); 
-        var pin = buttonList[indice+1];
-        if (!pin) return;
-        return digitalRead(pin);
-    }
-
-    ext.whenInput = function(name, op, val) {
-        var hw = hwList.search(name);
-        if (!hw) return;
-        if (op == '>')
-            return analogRead(hw.pin) > val;
-        else if (op == '<')
-            return analogRead(hw.pin) < val;
-        else if (op == '=')
-            return analogRead(hw.pin) == val;
-        else
-            return false;
-    };
 
     ext.mapValues = function(val, aMin, aMax, bMin, bMax) {
         var output = (((bMax - bMin) * (val - aMin)) / (aMax - aMin)) + bMin;

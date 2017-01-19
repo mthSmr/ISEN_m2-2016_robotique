@@ -72,7 +72,7 @@ Button btn_valid = Button(26);
 
 //------Son------------://
 Buzzer speaker_main = Buzzer(11);
-
+#define WELCOMSONG 0
 
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
@@ -581,6 +581,7 @@ void sysexCallback(byte command, byte argc, byte *argv)
 
 
 		break;
+
 	case BUZZER:
 		switch (argv[1])
 		{
@@ -704,7 +705,7 @@ void setup() {
 	frontLeds.setColor(0, 0, 0);
 
 	//-------Son de bienvenu----://
-	speaker_main.PlayMelody(WELCOMSONG);
+	speaker_main.playMelody(WELCOMSONG);
 
 
 	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);

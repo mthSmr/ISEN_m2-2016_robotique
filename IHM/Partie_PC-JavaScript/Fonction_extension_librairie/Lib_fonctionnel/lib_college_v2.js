@@ -365,8 +365,40 @@
     * BUZZER FONCTIONS
     *============================================================================*/
     
-        function buzzer(numMelodie) {
-            var msg = new Uint8Array([START_SYSEX,BUZZER, numMelodie,END_SYSEX]);
+        function buzzerRythme(time) {
+            var msg = new Uint8Array([START_SYSEX, BUZZER, time, END_SYSEX]);
+            console.log(msg);
+            device.send(msg.buffer);
+        }
+
+        function buzzerAttente(time) {
+            var msg = new Uint8Array([START_SYSEX, BUZZER, time, END_SYSEX]);
+            console.log(msg);
+            device.send(msg.buffer);
+        }
+
+        function playSon(frequency) {
+            var msg = new Uint8Array([START_SYSEX, BUZZER, frequency, END_SYSEX]);
+            console.log(msg);
+            device.send(msg.buffer);
+        }
+        function playSonDelay(frequency, time) {
+            var msg = new Uint8Array([START_SYSEX, BUZZER, frequency, time, END_SYSEX]);
+            console.log(msg);
+            device.send(msg.buffer);
+        }
+        function playNote(octave, note) {
+            var msg = new Uint8Array([START_SYSEX, BUZZER, octave, note, END_SYSEX]);
+            console.log(msg);
+            device.send(msg.buffer);
+        }
+        function playNoteDemiTone(octave, note, tone) {
+            var msg = new Uint8Array([START_SYSEX, BUZZER, octave, note, tone, END_SYSEX]);
+            console.log(msg);
+            device.send(msg.buffer);
+        }
+        function playMelody(num) {
+            var msg = new Uint8Array([START_SYSEX, BUZZER, num, END_SYSEX]);
             console.log(msg);
             device.send(msg.buffer);
         }
