@@ -1,5 +1,4 @@
 
-#include "FirmataProcess.h"
 #include <StandardCplusplus.h>
 #include <vector>
 
@@ -14,7 +13,7 @@
 #include "Led.h"
 #include "Buzzer.h"
 
-
+#define
 
 using namespace std;
 int choice = -1;

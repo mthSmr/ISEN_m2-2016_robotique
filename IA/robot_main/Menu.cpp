@@ -10,9 +10,8 @@
  * 
  * Created on 18 octobre 2016, 15:11
  */
-
-#include "Led.h"
 #include "Menu.h"
+#include "Led.h"
 #include "Button.h"
 #include "ControlPanel.h"
 #include "Buzzer.h"
@@ -66,7 +65,6 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
                 break;
                 
             case 3 : // scratch programmation
-				robot->firmataProcess(buttonPanel, leds);
                 break;
                 
             default:
@@ -76,7 +74,7 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
     this->tempChoice = 0;
 }
 
-void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led const *leds, Buzzer const *buzzer ){
+void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const leds, Buzzer *const buzzer ){
   
      switch(buttonPanel->analyze()){
         

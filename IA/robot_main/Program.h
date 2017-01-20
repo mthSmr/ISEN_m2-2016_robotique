@@ -54,7 +54,6 @@ public:
     void joystick(ControlPanel *const buttonPanel, Led *const leds);
     
     //user programs
-    void firmataProcess(ControlPanel *const buttonPanel, Led *const leds);
     void arduino();
 
 	//others
