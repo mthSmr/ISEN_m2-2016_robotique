@@ -14,9 +14,9 @@
 #include <StandardCplusplus.h>
 #include <vector>
 
-#define WELCOMSONG 1    //Son de bienvenu
-#define MENUNEXT 2      //A Chaque Changement De Menu
-#define VALIDATE 3      //quand on appuis sur le bouton au milieu.
+#define WELCOMSONG 0    //Son de bienvenu
+#define MENUNEXT 1      //A Chaque Changement De Menu
+#define VALIDATE 2      //quand on appuis sur le bouton au milieu.
 
 
 class Buzzer {

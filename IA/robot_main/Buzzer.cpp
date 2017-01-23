@@ -108,30 +108,30 @@ void Buzzer::playNote(int octave, char note) {
 	octave = floor(octave)-4;			//on empèche les puissances à virgules et on ramène l'octave 4 à 0 (cf le gros commentaire au dessus)
 	int delta = pow(2, octave);
 
-	if(note == "c"){
+	if(note == 'c'){
 		playSon(this->doo*delta);
 	}
-	else if(note == "d")
+	else if(note == 'd')
 	{
 		playSon(this->ree*delta);
 	}
-	else if (note == "e")
+	else if (note == 'e')
 	{
 		playSon(this->mii*delta);
 	}
-	else if (note == "f")
+	else if (note == 'f')
 	{
 		playSon(this->faa*delta);
 	}
-	else if (note == "g")
+	else if (note == 'g')
 	{
 		playSon(this->sol*delta);
 	}
-	else if (note == "a")
+	else if (note == 'a')
 	{
 		playSon(this->laa*delta);
 	}
-	else if (note == "b")
+	else if (note == 'b')
 	{
 		playSon(this->sii*delta);
 	}
@@ -190,7 +190,7 @@ void Buzzer::createMelody() {	//TODO:
 
 void Buzzer::playMusic(std::vector<int> melody) {
 
-	for each (int note in melody)
+	for (auto &note : melody)
 	{
 		playSon(note);
 	}

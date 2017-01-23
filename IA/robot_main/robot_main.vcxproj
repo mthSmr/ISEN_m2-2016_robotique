@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Mathilde\Documents\Arduino\libraries\StandardCplusplus;D:\Mathilde\Documents\Arduino\libraries\Adafruit_NeoPixel-master;D:\Mathilde\Documents\Arduino\libraries\StandardCplusplus\utility;D:\Programme\Arduino\libraries;D:\Programme\Arduino\hardware\arduino\avr\libraries;D:\Mathilde\Documents\Arduino\libraries;D:\Programme\Arduino\hardware\arduino\avr\cores\arduino;D:\Programme\Arduino\hardware\arduino\avr\variants\mega;D:\Mathilde\Documents\projet_robotique\ISEN_m2-2016_robotique\IA\robot_main;D:\Programme\Arduino\hardware\tools\avr/avr/include/;D:\Programme\Arduino\hardware\tools\avr//avr/include/avr/;D:\Programme\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>D:\Mathilde\Documents\projet_robotique\ISEN_m2-2016_robotique\IA\robot_main\__vm\.robot_main.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>D:\Programme\Arduino\libraries\StandardCplusplus;D:\Programme\Arduino\libraries\Adafruit_NeoPixel-master;D:\Programme\Arduino\libraries\StandardCplusplus\utility;D:\Programme\Arduino\libraries;D:\Programme\Arduino\hardware\arduino\avr\libraries;D:\Mathilde\Documents\Arduino\libraries;D:\Programme\Arduino\hardware\arduino\avr\cores\arduino;D:\Programme\Arduino\hardware\arduino\avr\variants\mega;D:\Mathilde\Documents\projet_robotique\ISEN_m2-2016_robotique\ISEN_m2-2016_robotique\IA\robot_main;D:\Programme\Arduino\hardware\tools\avr/avr/include/;D:\Programme\Arduino\hardware\tools\avr//avr/include/avr/;D:\Programme\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\Mathilde\Documents\projet_robotique\ISEN_m2-2016_robotique\ISEN_m2-2016_robotique\IA\robot_main\__vm\.robot_main.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -86,13 +86,13 @@
     <ClInclude Include="Button.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="Buzzer.h" />
     <ClInclude Include="ControlPanel.h">
       <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="Led.h">
       <FileType>CppCode</FileType>
     </ClInclude>
-    <ClInclude Include="Lib\Firmata\Firmata.h" />
     <ClInclude Include="Lib\Wire\Wire.h" />
     <ClInclude Include="Menu.h">
       <FileType>CppCode</FileType>
@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Buzzer.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="Led.cpp" />
     <ClCompile Include="Menu.cpp" />
