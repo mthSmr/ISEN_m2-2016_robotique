@@ -81,7 +81,9 @@ void setup() {
     frontLeds.setColor(0,0,0);
 
     //-------Son de bienvenu----://
-    speaker_main.playMelody(WELCOMSONG);
+    //speaker_main.playMelody(WELCOMSONG);
+	
+
 }
 
 void loop() {
@@ -90,6 +92,20 @@ void loop() {
   //------Partie de CrashTEST------//
 
   //------menu-------://
-    menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
+   //menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
     //robot.dodger(&controls,&frontLeds);
+
+	//speaker_main.playMelody(WELCOMSONG);
+   std::vector<float> marioMusic;
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(0);
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(0);
+   marioMusic.push_back(speaker_main.sol);
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(0);
+   marioMusic.push_back(speaker_main.sol * 2);
+    
+   speaker_main.playMusic(marioMusic);
 }

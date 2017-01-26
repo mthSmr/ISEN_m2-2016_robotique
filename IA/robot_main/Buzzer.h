@@ -11,7 +11,7 @@
 #ifndef BUZZER_H
 #define BUZZER_H
 
-#include <StandardCplusplus.h>
+//#include <StandardCplusplus.h>
 #include <vector>
 
 #define WELCOMSONG 0    //Son de bienvenu
@@ -24,27 +24,29 @@ class Buzzer {
 private:
     int pin;
 
-	int doo = 523.25;
-	int doH = 554.37;
-	int ree = 587.33;
-	int reH = 622.25;
-	int mii = 659.26;
-	int faa = 698.46;
-	int faH = 739.99;
-	int sol = 783.99;
-	int solH = 830.61;
-	int laa = 880;
-	int laH = 932.33;
-	int sii = 987.77;
-
 	int delayRythme = 300;
 	int delayAttente = 100;
 
-	std::vector<int> welcomeSong; 
-	std::vector<int> menuNext;
-	std::vector<int> validate;
+	std::vector<float> welcomeSong; 
+	std::vector<float> menuNext;
+	std::vector<float> validate;
     
 public:
+
+	float doo = 523.25;
+	float doH = 554.37;
+	float ree = 587.33;
+	float reH = 622.25;
+	float mii = 659.26;
+	float faa = 698.46;
+	float faH = 739.99;
+	float sol = 783.99;
+	float solH = 830.61;
+	float laa = 880;
+	float laH = 932.33;
+	float sii = 987.77;
+
+
     //Son ne pas oublier la fonction qui défini le pin
     //Les fonctions qui jour les Buzzer.
     Buzzer();
@@ -53,8 +55,8 @@ public:
 	void setDelayRythme(int time);
 	void setDelayAttente(int time);
     
-    void playSon(int);
-	void playSon(int frequency, int time);
+    void playSon(float);
+	void playSon(float frequency, int time);
 	void linkKey(char key); //TODO
 	void playKey(char key);	//TODO
 
@@ -64,7 +66,7 @@ public:
 
 	void createMelody();	//TODO
 	void playMelody(int melody);
-    void playMusic(std::vector<int>);
+    void playMusic(std::vector<float>);
     
 };
 

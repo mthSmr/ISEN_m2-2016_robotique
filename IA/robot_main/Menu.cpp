@@ -81,23 +81,23 @@ void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *c
             case 1 : // rightBtn
                 this->tempChoice++;
                 buzzer->playMelody(MENUNEXT);
-                delay(250);
+                //delay(250);
                 break;
                 
             case 2: // leftBtn
                 this->tempChoice--;
                 buzzer->playMelody(MENUNEXT);
-                delay(250);
+               // delay(250);
                 break;
                 
             case 3 : // downBtn
                 buzzer->playMelody(MENUNEXT);
-                delay(250);
+                //delay(250);
                 break;
                 
             case 4 : // upBtn
                 buzzer->playMelody(MENUNEXT);
-                delay(250);
+                //delay(250);
                 break;
                 
             case 5 : // validateBtn

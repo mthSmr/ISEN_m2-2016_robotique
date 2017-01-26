@@ -11,10 +11,10 @@
  * Created on 7 december 2016, 11:22
  */
 
-#include <StandardCplusplus.h>
-#include <vector> 
+//#include <StandardCplusplus.h>
+//#include <vector> 
 
-#include <Adafruit_NeoPixel.h>
+#include "Adafruit_NeoPixel.h"
 
 #include "Buzzer.h"
 #include "Arduino.h"
@@ -28,21 +28,13 @@ Buzzer::Buzzer(int newPin) {
     pinMode(this->pin, INPUT); //definition du pin Buzzer
 
 	welcomeSong.push_back(doo);		//définition des melodies préenregistrées
-	welcomeSong.push_back(0);
 	welcomeSong.push_back(doo);
-	welcomeSong.push_back(0);
 	welcomeSong.push_back(sii);
-	welcomeSong.push_back(0);
 	welcomeSong.push_back(sii);	
 
 	menuNext.push_back(doo);
 
 	validate.push_back(doo);
-	validate.push_back(0);
-	validate.push_back(mii);
-	validate.push_back(0);
-	validate.push_back(sol);
-	validate.push_back(0);
 	validate.push_back(doo*2);
 }
 
@@ -54,22 +46,20 @@ void Buzzer::setDelayAttente(int time) {
 	delayAttente = time;
 }
 
-void Buzzer::playSon(int frequency){          //Joue un seul Son
+void Buzzer::playSon(float frequency){          //Joue un seul Son
   
   if(frequency>10 && frequency<20000){ 
-        tone(this->pin,frequency); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
-		delay(5000);
-		noTone(this->pin);
-    } else
-    {
-      noTone(this->pin);
+        tone(this->pin,frequency); 
+		delay(delayRythme);
     }
+    noTone(this->pin);
+   
  }
 
-void Buzzer::playSon(int frequency, int time) {          //Joue un seul Son
+void Buzzer::playSon(float frequency, int time) {          //Joue un seul Son
 
 	if (frequency>10 && frequency<20000) {
-		tone(this->pin, frequency); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
+		tone(this->pin, frequency); 
 		delay(time*1000);
 		noTone(this->pin);
 	}
@@ -188,15 +178,15 @@ void Buzzer::createMelody() {	//TODO:
 }
 
 
-void Buzzer::playMusic(std::vector<int> melody) {
+void Buzzer::playMusic(std::vector<float> melody) {
 
-	for (auto &note : melody)
+	for (auto note : melody)
 	{
 		playSon(note);
+		delay(delayAttente);
 	}
 
 	//int song_welcom[]={doo,2,doo,2,sii,1,sii,1}; //Faire une fonction pour optimiser le son.
-
 }
 
 void Buzzer::playMelody(int melody) {
@@ -210,6 +200,7 @@ void Buzzer::playMelody(int melody) {
 	default:
 		break;
 	}
+
 }
 
   
