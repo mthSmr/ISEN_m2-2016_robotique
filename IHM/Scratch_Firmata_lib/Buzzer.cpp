@@ -57,9 +57,7 @@ void Buzzer::setDelayAttente(int time) {
 void Buzzer::playSon(int frequency){          //Joue un seul Son
   
   if(frequency>10 && frequency<20000){ 
-        tone(this->pin,frequency); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
-		delay(5000);
-		noTone(this->pin);
+        tone(this->pin,frequency,2000); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
     } else
     {
       noTone(this->pin);
@@ -69,9 +67,7 @@ void Buzzer::playSon(int frequency){          //Joue un seul Son
 void Buzzer::playSon(int frequency, int time) {          //Joue un seul Son
 
 	if (frequency>10 && frequency<20000) {
-		tone(this->pin, frequency); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
-		delay(time*1000);
-		noTone(this->pin);
+		tone(this->pin, frequency, time * 1000); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
 	}
 	else
 	{
@@ -190,7 +186,7 @@ void Buzzer::createMelody() {	//TODO:
 
 void Buzzer::playMusic(std::vector<int> melody) {
 
-	for each (int note in melody)
+	for (auto note : melody)
 	{
 		playSon(note);
 	}

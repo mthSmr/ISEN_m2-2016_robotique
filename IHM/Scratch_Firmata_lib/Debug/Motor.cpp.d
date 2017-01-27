@@ -1,6 +1,6 @@
-C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Motor.cpp.o: \
- C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Motor.cpp \
- D:\Programme\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
+C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Motor.cpp.o: \
+ C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Motor.cpp \
+ D:\Mathilde\Documents\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -12,5 +12,5 @@ C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega256
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programme\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Motor.h \
- C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Button.h
+ C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Motor.h \
+ C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Button.h

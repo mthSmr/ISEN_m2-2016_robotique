@@ -702,8 +702,6 @@ void setup() {
 	//------LEDs init-------://
 	frontLeds.init();
 
-	frontLeds.setColor(0, 0, 0);
-
 	//-------Son de bienvenu----://
 	speaker_main.playMelody(WELCOMSONG);
 

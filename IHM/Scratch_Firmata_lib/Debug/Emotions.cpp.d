@@ -1,5 +1,6 @@
-C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Sensor.cpp.o: \
- C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Sensor.cpp \
+C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Emotions.cpp.o: \
+ C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Emotions.cpp \
+ C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Emotions.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -10,6 +11,4 @@ C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega256
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\Programme\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- D:\Programme\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\Sensor.h \
- C:\Users\Mathilde\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Debug\SensorType.h
+ D:\Programme\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h
