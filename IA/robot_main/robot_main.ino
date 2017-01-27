@@ -1,5 +1,4 @@
 
-#include "FirmataProcess.h"
 #include <StandardCplusplus.h>
 #include <vector>
 
@@ -16,19 +15,20 @@
 
 
 
+
 using namespace std;
 int choice = -1;
 int locations = 2;
 
 //------Motors-------://
-Motor motor_l = Motor(9,8,10);
-Motor motor_r = Motor(7,6,5);
+	Motor motor_l = Motor(9,8,10);
+	Motor motor_r = Motor(7,6,5);
 
 
 //------Sensors-------://
-Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
-Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
-Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
+	Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
+	Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
+	Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
 
 //------LEDs-------://
     Led frontLeds = Led(44,5);
@@ -81,7 +81,9 @@ void setup() {
     frontLeds.setColor(0,0,0);
 
     //-------Son de bienvenu----://
-    speaker_main.PlayMelody(WELCOMSONG);
+    //speaker_main.playMelody(WELCOMSONG);
+	
+
 }
 
 void loop() {
@@ -90,7 +92,20 @@ void loop() {
   //------Partie de CrashTEST------//
 
   //------menu-------://
-    
-    menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
+   //menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
     //robot.dodger(&controls,&frontLeds);
+
+	//speaker_main.playMelody(WELCOMSONG);
+   std::vector<float> marioMusic;
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(0);
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(0);
+   marioMusic.push_back(speaker_main.sol);
+   marioMusic.push_back(speaker_main.sii);
+   marioMusic.push_back(0);
+   marioMusic.push_back(speaker_main.sol * 2);
+    
+   speaker_main.playMusic(marioMusic);
 }

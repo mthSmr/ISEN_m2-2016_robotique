@@ -10,9 +10,8 @@
  * 
  * Created on 18 octobre 2016, 15:11
  */
-
-#include "Led.h"
 #include "Menu.h"
+#include "Led.h"
 #include "Button.h"
 #include "ControlPanel.h"
 #include "Buzzer.h"
@@ -66,7 +65,6 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
                 break;
                 
             case 3 : // scratch programmation
-				robot->firmataProcess(buttonPanel, leds);
                 break;
                 
             default:
@@ -76,34 +74,34 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
     this->tempChoice = 0;
 }
 
-void Menu::runMenu(Program const *robot, ControlPanel const *buttonPanel, Led const *leds, Buzzer const *buzzer ){
+void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const leds, Buzzer *const buzzer ){
   
      switch(buttonPanel->analyze()){
         
             case 1 : // rightBtn
                 this->tempChoice++;
-                buzzer->PlayMelody(MENUNEXT);
-                delay(250);
+                buzzer->playMelody(MENUNEXT);
+                //delay(250);
                 break;
                 
             case 2: // leftBtn
                 this->tempChoice--;
-                buzzer->PlayMelody(MENUNEXT);
-                delay(250);
+                buzzer->playMelody(MENUNEXT);
+               // delay(250);
                 break;
                 
             case 3 : // downBtn
-                buzzer->PlayMelody(MENUNEXT);
-                delay(250);
+                buzzer->playMelody(MENUNEXT);
+                //delay(250);
                 break;
                 
             case 4 : // upBtn
-                buzzer->PlayMelody(MENUNEXT);
-                delay(250);
+                buzzer->playMelody(MENUNEXT);
+                //delay(250);
                 break;
                 
             case 5 : // validateBtn
-                buzzer->PlayMelody(VALIDATE);
+                buzzer->playMelody(VALIDATE);
                 runChoice(robot,buttonPanel,leds);
                 break;
                 

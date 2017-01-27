@@ -21,7 +21,7 @@
 
 class Buzzer {
 
-public:
+private:
     int pin;
 
 	int doo = 523.25;
@@ -55,14 +55,16 @@ public:
     
     void playSon(int);
 	void playSon(int frequency, int time);
-	void linkKey(char key);
-	void playSon(char key);
+	void linkKey(char key); //TODO
+	void playKey(char key);	//TODO
 
-	void playNote(String note, int octave);
-	void playMode();
+	void playNote(int octave, char note);
+	void playNote(int octave, char note, char tone);
+	void playMode();		//TODO
 
-	void createMelody();
-    void playMelody(std::vector<int>);
+	void createMelody();	//TODO
+	void playMelody(int melody);
+    void playMusic(std::vector<int>);
     
 };
 

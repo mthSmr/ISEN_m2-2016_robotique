@@ -14,7 +14,7 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#include <cstdlib>
+//#include <cstdlib>
 #include <vector>
 #include "Motor.h"
 #include "Sensor.h"
@@ -54,7 +54,6 @@ public:
     void joystick(ControlPanel *const buttonPanel, Led *const leds);
     
     //user programs
-    void firmataProcess(ControlPanel *const buttonPanel, Led *const leds);
     void arduino();
 
 	//others

@@ -51,7 +51,7 @@
     <ClInclude Include="Lib\Wire\Wire.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lib\Firmata\Firmata.h">
+    <ClInclude Include="Buzzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -78,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Message.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Buzzer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

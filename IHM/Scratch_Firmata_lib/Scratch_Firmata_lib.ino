@@ -72,7 +72,7 @@ Button btn_valid = Button(26);
 
 //------Son------------://
 Buzzer speaker_main = Buzzer(11);
-
+#define WELCOMSONG 0
 
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
@@ -581,8 +581,34 @@ void sysexCallback(byte command, byte argc, byte *argv)
 
 
 		break;
-	case BUZZER:
 
+	case BUZZER:
+		switch (argv[1])
+		{
+		case 1://setDelayRythme
+			speaker_main.setDelayRythme(argv[2]);
+			break;
+		case 2://setDelayAttente
+			speaker_main.setDelayAttente(argv[2]);
+			break;
+		case 3://playSon
+			speaker_main.playSon(argv[2]);
+			break;
+		case 4://playSon
+			speaker_main.playSon(argv[2], argv[3]);
+			break;
+		case 5://playNote
+			speaker_main.playNote(argv[2], argv[3]);
+			break;
+		case 6://playNote
+			speaker_main.playNote(argv[2], argv[3], argv[4]);
+			break;
+		case 7://playMelody
+			speaker_main.playMelody(argv[2]);
+			break;
+		default:
+			break;
+		}
 
 		break;
 	case EMOTIONS:
@@ -679,7 +705,7 @@ void setup() {
 	frontLeds.setColor(0, 0, 0);
 
 	//-------Son de bienvenu----://
-	speaker_main.PlayMelody(WELCOMSONG);
+	speaker_main.playMelody(WELCOMSONG);
 
 
 	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
