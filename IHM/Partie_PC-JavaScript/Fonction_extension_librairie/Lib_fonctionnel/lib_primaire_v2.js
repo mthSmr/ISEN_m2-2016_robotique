@@ -85,9 +85,7 @@
 	    var pinging = false;
 	    var pingCount = 0;
 	    var pinger = null;
-
-	    var hwList = new HWList();
-	    
+    
 	    var buttonList = ["bouton 1", 22, "bouton 2", 24, "bouton 3", 25, "bouton 4", 23, "bouton 5", 26];
 
     /*==============================================================================
@@ -379,32 +377,31 @@
 
 	    //----------------------------------------------------------------------------
 
+    /*==============================================================================
+	* BUTTON FONCTIONS
+	*============================================================================*/
+
+	    ext.quandBouton = function(bouton, etatBouton){
+	        var indice = buttonList.indexOf(bouton); 
+	        var pin = buttonList[indice+1];
+	        if (!pin) return;
+	        if (etatBouton === 'pressé')
+	            return digitalRead(pin);
+	        else if (etatBouton === 'relaché')
+	            return !digitalRead(pin);
+	    }
+	    
+	    ext.boutonPresse = function(bouton) {
+	        var indice = buttonList.indexOf(bouton); 
+	        var pin = buttonList[indice+1];
+	        if (!pin) return;
+	        return digitalRead(pin);
+	    }
+
+
 	/*==============================================================================
 	* OTHER FONCTIONS
 	*============================================================================*/
-
-	    function HWList() {
-	        this.devices = [];
-
-	        this.add = function(dev, pin) {
-	            var device = this.search(dev);
-	            if (!device) {
-	                device = {name: dev, pin: pin, val: 0};
-	                this.devices.push(device);
-	            } else {
-	                device.pin = pin;
-	                device.val = 0;
-	            }
-	        };
-
-	        this.search = function(dev) {
-	            for (var i=0; i<this.devices.length; i++) {
-	                if (this.devices[i].name === dev)
-	                    return this.devices[i];
-	            }
-	            return null;
-	        };
-	    }
 
 	    function hasCapability(pin, mode) {
 		    if (pinModes[mode].indexOf(pin) > -1)
@@ -547,46 +544,6 @@
 	                return digitalRead(pin) === false;
 	        }
 	    };
-
-	    ext.connectHW = function(hw, pin) {
-	        hwList.add(hw, pin);
-	    };
-
-	    ext.readInput = function(name) {
-	        var hw = hwList.search(name);
-	        if (!hw) return;
-	        return analogRead(hw.pin);
-	    };
-	    
-	    ext.quandBouton = function(bouton, etatBouton){
-	        var indice = buttonList.indexOf(bouton); 
-	        var pin = buttonList[indice+1];
-	        if (!pin) return;
-	        if (etatBouton === 'pressé')
-	            return digitalRead(pin);
-	        else if (etatBouton === 'relaché')
-	            return !digitalRead(pin);
-	    }
-	    
-	    ext.boutonPresse = function(bouton) {
-	        var indice = buttonList.indexOf(bouton); 
-	        var pin = buttonList[indice+1];
-	        if (!pin) return;
-	        return digitalRead(pin);
-	    }
-
-	    ext.whenInput = function(name, op, val) {
-	        var hw = hwList.search(name);
-	        if (!hw) return;
-	        if (op == '>')
-	            return analogRead(hw.pin) > val;
-	        else if (op == '<')
-	            return analogRead(hw.pin) < val;
-	        else if (op == '=')
-	            return analogRead(hw.pin) == val;
-	        else
-	            return false;
-	    };
     
 	/*==============================================================================
 	* UTILITY FONCTIONS
@@ -624,6 +581,7 @@
 
 	    var poller = null;
 	    var watchdog = null;
+
 	    function tryNextDevice() {
 	        device = potentialDevices.shift();
 	        if (!device) return;
