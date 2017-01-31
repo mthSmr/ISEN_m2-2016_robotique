@@ -1,8 +1,8 @@
 
-#include <StandardCplusplus.h>
-#include <vector>
+#include "StandardCplusplus.h"
+#include "vector"
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "Program.h"
 #include "SensorType.h"
 #include "Sensor.h"
@@ -26,13 +26,13 @@ int locations = 2;
 
 
 //------Sensors-------://
-	Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1); 
-	Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
-	Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
+	Sensor sensorAvG = Sensor(37, A10, 300, SensorType::infraR, 1); 
+	Sensor sensorAvM = Sensor(39, A11, 300, SensorType::infraR, 0);
+	Sensor sensorAvD = Sensor(41, A12, 300, SensorType::infraR, -1);
 
 //------LEDs-------://
-    Led frontLeds = Led(44,5);
-	Led *const frontLeds_p = &frontLeds;
+    Led frontLeds = Led(44,6);
+	  Led *const frontLeds_p = &frontLeds;
 
 //------buttons-------://
     Button btn_up = Button(22);
@@ -75,14 +75,13 @@ void setup() {
     robot.addSensor(&sensorAvG);
     robot.addSensor(&sensorAvM);
     robot.addSensor(&sensorAvD);
-	robot.addLed(&frontLeds);
-	robot.setControls(&controls);
+	  robot.addLed(&frontLeds);
+	  robot.setControls(&controls);
 
     frontLeds.setColor(0,0,0);
 
     //-------Son de bienvenu----://
     //speaker_main.playMelody(WELCOMSONG);
-	
 
 }
 
@@ -92,20 +91,20 @@ void loop() {
   //------Partie de CrashTEST------//
 
   //------menu-------://
-   //menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
-    //robot.dodger(&controls,&frontLeds);
-
-	//speaker_main.playMelody(WELCOMSONG);
-   std::vector<float> marioMusic;
-   marioMusic.push_back(speaker_main.sii);
-   marioMusic.push_back(speaker_main.sii);
-   marioMusic.push_back(0);
-   marioMusic.push_back(speaker_main.sii);
-   marioMusic.push_back(0);
-   marioMusic.push_back(speaker_main.sol);
-   marioMusic.push_back(speaker_main.sii);
-   marioMusic.push_back(0);
-   marioMusic.push_back(speaker_main.sol * 2);
-    
-   speaker_main.playMusic(marioMusic);
+  menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
+  //robot.dodger(&controls,&frontLeds);
+  
+//speaker_main.playMelody(WELCOMSONG);
+//   std::vector<float> marioMusic;
+//   marioMusic.push_back(speaker_main.sii);
+//   marioMusic.push_back(speaker_main.sii);
+//   marioMusic.push_back(0);
+//   marioMusic.push_back(speaker_main.sii);
+//   marioMusic.push_back(0);
+//   marioMusic.push_back(speaker_main.sol);
+//   marioMusic.push_back(speaker_main.sii);
+//   marioMusic.push_back(0);
+//   marioMusic.push_back(speaker_main.sol * 2);
+//    
+//   speaker_main.playMusic(marioMusic);
 }

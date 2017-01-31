@@ -15,7 +15,7 @@
 #include <StandardCplusplus.h>
 #include <vector>
 #include "Led.h"
-#include "Arduino.h"
+//#include "Arduino.h"
 
 
 Led::Led(int newPin, int newNumber) {
