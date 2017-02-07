@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scratch_Firmata_lib.ino" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Scratch_Firmata_lib.vsarduino.h">
@@ -40,6 +39,12 @@
     <ClInclude Include="SensorType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Emotions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EmotionSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp">
@@ -55,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Emotions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EmotionSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

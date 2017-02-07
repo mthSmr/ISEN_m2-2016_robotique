@@ -23,6 +23,10 @@ See file LICENSE.txt for further informations on licensing terms.
 Last updated by Jeff Hoefs: August 9th, 2015
 */
 
+#include "EmotionSprite.h"
+#include "EmotionSprite.h"
+#include "EmotionSprite.h"
+
 #include <Wire.h>
 #include <Firmata.h>
 #include <Boards.h>
@@ -60,7 +64,7 @@ Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
 Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
 
 //------LEDs-------://
-Led frontLeds = Led(44, 5);
+Led frontLeds = Led(44, 6);
 Led *const frontLeds_p = &frontLeds;
 
 //------buttons-------://
@@ -72,7 +76,7 @@ Button btn_valid = Button(26);
 
 //------Son------------://
 Buzzer speaker_main = Buzzer(11);
-#define WELCOMSONG 0
+
 
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
@@ -99,61 +103,61 @@ Buzzer buzzer(11);
 * GLOBAL VARIABLES
 *============================================================================*/
 
-/* analog inputs */
-int analogInputsToReport = 0; // bitwise array to store pin reporting
+	/* analog inputs */
+	int analogInputsToReport = 0; // bitwise array to store pin reporting
 
-							  /* digital input ports */
-byte reportPINs[TOTAL_PORTS];       // 1 = report this port, 0 = silence
-byte previousPINs[TOTAL_PORTS];     // previous 8 bits sent
+								  /* digital input ports */
+	byte reportPINs[TOTAL_PORTS];       // 1 = report this port, 0 = silence
+	byte previousPINs[TOTAL_PORTS];     // previous 8 bits sent
 
-									/* pins configuration */
-byte pinConfig[TOTAL_PINS];         // configuration of every pin
-byte portConfigInputs[TOTAL_PORTS]; // each bit: 1 = pin in INPUT, 0 = anything else
-int pinState[TOTAL_PINS];           // any value that has been written
+										/* pins configuration */
+	byte pinConfig[TOTAL_PINS];         // configuration of every pin
+	byte portConfigInputs[TOTAL_PORTS]; // each bit: 1 = pin in INPUT, 0 = anything else
+	int pinState[TOTAL_PINS];           // any value that has been written
 
-									/* timer variables */
-unsigned long currentMillis;        // store the current value from millis()
-unsigned long previousMillis;       // for comparison with currentMillis
-unsigned int samplingInterval = 19; // how often to run the main loop (in ms)
+										/* timer variables */
+	unsigned long currentMillis;        // store the current value from millis()
+	unsigned long previousMillis;       // for comparison with currentMillis
+	unsigned int samplingInterval = 19; // how often to run the main loop (in ms)
 
-									/* i2c data */
-struct i2c_device_info {
-	byte addr;
-	int reg;
-	byte bytes;
-};
+										/* i2c data */
+	struct i2c_device_info {
+		byte addr;
+		int reg;
+		byte bytes;
+	};
 
-/* for i2c read continuous more */
-i2c_device_info query[I2C_MAX_QUERIES];
+	/* for i2c read continuous more */
+	i2c_device_info query[I2C_MAX_QUERIES];
 
-byte i2cRxData[32];
-boolean isI2CEnabled = false;
-signed char queryIndex = -1;
-// default delay time between i2c read request and Wire.requestFrom()
-unsigned int i2cReadDelayTime = 0;
+	byte i2cRxData[32];
+	boolean isI2CEnabled = false;
+	signed char queryIndex = -1;
+	// default delay time between i2c read request and Wire.requestFrom()
+	unsigned int i2cReadDelayTime = 0;
 
-byte servoPinMap[TOTAL_PINS];
+	byte servoPinMap[TOTAL_PINS];
 
-boolean isResetting = false;
+	boolean isResetting = false;
 
-/* utility functions */
-void wireWrite(byte data)
-{
-#if ARDUINO >= 100
-	Wire.write((byte)data);
-#else
-	Wire.send(data);
-#endif
-}
+	/* utility functions */
+	void wireWrite(byte data)
+	{
+	#if ARDUINO >= 100
+		Wire.write((byte)data);
+	#else
+		Wire.send(data);
+	#endif
+	}
 
-byte wireRead(void)
-{
-#if ARDUINO >= 100
-	return Wire.read();
-#else
-	return Wire.receive();
-#endif
-}
+	byte wireRead(void)
+	{
+	#if ARDUINO >= 100
+		return Wire.read();
+	#else
+		return Wire.receive();
+	#endif
+	}
 
 /*==============================================================================
 * FUNCTIONS
@@ -579,37 +583,44 @@ void sysexCallback(byte command, byte argc, byte *argv)
 		break;
 	case LED:
 
-
-		break;
-
-	case BUZZER:
-		switch (argv[1])
-		{
-		case 1://setDelayRythme
-			speaker_main.setDelayRythme(argv[2]);
-			break;
-		case 2://setDelayAttente
-			speaker_main.setDelayAttente(argv[2]);
-			break;
-		case 3://playSon
-			speaker_main.playSon(argv[2]);
-			break;
-		case 4://playSon
-			speaker_main.playSon(argv[2], argv[3]);
-			break;
-		case 5://playNote
-			speaker_main.playNote(argv[2], argv[3]);
-			break;
-		case 6://playNote
-			speaker_main.playNote(argv[2], argv[3], argv[4]);
-			break;
-		case 7://playMelody
-			speaker_main.playMelody(argv[2]);
-			break;
-		default:
-			break;
+		switch (argv[0]) {
+			case 1: frontLeds.setColorUnit(argv[1], argv[2], argv[3], argv[4]);
+				break;
+			case 2 : frontLeds.setColorAll(argv[1], argv[2], argv[3]);
+				break;
+			case 3 : frontLeds.setColor(argv[1]);
+				break;
+			case 4: frontLeds.ledOnOff(argv[1]);
+				break;
+			default: frontLeds.ledOnOff(0);
+				break;
 		}
 
+		break;
+	case BUZZER:
+
+		switch (argv[0]) {
+			case 1: speaker_main.playSon(argv[1]);
+				break;
+			case 2: speaker_main.playNote(argv[1],argv[2]);
+				break;
+			case 3: 
+				break;
+			case 4: speaker_main.playSonDelay(argv[1],argv[2]);
+				break;
+			case 5: speaker_main.setDelayRythme(argv[1]);
+				break;
+			case 6: speaker_main.setDelayAttente(argv[1]);
+				break;
+			case 7: speaker_main.playMelody(argv[1]);
+				break;
+			case 8: speaker_main.buzzerOnOff(argv[1]);
+				break;
+			case 9: speaker_main.buzzerOnOffDelay(argv[1],argv[2]);
+				break;
+			default:
+				break;
+		}
 		break;
 	case EMOTIONS:
 
@@ -702,8 +713,10 @@ void setup() {
 	//------LEDs init-------://
 	frontLeds.init();
 
+	frontLeds.setColorAll(0, 0, 0);
+
 	//-------Son de bienvenu----://
-	speaker_main.playMelody(WELCOMSONG);
+	//speaker_main.PlayMelody(WELCOMSONG);
 
 
 	Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
