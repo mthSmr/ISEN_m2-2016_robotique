@@ -18,17 +18,21 @@
 
 using namespace std;
 int choice = -1;
-int locations = 2;
+int locations = 3;
 
 //------Motors-------://
-	Motor motor_l = Motor(9,8,10);
+	Motor motor_l = Motor(9,8,10);	
 	Motor motor_r = Motor(7,6,5);
 
 
 //------Sensors-------://
-	Sensor sensorAvG = Sensor(37, A10, 300, SensorType::infraR, 1); 
-	Sensor sensorAvM = Sensor(39, A11, 300, SensorType::infraR, 0);
-	Sensor sensorAvD = Sensor(41, A12, 300, SensorType::infraR, -1);
+	Sensor sensorAvG = Sensor(37, A10, 150, SensorType::infraR, 1); 
+	Sensor sensorAvM = Sensor(39, A11, 150, SensorType::infraR, 0);
+	Sensor sensorAvD = Sensor(41, A12, 150, SensorType::infraR, -1);
+	Sensor sensorArG = Sensor(45, A14, 150, SensorType::infraR, 10);
+	Sensor sensorArD = Sensor(47, A15, 150, SensorType::infraR, -10);
+  Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
+  Sensor sensorLineRight = Sensor(42, A1, 500, SensorType::line, -1);
 
 //------LEDs-------://
     Led frontLeds = Led(44,6);
@@ -48,10 +52,10 @@ int locations = 2;
     Buzzer speaker_main = Buzzer(11);
 
 //------menu-------://
-    Menu menu = Menu(2);
+    Menu menu = Menu(locations);
     
 //------robot-------://
-    Program robot = Program(2,3);
+    Program robot = Program(2,7);
 
 
 void setup() {
@@ -75,6 +79,10 @@ void setup() {
     robot.addSensor(&sensorAvG);
     robot.addSensor(&sensorAvM);
     robot.addSensor(&sensorAvD);
+	robot.addSensor(&sensorArG);
+	robot.addSensor(&sensorArD);
+	robot.addSensor(&sensorLineLeft);
+	robot.addSensor(&sensorLineRight);
 	  robot.addLed(&frontLeds);
 	  robot.setControls(&controls);
 
@@ -82,7 +90,9 @@ void setup() {
 
     //-------Son de bienvenu----://
     //speaker_main.playMelody(WELCOMSONG);
-
+	
+	//Initialisation de la communication série à 9600 Baud
+	Serial.begin(9600);
 }
 
 void loop() {

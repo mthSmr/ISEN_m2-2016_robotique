@@ -56,12 +56,12 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
                 robot->dodger(buttonPanel, leds);
                 break;
                 
-            case 1 : // orange:suiveur de ligne
+            case 1 : // vert:joystick
                 robot->joystick(buttonPanel, leds);
                 break;
                 
-            case 2: //	user progrm
-                
+            case 2: //	orange:suivi de ligne
+				robot->lineFollower(buttonPanel, leds);
                 break;
                 
             case 3 : // scratch programmation
@@ -75,7 +75,8 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
 }
 
 void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const leds, Buzzer *const buzzer ){
-  
+
+      
      switch(buttonPanel->analyze()){
         
             case 1 : // rightBtn
@@ -115,9 +116,12 @@ void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *c
           leds->setColor(0, 128, 255);//bleu:evitement d'obstacle
           
         }
-        if(choice == 1){
-          leds->setColor(231, 1, 62);//orange:suiveur de ligne
+        else if(choice == 1){
+          leds->setColor(0, 25, 255);//vert:joystick
         }
+		    else if (choice == 2) {
+			    leds->setColor(255, 0, 50);//orange:suiveur de ligne
+		    }
     
 }
 

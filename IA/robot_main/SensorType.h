@@ -14,7 +14,7 @@
 #ifndef TYPE_H
 #define TYPE_H
 
-enum class SensorType {undefined, infraR, lum};
+enum class SensorType {undefined, infraR, lum, line};
 
 
 #endif /* TYPE_H */

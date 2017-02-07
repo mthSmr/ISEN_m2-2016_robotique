@@ -50,7 +50,7 @@ class Program {
 
     //for demo
     void dodger(ControlPanel *const, Led *const);
-    void lineFollower();
+    void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds);
     void joystick(ControlPanel *const buttonPanel, Led *const leds);
 
     //user programs
@@ -60,8 +60,8 @@ class Program {
     bool checkLeft();
     bool checkRight();
     bool checkCenter();
-    void updateSensor();
-
+    void updateSensor(String sensorToUpdate);
+//    void checkLineSensor();
 };
 
 #endif /* PROGRAM_H */

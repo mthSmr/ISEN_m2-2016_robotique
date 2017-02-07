@@ -11,22 +11,28 @@
  * Created on 7 december 2016, 11:22
  */
 
-//#include <StandardCplusplus.h>
-//#include <vector> 
-
 #include "Buzzer.h"
 #include <Arduino.h>
 
 using namespace std;
 
-Buzzer::Buzzer() {          //Par defaut on fait rien.
+//************************************************************************
+//						Constructors
+//************************************************************************
+Buzzer::Buzzer() {          
 }
+
+//************************************************************************
+//	Constructor with parameters
+//	Arguments : the pin you want to attach to contro the buzzer
+//	Return : nothing
+//************************************************************************
 
 Buzzer::Buzzer(int newPin) {
     this->pin = newPin;
-    pinMode(this->pin, INPUT); //definition du pin Buzzer
+    pinMode(this->pin, INPUT); 
 
-	welcomeSong.push_back(doo);		//d�finition des melodies pr�enregistr�es
+	welcomeSong.push_back(doo);		
 	welcomeSong.push_back(doo);
 	welcomeSong.push_back(sii);
 	welcomeSong.push_back(sii);	
@@ -37,6 +43,10 @@ Buzzer::Buzzer(int newPin) {
 	validate.push_back(doo*2);
 }
 
+
+//************************************************************************
+//						Setters
+//************************************************************************
 void Buzzer::setDelayRythme(int time) {
 	delayRythme = time;
 }
@@ -45,7 +55,17 @@ void Buzzer::setDelayAttente(int time) {
 	delayAttente = time;
 }
 
-void Buzzer::playSon(float frequency){          //Joue un seul Son
+//************************************************************************
+//						Specific methods
+//************************************************************************
+
+//************************************************************************
+//	Play Sound
+//	Arguments : the frequency of the note you want to play
+//	Return : nothing
+//************************************************************************
+
+void Buzzer::playSon(float frequency){          
   
   if(frequency>10 && frequency<20000){ 
         tone(this->pin,frequency); 
@@ -55,7 +75,13 @@ void Buzzer::playSon(float frequency){          //Joue un seul Son
    
  }
 
-void Buzzer::playSon(float frequency, int time) {          //Joue un seul Son
+//************************************************************************
+//	Play sound (overloaded)
+//	Arguments : the frequency and the time of the note you play
+//	Return : nothing
+//************************************************************************
+
+void Buzzer::playSon(float frequency, int time) {
 
 	if (frequency>10 && frequency<20000) {
 		tone(this->pin, frequency); 
@@ -68,14 +94,32 @@ void Buzzer::playSon(float frequency, int time) {          //Joue un seul Son
 	}
 }
 
-void Buzzer::linkKey(char key) {	//TODO: associer une note � une touche clavier
+//************************************************************************
+//	
+//	Arguments : 
+//	Return : 
+//************************************************************************
+
+void Buzzer::linkKey(char key) {
 
 }
 
-void Buzzer::playKey(char key) {	//TODO: jouer une note � l'appuis d'une touche associ�e
+//************************************************************************
+//	
+//	Arguments : 
+//	Return : 
+//************************************************************************
+
+void Buzzer::playKey(char key) {
 
 }
 
+
+//************************************************************************
+//	
+//	Arguments : 
+//	Return : 
+//************************************************************************
 
 //	Fonction playNote	//
 /*
@@ -130,6 +174,12 @@ void Buzzer::playNote(int octave, char note) {
 
 }
 
+//************************************************************************
+//	
+//	Arguments : 
+//	Return : 
+//************************************************************************
+
 void Buzzer::playNote(int octave, char note, char tone) {   //surcharge pour les demi-tons
 
 	if (octave < 1) {		// on limite le nombre d'octave par s�curit�
@@ -168,14 +218,31 @@ void Buzzer::playNote(int octave, char note, char tone) {   //surcharge pour les
 
 }
 
+//************************************************************************
+//	
+//	Arguments : 
+//	Return : 
+//************************************************************************
+
 void Buzzer::playMode() {	//TODO: mode piano grace � la fct linkKey
 
 }
+
+//************************************************************************
+//	
+//	Arguments : 
+//	Return : 
+//************************************************************************
 
 void Buzzer::createMelody() {	//TODO:
 
 }
 
+//************************************************************************
+//	Play music
+//	Arguments : a vector of note
+//	Return : nothing
+//************************************************************************
 
 void Buzzer::playMusic(std::vector<float> melody) {
 
@@ -187,6 +254,12 @@ void Buzzer::playMusic(std::vector<float> melody) {
 
 	//int song_welcom[]={doo,2,doo,2,sii,1,sii,1}; //Faire une fonction pour optimiser le son.
 }
+
+//************************************************************************
+//	Play default melody
+//	Arguments : 0->WelcomeSound; 1->menuNext; 3->validate
+//	Return : nothing
+//************************************************************************
 
 void Buzzer::playMelody(int melody) {
 	switch (melody)
@@ -201,5 +274,3 @@ void Buzzer::playMelody(int melody) {
 	}
 
 }
-
-  

@@ -11,7 +11,6 @@
 #ifndef BUZZER_H
 #define BUZZER_H
 
-//#include <StandardCplusplus.h>
 #include "vector"
 
 #define WELCOMSONG 0    //Son de bienvenu
@@ -22,12 +21,11 @@
 class Buzzer {
 
 private:
-    int pin;
+    int pin;						//Used to store the pin to which the buzzer will be attached
+	int delayRythme = 300;			//Used to ...
+	int delayAttente = 100;			//Used to ...
 
-	int delayRythme = 300;
-	int delayAttente = 100;
-
-	std::vector<float> welcomeSong; 
+	std::vector<float> welcomeSong; //
 	std::vector<float> menuNext;
 	std::vector<float> validate;
     

@@ -19,15 +19,14 @@
 class Button {
 
 public:
-    int pin;
-    int value;
+    int pin;			//Used to store the pin assignement of the button	
+    int value;			//Used to store the value of the button when we analyse it
     
 public:
-    Button();
-    Button(int);
-    int getValue();
-    void readValue();
-
+    Button();			//Basic constructor of the class Button
+    Button(int pin);	//Constructor of the class Button with the pin assignement
+    int getValue();		//Get the value of the  button and store it in the value member
+    void readValue();	//Read the value of the button: HIGH if not pressed, LOW if pressed
 };
 
 #endif /* BUTTON_H */

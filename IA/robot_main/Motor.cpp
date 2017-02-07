@@ -87,7 +87,7 @@ void Motor::setDirection(bool newDirection){
 
 bool Motor::init() {
 	// initialize serial communication at 9600 bits per second:
-	Serial.begin(9600);
+	
 
 	pinMode(this->en, OUTPUT);   // Sorties commande  moteur 1
 	pinMode(this->pinInput1, OUTPUT);

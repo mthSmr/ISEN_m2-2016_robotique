@@ -45,7 +45,7 @@ std::vector<Led*> Program::getLedList()
 
 ControlPanel Program::getControls()
 {
-  return controls;
+  return this->controls;
 }
 
 void Program::setControls(ControlPanel* newControlPanel)
@@ -70,40 +70,42 @@ void Program::addLed(Led * const newLeds)
 
 void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
 {
-  delay(250);
   leds->setColor(1, 250, 49);//bleu foncé
+  delay(250);
 
   do {
 
-    this->updateSensor();
-
-    if (this->checkCenter()) {
-      motorList[0]->setDirection(false);
-      motorList[1]->setDirection(true);
-      motorList[0]->setSpeed(0);
-      motorList[1]->setSpeed(150);
-      delay(1000);
-    }
-    else if (this->checkLeft()) {
-      motorList[0]->setDirection(true);
-      motorList[1]->setDirection(false);
-      motorList[0]->setSpeed(150);
-      motorList[1]->setSpeed(0);
-      delay(250);
-    }
-    else if (this->checkRight()) {
-      motorList[0]->setDirection(true);
-      motorList[1]->setDirection(false);
-      motorList[0]->setSpeed(0);
-      motorList[1]->setSpeed(150);
-      delay(250);
-    }
-    else {
-      motorList[0]->setDirection(true);
-      motorList[1]->setDirection(false);
-      motorList[0]->setSpeed(200);
-      motorList[1]->setSpeed(200);
-    }
+    this->updateSensor("distance");
+	for (int i = 0; i < this->sensorList.size(); i++) {
+		if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 0 && this->sensorList[i]->getValue() == true) {
+			motorList[0]->setDirection(false);
+			motorList[1]->setDirection(true);
+			motorList[0]->setSpeed(0);
+			motorList[1]->setSpeed(150);
+			delay(1000);
+		}
+		else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 1 && this->sensorList[i]->getValue() == true) {
+			motorList[0]->setDirection(true);
+			motorList[1]->setDirection(false);
+			motorList[0]->setSpeed(150);
+			motorList[1]->setSpeed(0);
+			delay(250);
+		}
+		else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == -1 && this->sensorList[i]->getValue() == true) {
+			motorList[0]->setDirection(true);
+			motorList[1]->setDirection(false);
+			motorList[0]->setSpeed(0);
+			motorList[1]->setSpeed(150);
+			delay(250);
+		}
+		else {
+			motorList[0]->setDirection(true);
+			motorList[1]->setDirection(false);
+			motorList[0]->setSpeed(200);
+			motorList[1]->setSpeed(200);
+		}
+		delay(70);
+	}
   }
   while (buttonPanel->analyze() != 5);
   delay(200);
@@ -111,10 +113,69 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
   this->motorList[1]->setSpeed(0);
 }
 
-void Program::lineFollower() {
-  //leds->setColor(254, 0, 27);//orange foncé
+void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds) {
 
+	int premierCapt = 0;
+	int etat0 = 0, etat1 = 0, etat = 0;
+	int i = 0;
+	 
+  leds->setColor(254, 0, 27);//orange foncé
+  for (int i = 0; i < this->sensorList.size(); i++) {
+	  if (this->sensorList[i]->getType() != SensorType::line) {
+
+		  premierCapt++;
+	  }
+  }
+  do {
+    updateSensor("line");
+
+
+//		Serial.print(premierCapt);
+//		Serial.print(":  ");
+//		Serial.println(this->sensorList[premierCapt]->getValue());
+//		Serial.print(premierCapt+1);
+//  	Serial.print(":  ");
+		Serial.println(this->sensorList[premierCapt]->getValue());
+		
+      if (this->sensorList[premierCapt]->getValue() == true && this->sensorList[premierCapt + 1]->getValue() == false) {
+		  
+//		Serial.println("Tourner gauche");
+      motorList[0]->setDirection(true);
+      motorList[1]->setDirection(false);
+      motorList[0]->setSpeed(75);
+	  motorList[1]->setSpeed(0);
+//		delay(200);
+
+      }
+      else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == false) {
+
+//		Serial.println("Tourner droite");
+      motorList[0]->setDirection(true);
+      motorList[1]->setDirection(false);
+      motorList[0]->setSpeed(0);
+      motorList[1]->setSpeed(75);
+//		delay(200);
+
+      }
+      else {
+
+//		Serial.println("Tourner tout droit");
+      motorList[0]->setDirection(true);
+      motorList[1]->setDirection(false); 
+      motorList[0]->setSpeed(150);
+      motorList[1]->setSpeed(150);
+
+      }
+
+    delay(80);
+  }
+  while (buttonPanel->analyze() != 5);
+  delay(200);
+  this->motorList[0]->setSpeed(0);
+  this->motorList[1]->setSpeed(0);
 }
+
+
 
 void Program::joystick(ControlPanel *const buttonPanel, Led *const leds) {
 
@@ -178,15 +239,26 @@ void Program::arduino() {
 
 }
 
-void Program::updateSensor() {
-  for (int i = 0; i < this->sensorList.size(); i++)
-  {
-    this->sensorList[i]->read();
+void Program::updateSensor(String sensorToUpdate) {
+  if (sensorToUpdate == "distance") {
+    for (int i = 0; i < this->sensorList.size(); i++)
+    {
+      if (this->sensorList[i]->getType() == SensorType::infraR) {
+        this->sensorList[i]->read();
+      }
+    }
   }
-  delay(70);
+  if (sensorToUpdate == "line") {
+	  for (int i = 0; i < this->sensorList.size(); i++)
+	  {
+		  if (this->sensorList[i]->getType() == SensorType::line) {
+			  this->sensorList[i]->read();
+		  }
+	  }
+  }
 }
 
-bool Program::checkRight() {  
+bool Program::checkRight() {
   bool result = false;
   for (int i = 0; i < this->sensorList.size(); i++)
   {
@@ -225,3 +297,27 @@ bool Program::checkCenter() {
   return result;
 }
 
+//void checkLineSensor() {
+//  for (int i = 0; i < 2; i++) {
+//
+//    if (i == 0) {
+//      Serial.println("Capteur gauche");
+//    }
+//    else {
+//      Serial.println("Capteur droit");
+//    }
+//    digitalWrite(sensCommand[i], HIGH);
+//    delay(5);
+//    rawtcrt[i] = analogRead(sensData[i]);
+//    Serial.println(rawtcrt[i]);
+//    if (rawtcrt[i] < colorThreshold) {
+//      bwtcrt[i] = 0;
+//    }
+//    else {
+//      bwtcrt[i] = 1;
+//    }
+//    Serial.println(bwtcrt[0]);
+//    Serial.println(bwtcrt[1]);
+//    delay(5);
+//    digitalWrite(sensCommand[i], LOW);
+//  }

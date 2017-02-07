@@ -33,9 +33,9 @@ void Sensor::read() {
   digitalWrite(this->digitalPin, HIGH);
   delay(5);
   analog = analogRead(analogPin);
-      Serial.print("capteur ");
-      Serial.print(" = ");
-      Serial.println(analog);
+//      Serial.print("capteur ");
+//      Serial.print(" = ");
+//      Serial.println(analog);
   delay(5);
   digitalWrite(this->digitalPin, LOW);
 
