@@ -1,15 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
-/* 
- * File:   Buzzer.cpp
- * Author: BenoitP
- * 
- * Created on 7 december 2016, 11:22
- */
+/*
+* File:   Buzzer.cpp
+* Author: BenoitP
+*
+* Created on 7 december 2016, 11:22
+*/
 
 #include <StandardCplusplus.h>
 #include <vector> 
@@ -24,26 +24,26 @@ Buzzer::Buzzer() {          //Par defaut on fait rien.
 }
 
 Buzzer::Buzzer(int newPin) {
-    this->pin = newPin;
-    pinMode(this->pin, INPUT); //definition du pin Buzzer
+	this->pin = newPin;
+	pinMode(this->pin, INPUT); //definition du pin Buzzer
 
-	welcomeSong.push_back(doo);		//définition des melodies préenregistrées
+	welcomeSong.push_back(DO);		//définition des melodies préenregistrées
 	welcomeSong.push_back(0);
-	welcomeSong.push_back(doo);
+	welcomeSong.push_back(DO);
 	welcomeSong.push_back(0);
-	welcomeSong.push_back(sii);
+	welcomeSong.push_back(SI);
 	welcomeSong.push_back(0);
-	welcomeSong.push_back(sii);	
+	welcomeSong.push_back(SI);
 
-	menuNext.push_back(doo);
+	menuNext.push_back(DO);
 
-	validate.push_back(doo);
+	validate.push_back(DO);
 	validate.push_back(0);
-	validate.push_back(mii);
+	validate.push_back(MI);
 	validate.push_back(0);
-	validate.push_back(sol);
+	validate.push_back(SOL);
 	validate.push_back(0);
-	validate.push_back(doo*2);
+	validate.push_back(DO * 2);
 }
 
 void Buzzer::setDelayRythme(int time) {
@@ -54,17 +54,18 @@ void Buzzer::setDelayAttente(int time) {
 	delayAttente = time;
 }
 
-void Buzzer::playSon(int frequency){          //Joue un seul Son
-  
-  if(frequency>10 && frequency<20000){ 
-        tone(this->pin,frequency,2000); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
-    } else
-    {
-      noTone(this->pin);
-    }
- }
+void Buzzer::playSon(int frequency) {          //Joue un seul Son
 
-void Buzzer::playSon(int frequency, int time) {          //Joue un seul Son
+	if (frequency>10 && frequency<20000) {
+		tone(this->pin, frequency, 2000); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
+	}
+	else
+	{
+		noTone(this->pin);
+	}
+}
+
+void Buzzer::playSonDelay(int frequency, int time) {          //Joue un seul Son
 
 	if (frequency>10 && frequency<20000) {
 		tone(this->pin, frequency, time * 1000); //A MODIFIER VITE PAR CE QU'IL FAUT TESTER MA
@@ -87,12 +88,12 @@ void Buzzer::playKey(char key) {	//TODO: jouer une note à l'appuis d'une touche 
 //	Fonction playNote	//
 /*
 La gamme par défaut pour le buzzer est la 4 (celle avec le la/A 880Hz)(cf le wiki des octaves)
-	==> L'octave 4 en musique = à l'octave 0 dans le code. 
+==> L'octave 4 en musique = à l'octave 0 dans le code.
 
-Pour simplifier la théorie musical toussa toussa on passe à l'octave supéieure en
+Pour simplifier la théorie musical toussa toussa on passe à l'octave supérieure en
 multipliant par 2 et à l'ocatve inférieure en divisant par 2.
 */
-void Buzzer::playNote(int octave, char note) {   
+void Buzzer::playNote(int octave,int note) {   //surcharge pour les demi-tons
 
 	if (octave < 1) {		// on limite le nombre d'octave par sécurité
 		octave = 1;
@@ -101,73 +102,36 @@ void Buzzer::playNote(int octave, char note) {
 		octave = 7;
 	}
 
-	octave = floor(octave)-4;			//on empèche les puissances à virgules et on ramène l'octave 4 à 0 (cf le gros commentaire au dessus)
+	octave = floor(octave) - 4;			//on empèche les puissances à virgules et on ramène l'octave 4 à 0 (cf le gros commentaire au dessus)
 	int delta = pow(2, octave);
 
-	if(note == "c"){
-		playSon(this->doo*delta);
-	}
-	else if(note == "d")
-	{
-		playSon(this->ree*delta);
-	}
-	else if (note == "e")
-	{
-		playSon(this->mii*delta);
-	}
-	else if (note == "f")
-	{
-		playSon(this->faa*delta);
-	}
-	else if (note == "g")
-	{
-		playSon(this->sol*delta);
-	}
-	else if (note == "a")
-	{
-		playSon(this->laa*delta);
-	}
-	else if (note == "b")
-	{
-		playSon(this->sii*delta);
-	}
-
-	delay(delayRythme);
-	noTone(this->pin);
-
-}
-
-void Buzzer::playNote(int octave, char note, char tone) {   //surcharge pour les demi-tons
-
-	if (octave < 1) {		// on limite le nombre d'octave par sécurité
-		octave = 1;
-	}
-	else if (octave > 7) {
-		octave = 7;
-	}
-
-	octave = floor(octave)-4;			//on empèche les puissances à virgules et on ramène l'octave 4 à 0 (cf le gros commentaire au dessus)
-	int delta = pow(2, octave);
-
-	if ( (note == 'c' && tone == 'h') || (note == 'd' && tone == 'b') )
-	{
-		playSon(this->doH*delta);
-	}
-	else if ((note == 'd' && tone == 'h') || (note == 'e' && tone == 'b'))
-	{
-		playSon(this->reH*delta);
-	}
-	else if ((note == 'f' && tone == 'h') || (note == 'g' && tone == 'b'))
-	{
-		playSon(this->faH*delta);
-	}
-	else if ((note == 'g' && tone == 'h') || (note == 'a' && tone == 'b'))
-	{
-		playSon(this->solH*delta);
-	}
-	else if ((note == 'a' && tone == 'h') || (note == 'b' && tone == 'b'))
-	{
-		playSon(this->laH*delta);
+	switch (note) {
+	case 1: playSon(DO*delta);
+		break;
+	case 2: playSon(DOd*delta);
+		break;
+	case 3: playSon(RE*delta);
+		break;
+	case 4: playSon(REd*delta);
+		break;
+	case 5: playSon(MI*delta);
+		break;
+	case 6: playSon(FA*delta);
+		break;
+	case 7: playSon(FAd*delta);
+		break;
+	case 8: playSon(SOL*delta);
+		break;
+	case 9: playSon(SOLd*delta);
+		break;
+	case 10: playSon(LA*delta);
+		break;
+	case 11: playSon(LAd*delta);
+		break;
+	case 12: playSon(SI*delta);
+		break;
+	default:
+		break;
 	}
 
 	delay(delayRythme);
@@ -208,4 +172,18 @@ void Buzzer::playMelody(int melody) {
 	}
 }
 
-  
+void Buzzer::buzzerOnOff(bool state) {
+	if (state == 1) {
+		digitalWrite(this->pin, HIGH);
+	}
+	else if (state == 0) {
+		digitalWrite(this->pin, LOW);
+	}
+}
+
+void Buzzer::buzzerOnOffDelay(bool state,int time) {
+	buzzerOnOff(state);
+	delay(time*1000);
+	buzzerOnOff(!state);
+}
+

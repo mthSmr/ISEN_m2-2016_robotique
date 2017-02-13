@@ -37,7 +37,13 @@ std::vector<int> Led::getColor(){
    return this->color;
 }
 
-void Led::setColor(int newR, int newV, int newB){
+void Led::show(int ledNbr, int newR, int newV, int newB) {
+	this->color = { newR, newV, newB };
+	this->strip.setPixelColor(ledNbr,newR, newV, newB);
+	this->strip.show();
+}
+
+void Led::setColorAll(int newR, int newV, int newB){
     this->color = {newR, newV, newB};
 
     int cpt;
@@ -47,4 +53,31 @@ void Led::setColor(int newR, int newV, int newB){
     this->strip.show();
 }
 
+void Led::setColorUnit(int ledNbr, int newR, int newV, int newB) {
+	ledNbr = abs(ledNbr);
+	if (ledNbr > this->number) show(this->number,0,0,0);
+	else show(ledNbr-1, newR, newV, newB);
+}
 
+void Led::setColor(int couleur) {
+	this->r = tabColor[couleur][0];
+	this->v = tabColor[couleur][1];
+	this->b = tabColor[couleur][2];
+}
+
+void Led::ledOnOff(bool state) {
+	if (state == 1) {
+		int cpt;
+		for (cpt = 0; cpt < this->number; cpt++) {
+			this->strip.setPixelColor(cpt, this->r,this->v,this->b);
+		}
+		this->strip.show();
+	}
+	else if (state == 0){
+		int cpt;
+		for (cpt = 0; cpt < this->number; cpt++) {
+			this->strip.setPixelColor(cpt,0,0,0);
+		}
+		this->strip.show();
+	}
+}

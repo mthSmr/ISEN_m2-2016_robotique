@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\Arduino\libraries\Firmata;$(ProjectDir)..\..\..\..\Arduino\libraries\Adafruit_NeoPixel-master;$(ProjectDir)..\..\..\..\Arduino\libraries\StandardCplusplus;$(ProjectDir)..\..\..\..\Arduino\libraries\Firmata\utility;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\Scratch_Firmata_lib;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\Programme\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ProjectDir)__vm\.Scratch_Firmata_lib.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire;D:\Documents\Arduino\libraries\Firmata\src;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial;D:\Documents\Arduino\libraries\Adafruit_NeoPixel-master;C:\Program Files (x86)\Arduino\libraries\StandardCplusplus-master;D:\Documents\Arduino\libraries\Adafruit_NeoPixel-master\utility;D:\Documents\Arduino\libraries\Firmata\src\utility;C:\Program Files (x86)\Arduino\libraries\StandardCplusplus-master\utility;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;D:\Documents\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Documents\Arduino\Scratch_Firmata_lib;C:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\Documents\Arduino\Scratch_Firmata_lib\__vm\.Scratch_Firmata_lib.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=10606;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -74,7 +74,6 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="Scratch_Firmata_lib.ino">
       <FileType>CppCode</FileType>
     </None>
@@ -82,6 +81,8 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Buzzer.h" />
+    <ClInclude Include="Emotions.h" />
+    <ClInclude Include="EmotionSprite.h" />
     <ClInclude Include="Led.h" />
     <ClInclude Include="Motor.h" />
     <ClInclude Include="Sensor.h" />
@@ -91,6 +92,8 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Buzzer.cpp" />
+    <ClCompile Include="Emotions.cpp" />
+    <ClCompile Include="EmotionSprite.cpp" />
     <ClCompile Include="Led.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Sensor.cpp" />
@@ -101,4 +104,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM8" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
