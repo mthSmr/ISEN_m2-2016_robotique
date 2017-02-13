@@ -26,16 +26,17 @@ class Motor {
     
 private:
 
-      int pinInput1; // Commande de sens moteur, Input 1
-      int pinInput2; // Commande de sens moteur, Input 2  
-      int en;  // Commande de vitesse moteur, Output Enabled1
-      float speed;
-      bool direction; //direction is forward? TRUE/FALSE
+      int pinInput1;	//Command moteur direction, Input 1
+      int pinInput2;	//Command motor direction, Input 2  
+      int en;			//Command motor speed, Output Enable1
+      float speed;		//Store the speed of the motor
+      bool direction;	//direction is forward? TRUE/FALSE
       
 
 public:
     
-    Motor(int, int, int);
+	//Constructors
+	Motor(int, int, int);
     Motor(int, int, int, float, bool);
     
     //getter
@@ -47,7 +48,7 @@ public:
     void setDirection(bool);
 
 	//utilitary 
-	bool init();
+	bool init();	//initialization function
 	//void moveForward(int distance);
 	//void moveBackward(int distance);
 	//void stop();

@@ -25,20 +25,17 @@ class Menu {
     int locations;
     
 public:    
-    Menu();
-    Menu(int);
-    
-    //getters
-    int getLocations();
+    Menu();				//Constructors
+    Menu(int);		
+
+    int getLocations(); //getters
      
-    //utilitary
-    void runMenu(Program *const, ControlPanel *const, Led *const, Buzzer *const);
-    void runChoice(Program *const, ControlPanel *const, Led *const);
+    void runMenu(Program *const, ControlPanel *const, Led *const, Led *const, Buzzer *const);	//Function to run the select mode menu
+    void runChoice(Program *const, ControlPanel *const, Led *const, Led *const);				//Function to run the selected mode in the menu
     
 private:
-    //setters
-    void setLocations(int);
     
+    void setLocations(int);	//setters
 };
 
 #endif /* MENU_H */

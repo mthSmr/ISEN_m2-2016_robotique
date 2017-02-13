@@ -26,36 +26,37 @@ int locations = 3;
 
 
 //------Sensors-------://
-	Sensor sensorAvG = Sensor(37, A10, 150, SensorType::infraR, 1); 
-	Sensor sensorAvM = Sensor(39, A11, 150, SensorType::infraR, 0);
-	Sensor sensorAvD = Sensor(41, A12, 150, SensorType::infraR, -1);
-	Sensor sensorArG = Sensor(45, A14, 150, SensorType::infraR, 10);
-	Sensor sensorArD = Sensor(47, A15, 150, SensorType::infraR, -10);
-  Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
-  Sensor sensorLineRight = Sensor(42, A1, 500, SensorType::line, -1);
+Sensor sensorAvG = Sensor(37, A10, 150, SensorType::infraR, 1); 
+Sensor sensorAvM = Sensor(39, A11, 150, SensorType::infraR, 0);
+Sensor sensorAvD = Sensor(41, A12, 150, SensorType::infraR, -1);
+Sensor sensorArG = Sensor(45, A14, 150, SensorType::infraR, 10);
+Sensor sensorArD = Sensor(47, A15, 150, SensorType::infraR, -10);
+Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
+Sensor sensorLineRight = Sensor(42, A1, 500, SensorType::line, -1);
 
 //------LEDs-------://
-    Led frontLeds = Led(44,6);
-	  Led *const frontLeds_p = &frontLeds;
-
+Led frontLeds = Led(44, 6);
+Led *const frontLeds_p = &frontLeds;
+Led backLeds = Led(12, 2);
+Led *const backLeds_p = &backLeds;
 //------buttons-------://
-    Button btn_up = Button(22);
-    Button btn_left = Button(23);
-    Button btn_right = Button(24);
-    Button btn_down = Button(25);
-    Button btn_valid = Button(26);
+Button btn_up = Button(22);
+Button btn_left = Button(23);
+Button btn_right = Button(24);
+Button btn_down = Button(25);
+Button btn_valid = Button(26);
     
 //------Controls-------://
-    ControlPanel controls(5);
+ControlPanel controls(5);
 
 //------Son------------://
-    Buzzer speaker_main = Buzzer(11);
+Buzzer speaker_main = Buzzer(11);
 
 //------menu-------://
-    Menu menu = Menu(locations);
+Menu menu = Menu(locations);
     
 //------robot-------://
-    Program robot = Program(2,7);
+Program robot = Program(2,7);
 
 
 void setup() {
@@ -66,6 +67,7 @@ void setup() {
 
     //------LEDs init-------://
     frontLeds.init();
+	backLeds.init();
     
     //------Controls init-------://
     controls.addButton(btn_right);
@@ -83,8 +85,9 @@ void setup() {
 	robot.addSensor(&sensorArD);
 	robot.addSensor(&sensorLineLeft);
 	robot.addSensor(&sensorLineRight);
-	  robot.addLed(&frontLeds);
-	  robot.setControls(&controls);
+	robot.addLed(&frontLeds);
+	robot.addLed(&backLeds);
+	robot.setControls(&controls);
 
     frontLeds.setColor(0,0,0);
 
@@ -101,7 +104,7 @@ void loop() {
   //------Partie de CrashTEST------//
 
   //------menu-------://
-  menu.runMenu(&robot,&controls,&frontLeds, &speaker_main );
+  menu.runMenu(&robot,&controls,&frontLeds, &backLeds,&speaker_main );
   //robot.dodger(&controls,&frontLeds);
   
 //speaker_main.playMelody(WELCOMSONG);

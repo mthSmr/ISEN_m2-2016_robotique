@@ -19,14 +19,27 @@
 #include "Led.h"
 
 
+//************************************************************************
+//	Constructor
+//************************************************************************
 
 Program::Program() {
 }
+
+//************************************************************************
+//	Constructor with parameters
+//	Arguments : the number of motors; the number of sensors
+//	Return : nothing
+//************************************************************************
 
 Program::Program(int motorNbr, int sensorNbr) {
   this->motorList.reserve(motorNbr);
   this->sensorList.reserve(sensorNbr);
 }
+
+//************************************************************************
+//	Getters
+//************************************************************************
 
 std::vector<Motor*> Program::getMotorList()
 {
@@ -48,6 +61,10 @@ ControlPanel Program::getControls()
   return this->controls;
 }
 
+//************************************************************************
+//	Setters
+//************************************************************************
+
 void Program::setControls(ControlPanel* newControlPanel)
 {
   this->controls = newControlPanel;
@@ -68,10 +85,16 @@ void Program::addLed(Led * const newLeds)
   this->ledList.push_back(newLeds);
 }
 
-void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
+//************************************************************************
+//	Program obstacle doger
+//	Arguments : the button panel object, the two leds strip objects
+//	Return : nothing
+//************************************************************************
+void Program::dodger(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack)
 {
-  leds->setColor(1, 250, 49);//bleu foncé
-  delay(250);
+	ledFront->setColor(1, 250, 49);//bleu foncé
+	ledFront->setColor(1, 250, 49);
+	delay(250);
 
   do {
 
@@ -113,13 +136,21 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const leds)
   this->motorList[1]->setSpeed(0);
 }
 
-void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds) {
+//************************************************************************
+//	Program line follower
+//	Arguments : the buton panel object, the two leds strip objects
+//	Return : nothing
+//************************************************************************
+
+void Program::lineFollower(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack) {
 
 	int premierCapt = 0;
 	int etat0 = 0, etat1 = 0, etat = 0;
 	int i = 0;
 	 
-  leds->setColor(254, 0, 27);//orange foncé
+	ledFront->setColor(254, 0, 27);//orange foncé
+	ledFront->setColor(254, 0, 27);
+
   for (int i = 0; i < this->sensorList.size(); i++) {
 	  if (this->sensorList[i]->getType() != SensorType::line) {
 
@@ -129,13 +160,7 @@ void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds) {
   do {
     updateSensor("line");
 
-
-//		Serial.print(premierCapt);
-//		Serial.print(":  ");
-//		Serial.println(this->sensorList[premierCapt]->getValue());
-//		Serial.print(premierCapt+1);
-//  	Serial.print(":  ");
-		Serial.println(this->sensorList[premierCapt]->getValue());
+	Serial.println(this->sensorList[premierCapt]->getValue());
 		
       if (this->sensorList[premierCapt]->getValue() == true && this->sensorList[premierCapt + 1]->getValue() == false) {
 		  
@@ -176,10 +201,16 @@ void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds) {
 }
 
 
+//************************************************************************
+//	Joystick program
+//	Arguments : the button panel object, the two leds strip objects
+//	Return : nothing
+//************************************************************************
 
-void Program::joystick(ControlPanel *const buttonPanel, Led *const leds) {
+void Program::joystick(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack) {
 
-  leds->setColor(136, 29, 66);
+  ledFront->setColor(136, 29, 66);
+  ledBack->setColor(136, 29, 66);
   bool loop = true;
 
   while (loop) {
@@ -188,7 +219,8 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds) {
     switch (buttonPanel->analyze()) {
 
       case 1 : // rightBtn
-        leds->setColor(88, 0, 41);//bleu foncé
+        ledFront->setColor(88, 0, 41);//bleu foncé
+		ledBack->setColor(88, 0, 41);
         this->motorList[0]->setDirection(true);
         this->motorList[1]->setDirection(false);
         this->motorList[0]->setSpeed(125);
@@ -196,7 +228,8 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds) {
         break;
 
       case 2: // leftBtn
-        leds->setColor(44, 255, 117);//bleu ciel
+        ledFront->setColor(44, 255, 117);//bleu ciel
+		ledBack->setColor(44, 255, 117);
         this->motorList[0]->setDirection(true);
         this->motorList[1]->setDirection(false);
         this->motorList[0]->setSpeed(0);
@@ -204,7 +237,8 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds) {
         break;
 
       case 3 : // downBtn
-        leds->setColor(121, 249, 28);//violet
+        ledFront->setColor(121, 249, 28);//violet
+		ledBack->setColor(121, 249, 28);
         this->motorList[0]->setDirection(false);
         this->motorList[1]->setDirection(true);
         this->motorList[0]->setSpeed(125);
@@ -212,7 +246,8 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds) {
         break;
 
       case 4 : // upBtn
-        leds->setColor(129, 83, 20);//framboise
+        ledFront->setColor(129, 83, 20);//framboise
+		ledBack->setColor(129, 83, 20);
         this->motorList[0]->setDirection(true);
         this->motorList[1]->setDirection(false);
         this->motorList[0]->setSpeed(125);
@@ -235,9 +270,21 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const leds) {
   delay(750);
 }
 
+//************************************************************************
+//	User program
+//	Arguments : none
+//	Return : nothing
+//************************************************************************
+
 void Program::arduino() {
 
 }
+
+//************************************************************************
+//	Sensor data updating function
+//	Arguments : the type of sensor to update ("distance" or "line")
+//	Return : nothing
+//************************************************************************
 
 void Program::updateSensor(String sensorToUpdate) {
   if (sensorToUpdate == "distance") {
@@ -258,44 +305,44 @@ void Program::updateSensor(String sensorToUpdate) {
   }
 }
 
-bool Program::checkRight() {
-  bool result = false;
-  for (int i = 0; i < this->sensorList.size(); i++)
-  {
-    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() < 0)
-    {
-      result = true;
-    }
-  }
+//bool Program::checkRight() {
+//  bool result = false;
+//  for (int i = 0; i < this->sensorList.size(); i++)
+//  {
+//    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() < 0)
+//    {
+//      result = true;
+//    }
+//  }
+//
+//  return result;
+//}
 
-  return result;
-}
+//bool Program::checkLeft() {
+//  bool result = false;
+//  for (int i = 0; i < this->sensorList.size(); i++)
+//  {
+//    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() > 0)
+//    {
+//      result = true;
+//    }
+//  }
+//
+//  return result;
+//}
 
-bool Program::checkLeft() {
-  bool result = false;
-  for (int i = 0; i < this->sensorList.size(); i++)
-  {
-    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() > 0)
-    {
-      result = true;
-    }
-  }
-
-  return result;
-}
-
-bool Program::checkCenter() {
-  bool result = false;
-  for (int i = 0; i < this->sensorList.size(); i++)
-  {
-    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() == 0)
-    {
-      result = true;
-    }
-  }
-
-  return result;
-}
+//bool Program::checkCenter() {
+//  bool result = false;
+//  for (int i = 0; i < this->sensorList.size(); i++)
+//  {
+//    if (this->sensorList[i]->getValue() && this->sensorList[i]->getPosition() == 0)
+//    {
+//      result = true;
+//    }
+//  }
+//
+//  return result;
+//}
 
 //void checkLineSensor() {
 //  for (int i = 0; i < 2; i++) {

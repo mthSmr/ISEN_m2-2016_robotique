@@ -15,15 +15,16 @@
 class Sensor {
 
   private:
-    SensorType type;
-    int digitalPin;
-    int analogPin;
-    int cap;
-    int position;
-    bool value;
-
+    SensorType type;		//Store the type of the sensor
+    int digitalPin;			//Store the digital pin attached to the sensor
+    int analogPin;			//Store the analog pin attached to the sensor
+    int cap;				//Store the threshold of the sensor
+    int position;			//Store the position of the sensor
+    bool value;				//Store the value of the sensor after the reading procedure
 
   public:
+
+	//Constructors
     Sensor();
     Sensor(int, int, int, SensorType, int);
 
@@ -39,9 +40,7 @@ class Sensor {
     void setCap(int);
 
     //utilitaire
-    void read();
-
-
+    void read();	//Read the value of the sensor
 };
 
 #endif /* SENSOR_H */

@@ -18,7 +18,11 @@
 
 
 
-//constructors
+//************************************************************************
+//	Constructor with parameters
+//	Arguments : the input 1 pin, the input 2 pin, the enable pin
+//	Return : nothing
+//************************************************************************
 
 Motor::Motor(int newPinInput1, int newPinInput2, int newEn) {
     this->pinInput1 = newPinInput1;
@@ -28,15 +32,20 @@ Motor::Motor(int newPinInput1, int newPinInput2, int newEn) {
     Motor::setDirection(true);
 }
 
+//*********************************************************************************************************************************
+//	Constructor with parameters
+//	Arguments : the input 1 pin, the input 2 pin, the enable pin, the basic speed, the direction (true = forward, false = backward)
+//	Return : nothing
+//*********************************************************************************************************************************
+
 Motor::Motor(int newPinInput1, int newPinInput2, int newEn, float speed = 0, bool direction = true) {
     Motor::setSpeed(speed);
     Motor::setDirection(direction);
 }
 
-
-
-
-//getters
+//************************************************************************
+//	Getters
+//************************************************************************
 
 float Motor::getSpeed() {
 	return this->speed;
@@ -46,10 +55,9 @@ bool Motor::getDirection() {
 	return this->direction;
 }
 
-
-
-
-//setters
+//************************************************************************
+//	Setter
+//************************************************************************
 
 void Motor::setSpeed(float newSpeed){
   //settings max and min limits
@@ -64,6 +72,12 @@ void Motor::setSpeed(float newSpeed){
     this->speed = newSpeed;
     analogWrite( this->en, newSpeed );
 }
+
+//***************************************************************************
+//	Set the direction of the motor
+//	Arguments : the direction of the motor (true = forward, false = backward)
+//	Return : nothing
+//***************************************************************************
 
 void Motor::setDirection(bool newDirection){
     this->direction = newDirection;
@@ -80,14 +94,13 @@ void Motor::setDirection(bool newDirection){
       
 }
 
-
-
-
-//utilitary
+//************************************************************************
+//	Initialization of the pin of the motor
+//	Arguments : none
+//	Return : nothing
+//************************************************************************
 
 bool Motor::init() {
-	// initialize serial communication at 9600 bits per second:
-	
 
 	pinMode(this->en, OUTPUT);   // Sorties commande  moteur 1
 	pinMode(this->pinInput1, OUTPUT);

@@ -44,15 +44,31 @@ void ControlPanel::setBtnNumberMax(int newBtnNumberMax){
     this->btnList.reserve(newBtnNumberMax);
 }
 
-//functions
+//************************************************************************
+//	Add button in the control panel button list
+//	Arguments : the button you want to add in the list
+//	Return : nothing
+//************************************************************************
 
 void ControlPanel::addButton(Button newBtn){ 
         this->btnList.push_back(newBtn);  
 }
 
+//************************************************************************
+//	Memory reservation for buttons
+//	Arguments : the number of buttons you want to rreserve memory for
+//	Return : nothing
+//************************************************************************
+
 void ControlPanel::reserve(int newBtnNumberMax){
     this->btnList.reserve(newBtnNumberMax);
 }
+
+//************************************************************************
+//	Control panel read: read all buttons stocked in the button vector
+//	Arguments : none
+//	Return : none
+//************************************************************************
 
 void ControlPanel::controlRead(){
     for (auto &btn: this->btnList){
@@ -74,6 +90,12 @@ void ControlPanel::controlRead(){
 //    return binary;
 //}
 
+//************************************************************************
+//	Control panel analyse: analyse the values stored in memory from read
+//	Arguments : none
+//	Return : 1 right; 2 left; 3 down; 4 up; 5 validate
+//************************************************************************
+
 int ControlPanel::analyze(){
     controlRead();
     
@@ -93,7 +115,5 @@ int ControlPanel::analyze(){
       return 5;
     }else{
       return 0;
-    }
-    
+    }  
 }
-

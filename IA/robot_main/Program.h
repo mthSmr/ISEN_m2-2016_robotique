@@ -14,7 +14,6 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-//#include <cstdlib>
 #include "vector"
 #include "Motor.h"
 #include "Sensor.h"
@@ -24,13 +23,14 @@
 
 class Program {
 
-    std::vector<Motor*> motorList;
-    std::vector<Sensor*> sensorList;
-    std::vector<Led*> ledList;
-    ControlPanel* controls;
+    std::vector<Motor*> motorList;		//used to store the motor list
+    std::vector<Sensor*> sensorList;	//used to store the sensor list
+    std::vector<Led*> ledList;			//used to store the led strips list
+    ControlPanel* controls;				//used to store the control panel
 
   public:
 
+	//Constructors
     Program();
     Program(int, int);
 
@@ -44,23 +44,23 @@ class Program {
     void setControls(ControlPanel* newControlPanel);
 
     //utilitaire
-    void addMotor(Motor *const);
-    void addSensor(Sensor *const);
-    void addLed(Led *const);
+    void addMotor(Motor *const);		//add a motor object in the motor vector
+    void addSensor(Sensor *const);		//add a sensor object in the sensor vector
+    void addLed(Led *const);			//add a led strip object in the sensor vector
 
     //for demo
-    void dodger(ControlPanel *const, Led *const);
-    void Program::lineFollower(ControlPanel *const buttonPanel, Led *const leds);
-    void joystick(ControlPanel *const buttonPanel, Led *const leds);
+    void dodger(ControlPanel *const, Led *const, Led *const);			//obstacle doger program
+    void lineFollower(ControlPanel *const, Led *const, Led  *const);	//lie follower program
+    void joystick(ControlPanel *const , Led *const, Led *const);		//joystick program
 
     //user programs
-    void arduino();
+    void arduino();			//slot for the user program
 
     //others
-    bool checkLeft();
-    bool checkRight();
-    bool checkCenter();
-    void updateSensor(String sensorToUpdate);
+    //bool checkLeft();							//
+    //bool checkRight();						//
+    //bool checkCenter();						//
+    void updateSensor(String sensorToUpdate);	//
 //    void checkLineSensor();
 };
 
