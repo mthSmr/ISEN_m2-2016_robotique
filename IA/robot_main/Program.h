@@ -52,6 +52,7 @@ class Program {
     void dodger(ControlPanel *const, Led *const, Led *const);			//obstacle doger program
     void lineFollower(ControlPanel *const, Led *const, Led  *const);	//lie follower program
     void joystick(ControlPanel *const , Led *const, Led *const);		//joystick program
+	void wifiJoystick(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack);												//joystick with wifi
 
     //user programs
     void arduino();			//slot for the user program

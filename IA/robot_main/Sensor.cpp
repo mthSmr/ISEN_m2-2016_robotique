@@ -16,7 +16,7 @@
 #include "SensorType.h"
 
 //************************************************************************
-//	Constructor 
+//	Constructor
 //************************************************************************
 
 Sensor::Sensor() {
@@ -50,9 +50,12 @@ void Sensor::read() {
   digitalWrite(this->digitalPin, HIGH);
   delay(5);
   analog = analogRead(analogPin);
-//      Serial.print("capteur ");
-//      Serial.print(" = ");
-//      Serial.println(analog);
+  
+//  Serial.print("capteur ");
+//  Serial.print(" = ");
+//  Serial.println(analog);
+//  delay(1000);
+  
   delay(5);
   digitalWrite(this->digitalPin, LOW);
 
@@ -97,10 +100,6 @@ bool Sensor::getValue() {
   return this->value;
 }
 
-void Sensor::setPosition(int pos)
-{
-  this->position = pos;
-}
 
 int Sensor::getPosition()
 {

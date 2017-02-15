@@ -15,6 +15,8 @@
 #include "ControlPanel.h"
 #include "Program.h"
 #include "Buzzer.h"
+//#include "Wifi.h"
+//#include "Data.h"
 
 #ifndef MENU_H
 #define MENU_H

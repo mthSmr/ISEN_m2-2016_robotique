@@ -90,45 +90,49 @@ void Program::addLed(Led * const newLeds)
 //	Arguments : the button panel object, the two leds strip objects
 //	Return : nothing
 //************************************************************************
+
 void Program::dodger(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack)
 {
-	ledFront->setColor(1, 250, 49);//bleu foncé
-	ledFront->setColor(1, 250, 49);
-	delay(250);
+  ledFront->setColor(1, 250, 49);//bleu foncé
+  ledBack->setColor(1, 250, 49);
+  delay(250);
 
   do {
 
     this->updateSensor("distance");
-	for (int i = 0; i < this->sensorList.size(); i++) {
-		if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 0 && this->sensorList[i]->getValue() == true) {
-			motorList[0]->setDirection(false);
-			motorList[1]->setDirection(true);
-			motorList[0]->setSpeed(0);
-			motorList[1]->setSpeed(150);
-			delay(1000);
-		}
-		else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 1 && this->sensorList[i]->getValue() == true) {
-			motorList[0]->setDirection(true);
-			motorList[1]->setDirection(false);
-			motorList[0]->setSpeed(150);
-			motorList[1]->setSpeed(0);
-			delay(250);
-		}
-		else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == -1 && this->sensorList[i]->getValue() == true) {
-			motorList[0]->setDirection(true);
-			motorList[1]->setDirection(false);
-			motorList[0]->setSpeed(0);
-			motorList[1]->setSpeed(150);
-			delay(250);
-		}
-		else {
-			motorList[0]->setDirection(true);
-			motorList[1]->setDirection(false);
-			motorList[0]->setSpeed(200);
-			motorList[1]->setSpeed(200);
-		}
-		delay(70);
-	}
+    for (int i = 0; i < this->sensorList.size(); i++) {
+      if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 0 && this->sensorList[i]->getValue() == true) {
+        motorList[0]->setDirection(true);
+        motorList[1]->setDirection(false);
+		motorList[1]->setSpeed(255);
+		delay(20);
+        motorList[0]->setSpeed(0);
+        motorList[1]->setSpeed(150);
+        //delay(1000);
+      }
+      else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 1 && this->sensorList[i]->getValue() == true) {
+
+		motorList[1]->setSpeed(0);
+        //delay(250);
+      }
+      else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == -1 && this->sensorList[i]->getValue() == true) {
+       
+		motorList[0]->setSpeed(0);
+        //delay(250);
+      }
+
+      else if (this->sensorList[0]->getValue() == false && this->sensorList[1]->getValue() == false && this->sensorList[2]->getValue() == false ){
+
+        motorList[0]->setDirection(true);
+        motorList[1]->setDirection(true);
+        motorList[0]->setSpeed(200);
+        motorList[1]->setSpeed(200);
+		delay(20);
+		motorList[0]->setSpeed(80);
+		motorList[1]->setSpeed(80);
+      }
+      delay(70);
+    }
   }
   while (buttonPanel->analyze() != 5);
   delay(200);
@@ -144,55 +148,90 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const ledFront, Led *
 
 void Program::lineFollower(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack) {
 
-	int premierCapt = 0;
-	int etat0 = 0, etat1 = 0, etat = 0;
-	int i = 0;
-	 
-	ledFront->setColor(254, 0, 27);//orange foncé
-	ledFront->setColor(254, 0, 27);
+  int premierCapt = 0;
+  int etat0 = 0, etat1 = 0, etat = 0;
+  int i = 0;
+
+  ledFront->setColor(254, 0, 27);//orange foncé
+  ledFront->setColor(254, 0, 27);
 
   for (int i = 0; i < this->sensorList.size(); i++) {
-	  if (this->sensorList[i]->getType() != SensorType::line) {
+    if (this->sensorList[i]->getType() != SensorType::line) {
 
-		  premierCapt++;
-	  }
+      premierCapt++;
+    }
   }
   do {
     updateSensor("line");
 
-	Serial.println(this->sensorList[premierCapt]->getValue());
+    if (this->sensorList[premierCapt]->getValue() == true && this->sensorList[premierCapt + 1]->getValue() == false && etat == 0) {
+
+      etat = 1;
+
+    }
+
+    else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == true && etat == 1) {
+
+      etat = 1;
+    }
+
+    else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == false && etat == 0) {
+
+      etat = 2;
+    }
+
+    else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == true && etat == 2) {
+
+      etat = 2;
+    }
+    else if (this->sensorList[premierCapt + 1]->getValue() == false && this->sensorList[premierCapt]->getValue() == false && (etat == 1 || etat == 2)) {
+
+      etat = etat;
+    }
+
+	else {
 		
-      if (this->sensorList[premierCapt]->getValue() == true && this->sensorList[premierCapt + 1]->getValue() == false) {
-		  
-//		Serial.println("Tourner gauche");
-      motorList[0]->setDirection(true);
-      motorList[1]->setDirection(false);
-      motorList[0]->setSpeed(75);
-	  motorList[1]->setSpeed(0);
-//		delay(200);
+		etat = 0;
+	}
 
-      }
-      else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == false) {
 
-//		Serial.println("Tourner droite");
-      motorList[0]->setDirection(true);
-      motorList[1]->setDirection(false);
-      motorList[0]->setSpeed(0);
-      motorList[1]->setSpeed(75);
-//		delay(200);
+    switch (etat)
+    {
+      case 0 :
+        if (etat1 != 0) {
+          //Serial.println("Tourner tout droit");
+          motorList[0]->setDirection(true);
+          motorList[1]->setDirection(true);
+		  motorList[1]->setSpeed(150);
+		  motorList[0]->setSpeed(150);
+		  delay(20);
+          motorList[0]->setSpeed(80);
+          motorList[1]->setSpeed(80);
+        }
+        delay(60);
+        break;
+      case 1 :
+        if (etat1 != 1) {
+          //Serial.println("Tourner gauche");
+          motorList[0]->setDirection(true);
+          motorList[1]->setDirection(true);
+		  motorList[0]->setSpeed(0);
+        }
+        delay(80);
+        break;
+      case 2 :
+        if (etat1 != 2) {
+          //Serial.println("Tourner droite");
+          motorList[0]->setDirection(true);
+          motorList[1]->setDirection(true);
+		  motorList[1]->setSpeed(0);
+        }
+        delay(80);
+      default:
 
-      }
-      else {
-
-//		Serial.println("Tourner tout droit");
-      motorList[0]->setDirection(true);
-      motorList[1]->setDirection(false); 
-      motorList[0]->setSpeed(150);
-      motorList[1]->setSpeed(150);
-
-      }
-
-    delay(80);
+        break;
+    }
+    etat1 = etat;
   }
   while (buttonPanel->analyze() != 5);
   delay(200);
@@ -212,46 +251,66 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const ledFront, Led
   ledFront->setColor(136, 29, 66);
   ledBack->setColor(136, 29, 66);
   bool loop = true;
+  int state = 0;
+  this->motorList[0]->setDirection(true);
+  this->motorList[1]->setDirection(true);
 
   while (loop) {
 
     delay(250);
+
     switch (buttonPanel->analyze()) {
 
       case 1 : // rightBtn
         ledFront->setColor(88, 0, 41);//bleu foncé
-		ledBack->setColor(88, 0, 41);
-        this->motorList[0]->setDirection(true);
-        this->motorList[1]->setDirection(false);
-        this->motorList[0]->setSpeed(125);
-        this->motorList[1]->setSpeed(0);
+        ledBack->setColor(88, 0, 41);
+        if (state != 1) {
+          Serial.print("Case 1 first time");
+          this->motorList[0]->setDirection(true);
+          this->motorList[1]->setDirection(true);
+          delay(5);
+          this->motorList[0]->setSpeed(125);
+          this->motorList[1]->setSpeed(0);
+        }
         break;
 
       case 2: // leftBtn
         ledFront->setColor(44, 255, 117);//bleu ciel
-		ledBack->setColor(44, 255, 117);
-        this->motorList[0]->setDirection(true);
-        this->motorList[1]->setDirection(false);
-        this->motorList[0]->setSpeed(0);
-        this->motorList[1]->setSpeed(75);
+        ledBack->setColor(44, 255, 117);
+        if (state != 2) {
+          Serial.print("Case 2 first time");
+          this->motorList[0]->setDirection(true);
+          this->motorList[1]->setDirection(true);
+          delay(5);
+          this->motorList[0]->setSpeed(0);
+          this->motorList[1]->setSpeed(125);
+        }
         break;
 
       case 3 : // downBtn
         ledFront->setColor(121, 249, 28);//violet
-		ledBack->setColor(121, 249, 28);
-        this->motorList[0]->setDirection(false);
-        this->motorList[1]->setDirection(true);
-        this->motorList[0]->setSpeed(125);
-        this->motorList[1]->setSpeed(75);
+        ledBack->setColor(121, 249, 28);
+        if (state != 3) {
+          Serial.print("Case 3 first time");
+          this->motorList[0]->setDirection(false);
+          this->motorList[1]->setDirection(false);
+          delay(5);
+          this->motorList[0]->setSpeed(125);
+          this->motorList[1]->setSpeed(125);
+        }
         break;
 
       case 4 : // upBtn
         ledFront->setColor(129, 83, 20);//framboise
-		ledBack->setColor(129, 83, 20);
-        this->motorList[0]->setDirection(true);
-        this->motorList[1]->setDirection(false);
-        this->motorList[0]->setSpeed(125);
-        this->motorList[1]->setSpeed(75);
+        ledBack->setColor(129, 83, 20);
+        if (state != 4) {
+          Serial.print("Case 4 first time");
+          this->motorList[0]->setDirection(true);
+          this->motorList[1]->setDirection(true);
+          delay(5);
+          this->motorList[0]->setSpeed(125);
+          this->motorList[1]->setSpeed(125);
+        }
         break;
 
       case 5 : // validateBtn
@@ -263,11 +322,22 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const ledFront, Led
         this->motorList[1]->setSpeed(0);
         break;
     }
+    state = buttonPanel->analyze();
   }
-
   this->motorList[0]->setSpeed(0);
   this->motorList[1]->setSpeed(0);
   delay(750);
+}
+
+//************************************************************************
+//	User program
+//	Arguments : none
+//	Return : nothing
+//************************************************************************
+
+void Program::wifiJoystick(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack) {
+  ledFront->setColor(255, 0, 255);
+  ledBack->setColor(255, 0, 255);
 }
 
 //************************************************************************
@@ -296,12 +366,12 @@ void Program::updateSensor(String sensorToUpdate) {
     }
   }
   if (sensorToUpdate == "line") {
-	  for (int i = 0; i < this->sensorList.size(); i++)
-	  {
-		  if (this->sensorList[i]->getType() == SensorType::line) {
-			  this->sensorList[i]->read();
-		  }
-	  }
+    for (int i = 0; i < this->sensorList.size(); i++)
+    {
+      if (this->sensorList[i]->getType() == SensorType::line) {
+        this->sensorList[i]->read();
+      }
+    }
   }
 }
 

@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\..\..\Arduino\libraries\StandardCplusplus-master;$(ProjectDir)..\..\..\..\..\..\..\..\Arduino\libraries\Adafruit_NeoPixel-master;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\robot_main;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\..\..\Arduino\libraries\StandardCplusplus-master;$(ProjectDir)..\..\..\..\..\..\..\..\Arduino\libraries\Adafruit_NeoPixel-master;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\robot_main;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\..\..\Programes files\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.robot_main.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega1280__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -90,6 +90,7 @@
     <ClInclude Include="ControlPanel.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="Data.h" />
     <ClInclude Include="Led.h">
       <FileType>CppCode</FileType>
     </ClInclude>
@@ -110,17 +111,20 @@
     <ClInclude Include="SensorType.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="Wifi.h" />
     <ClInclude Include="__vm\.robot_main.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Buzzer.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Led.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Sensor.cpp" />
+    <ClCompile Include="Wifi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="robot_main.rc" />

@@ -81,7 +81,8 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *
 				robot->lineFollower(buttonPanel, ledFront, ledBack);
                 break;
                 
-            case 3 : // scratch programmation
+            case 3 : // wi fi joystick
+				robot->wifiJoystick(buttonPanel, ledFront, ledBack);
                 break;
                 
             default:
@@ -97,7 +98,7 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *
 //	Return : nothing
 //**************************************************************************************************************************
 
-void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack, Buzzer *const buzzer ){
+void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack, Buzzer *const buzzer){
 
       
      switch(buttonPanel->analyze()){
@@ -126,7 +127,7 @@ void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *c
                 
             case 5 : // validateBtn
                 buzzer->playMelody(VALIDATE);
-                runChoice(robot,buttonPanel,ledFront,ledBack );
+                runChoice(robot,buttonPanel,ledFront,ledBack);
                 break;
                 
             default:
@@ -145,7 +146,11 @@ void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *c
         }
 		else if (choice == 2) {
 			ledFront->setColor(255, 0, 50);//orange:suiveur de ligne
-			ledFront->setColor(255, 0, 50);
+			ledBack->setColor(255, 0, 50);
+		}
+		else if (choice == 3){//rose wi fi
+			ledFront->setColor(253, 108, 158);
+			ledBack->setColor(253, 108, 158);
 		}
     
 }
