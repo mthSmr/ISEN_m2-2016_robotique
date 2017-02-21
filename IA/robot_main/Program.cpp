@@ -19,11 +19,15 @@
 #include "Led.h"
 
 
+static float circonference;			// Circonférence de la roue
+
 //************************************************************************
 //	Constructor
 //************************************************************************
 
 Program::Program() {
+	circonference = 2 * 3.14159 * rayonMM;
+	desiredSpeed = 6;
 }
 
 //************************************************************************
@@ -33,8 +37,10 @@ Program::Program() {
 //************************************************************************
 
 Program::Program(int motorNbr, int sensorNbr) {
-  this->motorList.reserve(motorNbr);
-  this->sensorList.reserve(sensorNbr);
+
+	circonference = 2 * 3.14159 * rayonMM;
+	this->motorList.reserve(motorNbr);
+	this->sensorList.reserve(sensorNbr);
 }
 
 //************************************************************************
@@ -56,7 +62,7 @@ std::vector<Led*> Program::getLedList()
   return ledList;
 }
 
-ControlPanel Program::getControls()
+ControlPanel* Program::getControls()
 {
   return this->controls;
 }
@@ -100,83 +106,38 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const ledFront, Led *
   do {
 
     this->updateSensor("distance");
-
     for (int i = 0; i < this->sensorList.size(); i++) {
       if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 0 && this->sensorList[i]->getValue() == true) {
-
-		//Serial.println("Reculer");
         motorList[0]->setDirection(true);
         motorList[1]->setDirection(false);
-		motorList[1]->setSpeed(200);
+		motorList[1]->setSpeed(255);
 		delay(20);
         motorList[0]->setSpeed(0);
-        motorList[1]->setSpeed(100);
-		i = 20;
+        motorList[1]->setSpeed(150);
         //delay(1000);
       }
       else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 1 && this->sensorList[i]->getValue() == true) {
 
-		//Serial.println("tourner gauche");
-		motorList[0]->setDirection(true);
-		motorList[1]->setDirection(true);
 		motorList[1]->setSpeed(0);
-		motorList[0]->setSpeed(200);
-		delay(20);
-		motorList[0]->setSpeed(100);
-		i = 20;
         //delay(250);
       }
-	  else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 2 && this->sensorList[i]->getValue() == true) {
-
-		  //Serial.println("tourner fort gauche");
-		  motorList[0]->setDirection(true);
-		  motorList[1]->setDirection(false);
-		  motorList[0]->setSpeed(200);
-		  motorList[1]->setSpeed(200);
-		  delay(20);
-		  motorList[0]->setSpeed(100);
-		  motorList[1]->setSpeed(100);
-		  i = 20;
-		  //delay(250);
-	  }
       else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == -1 && this->sensorList[i]->getValue() == true) {
        
-		//Serial.println("tourner droite");
-		motorList[0]->setDirection(true);
-		motorList[1]->setDirection(true);
 		motorList[0]->setSpeed(0);
-		motorList[1]->setSpeed(200);
-		delay(20);
-		motorList[1]->setSpeed(100);
-		i = 20;
         //delay(250);
       }
-	  else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == -2 && this->sensorList[i]->getValue() == true) {
 
-		  //Serial.println("tourner fort droite");
-		  motorList[0]->setDirection(false);
-		  motorList[1]->setDirection(true);
-		  motorList[0]->setSpeed(200);
-		  motorList[1]->setSpeed(200);
-		  delay(20);
-		  motorList[0]->setSpeed(100);
-		  motorList[1]->setSpeed(100);
-		  i = 20;
-		  //delay(250);
-	  }
-      else if (this->sensorList[0]->getValue() == false && this->sensorList[1]->getValue() == false && this->sensorList[2]->getValue() == false && this->sensorList[3]->getValue() == false && this->sensorList[4]->getValue() == false && this->sensorList[5]->getValue() == false && this->sensorList[6]->getValue() == false){
+      else if (this->sensorList[0]->getValue() == false && this->sensorList[1]->getValue() == false && this->sensorList[2]->getValue() == false ){
 
-		//Serial.println("Tout droit");
         motorList[0]->setDirection(true);
         motorList[1]->setDirection(true);
         motorList[0]->setSpeed(200);
         motorList[1]->setSpeed(200);
 		delay(20);
-		motorList[0]->setSpeed(100);
-		motorList[1]->setSpeed(100);
-		i = 20;
+		motorList[0]->setSpeed(80);
+		motorList[1]->setSpeed(80);
       }
-      delay(50);
+      delay(70);
     }
   }
   while (buttonPanel->analyze() != 5);
@@ -209,80 +170,74 @@ void Program::lineFollower(ControlPanel *const buttonPanel, Led *const ledFront,
   do {
     updateSensor("line");
 
-	if (this->sensorList[premierCapt]->getValue() == true && this->sensorList[premierCapt + 1]->getValue() == false) {
-	  
+    if (this->sensorList[premierCapt]->getValue() == true && this->sensorList[premierCapt + 1]->getValue() == false && etat == 0) {
+
       etat = 1;
 
     }
 
     else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == true && etat == 1) {
-		
-      etat= 0;
+
+      etat = 1;
     }
 
-    else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == false) {
-	  
+    else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == false && etat == 0) {
+
       etat = 2;
     }
 
-    else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == true && etat == 2 ) {
-	  
-      etat = 0;
+    else if (this->sensorList[premierCapt + 1]->getValue() == true && this->sensorList[premierCapt]->getValue() == true && etat == 2) {
+
+      etat = 2;
     }
     else if (this->sensorList[premierCapt + 1]->getValue() == false && this->sensorList[premierCapt]->getValue() == false && (etat == 1 || etat == 2)) {
 
       etat = etat;
     }
+
 	else {
 		
 		etat = 0;
 	}
 
+
     switch (etat)
     {
       case 0 :
-        
+        if (etat1 != 0) {
           //Serial.println("Tourner tout droit");
           motorList[0]->setDirection(true);
           motorList[1]->setDirection(true);
 		  motorList[1]->setSpeed(150);
 		  motorList[0]->setSpeed(150);
-		  delay(30);
+		  delay(20);
           motorList[0]->setSpeed(80);
           motorList[1]->setSpeed(80);
-        
-        delay(50);
+        }
+        delay(60);
         break;
       case 1 :
-        
+        if (etat1 != 1) {
           //Serial.println("Tourner gauche");
           motorList[0]->setDirection(true);
           motorList[1]->setDirection(true);
 		  motorList[0]->setSpeed(0);
-		  motorList[1]->setSpeed(150);
-		  delay(30);
-		  motorList[1]->setSpeed(80);
-        
-        delay(50);
+        }
+        delay(80);
         break;
       case 2 :
-     
+        if (etat1 != 2) {
           //Serial.println("Tourner droite");
           motorList[0]->setDirection(true);
-		  motorList[0]->setSpeed(150);
-		  delay(30);
-		  motorList[0]->setSpeed(80);
           motorList[1]->setDirection(true);
 		  motorList[1]->setSpeed(0);
-        
+        }
         delay(80);
       default:
 
         break;
     }
-   
-	Serial.println(etat);
-	
+    etat1 = etat;
   }
   while (buttonPanel->analyze() != 5);
   delay(200);
@@ -381,105 +336,14 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const ledFront, Led
 }
 
 //************************************************************************
-//	Wifi Joystick
-//	Arguments : the button panel object, the two leds strip objects, the data objects
+//	User program
+//	Arguments : none
 //	Return : nothing
 //************************************************************************
 
-void Program::useWifi(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack, Data *const data) {
-	ledFront->setColor(255, 10, 255);
-	ledBack->setColor(255, 10, 255);
-
-	while (buttonPanel->analyze() != 3) {
-		*data = data->receiveData();
-		int a = data->getA();
-		int p = data->getP();
-		switch (data->analyze()) {
-		case 0: // sleep
-			delay(5);
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(true);
-			this->motorList[1]->setSpeed(0);
-			this->motorList[0]->setSpeed(0);
-
-			// Print pour test 
-			//Serial.println("ARRET");
-			break;
-		case 1: // up
-			delay(5);
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(true);
-			this->motorList[1]->setSpeed(240);
-			this->motorList[0]->setSpeed(240);
-
-			// Print pour test 
-			//Serial.println("up");
-			break;
-		case 2:
-			delay(5);
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(true);
-			this->motorList[0]->setSpeed(240);
-			this->motorList[1]->setSpeed(200);
-			// Print pour test 
-			//Serial.println("up right");
-			break;
-		case 3:
-			delay(5);
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(true);
-			this->motorList[0]->setSpeed(200);
-			this->motorList[1]->setSpeed(100);
-			//Serial.println("droite"); 
-			break;
-		case 4:
-			delay(5);
-			this->motorList[0]->setDirection(false);
-			this->motorList[1]->setDirection(false);
-			this->motorList[0]->setSpeed(240);
-			this->motorList[1]->setSpeed(200);
-			//Serial.println(" down right");
-			break;
-		case 5:
-			delay(5);
-			this->motorList[0]->setDirection(false);
-			this->motorList[1]->setDirection(false);
-			this->motorList[0]->setSpeed(240);
-			this->motorList[1]->setSpeed(240);
-			//Serial.println("down");
-			break;
-		case 6:
-			delay(5);
-			this->motorList[0]->setDirection(false);
-			this->motorList[1]->setDirection(false);
-			this->motorList[0]->setSpeed(200);
-			this->motorList[1]->setSpeed(240);
-			//Serial.println("down left");
-			break;
-		case 7:
-			delay(5);
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(true);
-			this->motorList[0]->setSpeed(100);
-			this->motorList[1]->setSpeed(200);
-			//Serial.println("left");
-			break;
-		case 8:
-			delay(5);
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(true);
-			this->motorList[0]->setSpeed(200);
-			this->motorList[1]->setSpeed(240);
-			//Serial.println("upleft");
-			break;
-		default:
-			this->motorList[0]->setDirection(true);
-			this->motorList[1]->setDirection(true);
-			this->motorList[1]->setSpeed(0);
-			this->motorList[0]->setSpeed(0);
-			break;
-		}
-	}
+void Program::wifiJoystick(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack) {
+  ledFront->setColor(255, 0, 255);
+  ledBack->setColor(255, 0, 255);
 }
 
 //************************************************************************
@@ -516,7 +380,6 @@ void Program::updateSensor(String sensorToUpdate) {
     }
   }
 }
-
 
 //bool Program::checkRight() {
 //  bool result = false;
@@ -581,3 +444,214 @@ void Program::updateSensor(String sensorToUpdate) {
 //    delay(5);
 //    digitalWrite(sensCommand[i], LOW);
 //  }
+
+void Program::testAsserv(int target_mm =1000) {
+	avancer(target_mm);
+	/*for (int i = 0; i < 2; i++) {
+		Program::avancer(target_mm);
+		delay(500);
+
+		Rotation(95, 1);
+		delay(500);
+
+		target_mm = 500;
+		Avancer(target_mm);
+		delay(500);
+
+		Rotation(95, 1);
+		delay(500);
+	}*/
+}
+
+
+
+double Program::calculateTicks(int target_mm) {
+	return (target_mm * gain * nbOfTicksPerRotation / circonference );
+}
+
+void Program::avancer(int target_mm) {
+
+	double target_ticks = calculateTicks(target_mm);
+	Serial.print("target_ticks : ");
+	Serial.println(target_ticks);
+
+	motorList[0]->setEncoderPos(0);
+	motorList[1]->setEncoderPos(0);
+	//  Serial.println("dedans avant while");
+
+	while (motorList[0]->getEncoderPos() < target_ticks) {
+		asservissement_vitesse_Motors(desiredSpeed, false);
+		Serial.print(motorList[0]->getEncoderPos());
+		Serial.print(" , ");
+		Serial.println(motorList[1]->getEncoderPos());
+	}
+
+	motorList[0]->setSpeed(0);
+	motorList[1]->setSpeed(0);
+	//  Serial.println("dedans apres while");
+
+}
+
+void Program::reculer(int target_mm) {
+
+	double target_ticks = calculateTicks(target_mm);
+	//  Serial.print("target_ticks : ");
+	//  Serial.println(target_ticks);
+
+	motorList[0]->setEncoderPos(0);
+	motorList[1]->setEncoderPos(0);
+	//  Serial.println("dedans avant while");
+
+	while (motorList[0]->getEncoderPos() < target_ticks) {
+		asservissement_vitesse_Motors(desiredSpeed, true);
+		//    Serial.print(encoder1Pos);
+		//    Serial.print(" , ");
+		//    Serial.println(encoder2Pos);
+	}
+
+	motorList[0]->setSpeed(0);
+	motorList[1]->setSpeed(0);
+
+	//  Serial.println("dedans apres while");
+
+}
+
+void Program::rotation(int angle, int sens) {      // Sens des aiguilles et sens inverse des aiguilles
+	float distance_desiree = (rayon_base * 3.14159 * 2 * angle) / 360.0;      // 2*Pi*R*angle / 360
+	double target_ticks = calculateTicks(distance_desiree);
+	//  Serial.println(target_ticks);
+
+	motorList[0]->setEncoderPos(0);
+	motorList[1]->setEncoderPos(0);
+
+	//  Serial.println("dans rotation");
+
+	if (sens == 0) {                            // Sens horaire
+		while (motorList[0]->getEncoderPos() < target_ticks) {
+			motorList[0]->setSpeed(180);
+			motorList[1]->setSpeed(0);
+			Serial.println(motorList[0]->getEncoderPos());
+
+		}
+		motorList[0]->setSpeed(0);
+		motorList[1]->setSpeed(0);
+		//    Serial.println("dans le if de rotation");
+	}
+	else if (sens == 1) {                       // sens anti-horaire
+		while (motorList[1]->getEncoderPos() < target_ticks) {
+			motorList[0]->setSpeed(0);
+			motorList[1]->setSpeed(180);
+			Serial.println(motorList[1]->getEncoderPos());
+		}
+		motorList[0]->setSpeed(0);
+		motorList[1]->setSpeed(0);
+	}
+}
+
+float Program::asservissement_vitesse_Motors(double desired_speed_RotPerSec, boolean sens)       // Asservissement du Moteur Gauche (1)
+{
+	//  Serial.print("Vitesse desiree : ");
+	//  Serial.println(desired_speed_RotPerSec);
+
+	if (desired_speed_RotPerSec > maxSpeed) {
+		desired_speed_RotPerSec = maxSpeed;
+	}
+
+	/*previous2Power_1 = previousPower_1;
+	previous2Power_2 = previousPower_2;
+
+	previousPower_1 = percentPower_1;
+	previousPower_2 = percentPower_2;*/
+
+	// Calcul de la commande :
+	//percentPower_1 = -1 * a1_1 * previousPower_1 + (-1) * a0_1 * previous2Power_1 + b1_1 * ek_1_Previous + b0_1 * ek_1_Previous2; percentPower_1 = -1 * a1_1 * previousPower_1 + (-1) * a0_1 * previous2Power_1 + b1_1 * ek_1_Previous + b0_1 * ek_1_Previous2;
+	float percentPower_1 = motorList[0]->percentPower();
+
+	// Calcul de la commande :
+	float percentPower_2 = motorList[1]->percentPower();
+
+
+	if (percentPower_1 > maxPower) {
+		percentPower_1 = maxPower;
+	}
+	if (percentPower_1 < -maxPower) {
+		percentPower_1 = -maxPower;
+	}
+
+	if (percentPower_2 > maxPower) {
+		percentPower_2 = maxPower;
+	}
+	if (percentPower_2 < -maxPower) {
+		percentPower_2 = -maxPower;
+	}
+
+	float erreur_cmd = percentPower_1 - percentPower_2;
+	//Serial.println(erreur_cmd);
+
+	if (erreur_cmd < 0) {
+		percentPower_2 = percentPower_2 + erreur_cmd;
+		percentPower_1 = percentPower_1 - erreur_cmd;
+	}
+	else if (erreur_cmd > 0) {
+		percentPower_1 = percentPower_1 - erreur_cmd;
+	}
+
+	//  Serial.print("commande en pourcentage pour Moteur gauche : ");
+	//  Serial.print(percentPower_1);
+	//  Serial.print(",  commande en pourcentage pour Moteur droit : ");
+	//  Serial.println(percentPower_1);
+
+	motorList[0]->setDirection(sens);
+	motorList[0]->setSpeed(pourcentToDigital(percentPower_1)); 
+	motorList[1]->setDirection(sens);
+	motorList[1]->setSpeed(pourcentToDigital(percentPower_2));
+
+
+	// Record ticks over time
+	long start = millis();
+	int startTicks_1 = motorList[0]->getEncoderPos();
+	int startTicks_2 = motorList[1]->getEncoderPos();
+
+	while (millis() - start < (samplingPeriodMillis)) {
+	}
+
+	//  Serial.print("start : ");
+	//  Serial.println(start);
+
+	int ticks_1 = motorList[0]->getEncoderPos() - startTicks_1;
+	int ticks_2 = motorList[1]->getEncoderPos() - startTicks_2;
+
+	//Serial.println(ticks_1);
+
+	motorList[0]->setRealSpeed((ticks_1 / nbOfTicksPerRotation) / (samplingPeriodMillis / 1000.0)); // Vitesse réelle en rot/sec
+	motorList[1]->setRealSpeed((ticks_2 / nbOfTicksPerRotation) / (samplingPeriodMillis / 1000.0)); // Vitesse réelle en rot/sec
+
+																					   //  Serial.print("Vitesse reelle Moteur gauche : ");
+																					   //  Serial.print(speed_1_Real);
+																					   //  Serial.print(",  Vitesse reelle Moteur droit : ");
+																					   //  Serial.println(speed_2_Real);
+																					   //
+																					   //  Serial.println();
+
+	motorList[0]->addEkValue(desired_speed_RotPerSec - motorList[0]->getRealSpeed());
+	motorList[1]->addEkValue(desired_speed_RotPerSec - motorList[1]->getRealSpeed());
+	motorList[0]->addPowerValue(percentPower_1);
+	motorList[1]->addPowerValue(percentPower_2);
+
+	//Serial.println(ek_1);
+
+	//return (percentPower_1);
+
+}
+
+int Program::pourcentToDigital(int pourcentage)  //Convertit un pourcentage positif en 0-255
+{
+	if (pourcentage >= 0)
+	{ //then
+		return (pourcentage * 255 / 100); //convertion
+	}
+	else
+	{ //Si le pourcentage est négatif, on renvois zero.
+		return (0);
+	}
+}

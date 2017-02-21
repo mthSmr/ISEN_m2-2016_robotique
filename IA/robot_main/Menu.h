@@ -32,8 +32,8 @@ public:
 
     int getLocations(); //getters
      
-    void runMenu(Program *const, ControlPanel *const, Led *const, Led *const, Buzzer *const, Data *const);	//Function to run the select mode menu
-    void runChoice(Program *const, ControlPanel *const, Led *const, Led *const, Data *const);				//Function to run the selected mode in the menu
+    void runMenu(Program *const, ControlPanel *const, Led *const, Led *const, Buzzer *const);	//Function to run the select mode menu
+    void runChoice(Program *const, ControlPanel *const, Led *const, Led *const);				//Function to run the selected mode in the menu
     
 private:
     

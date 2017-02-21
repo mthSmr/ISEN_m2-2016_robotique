@@ -63,7 +63,7 @@ void Menu::setLocations(int locationsNbr){
 //	Return : nothing
 //*************************************************************************************************************************
 
-void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *const ledFront , Led *const ledBack, Data *const data){
+void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *const ledFront , Led *const ledBack){
         
         Serial.print("choice = ");
             Serial.println(this->choice);
@@ -82,7 +82,7 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *
                 break;
                 
             case 3 : // wi fi joystick
-				robot->useWifi(buttonPanel, ledFront, ledBack, data);
+				robot->wifiJoystick(buttonPanel, ledFront, ledBack);
                 break;
                 
             default:
@@ -98,7 +98,7 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *
 //	Return : nothing
 //**************************************************************************************************************************
 
-void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack, Buzzer *const buzzer, Data *const data){
+void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack, Buzzer *const buzzer){
 
       
      switch(buttonPanel->analyze()){
@@ -127,7 +127,7 @@ void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *c
                 
             case 5 : // validateBtn
                 buzzer->playMelody(VALIDATE);
-                runChoice(robot,buttonPanel,ledFront,ledBack, data);
+                runChoice(robot,buttonPanel,ledFront,ledBack);
                 break;
                 
             default:
