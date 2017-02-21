@@ -1,5 +1,5 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Motor.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Motor.cpp \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Motor.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Motor.cpp \
  D:\Documents\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
@@ -12,8 +12,8 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Motor
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Motor.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\ControlPanel.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Motor.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\ControlPanel.h \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/StandardCplusplus.h \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/vector \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/basic_definitions \
@@ -34,4 +34,4 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Motor
  D:\Documents\Arduino\libraries\StandardCplusplus-master/functional \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/type_traits \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/initializer_list \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Button.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Button.h

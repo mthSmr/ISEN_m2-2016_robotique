@@ -1,5 +1,5 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Button.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Button.cpp \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Button.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Button.cpp \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/StandardCplusplus.h \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/vector \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/basic_definitions \
@@ -31,4 +31,4 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Butto
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Button.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Button.h

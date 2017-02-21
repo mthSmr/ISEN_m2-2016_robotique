@@ -1,7 +1,7 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Menu.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Menu.cpp \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Menu.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Led.h \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Menu.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Menu.cpp \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Menu.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Led.h \
  D:\Documents\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
@@ -34,10 +34,14 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Menu.
  D:\Documents\Arduino\libraries\StandardCplusplus-master/functional \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/type_traits \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/initializer_list \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\ControlPanel.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Button.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Program.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Motor.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Sensor.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\SensorType.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Buzzer.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\ControlPanel.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Button.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Program.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Motor.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Sensor.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\SensorType.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Data.h \
+ D:\Programes\ files\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src/SoftwareSerial.h \
+ D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Wifi.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Buzzer.h

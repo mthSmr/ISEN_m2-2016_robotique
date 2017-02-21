@@ -1,5 +1,5 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Led.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Led.cpp \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Led.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Led.cpp \
  D:\Documents\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
@@ -32,4 +32,4 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Led.c
  D:\Documents\Arduino\libraries\StandardCplusplus-master/functional \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/type_traits \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/initializer_list \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Led.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Led.h

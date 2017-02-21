@@ -1,6 +1,9 @@
-#include "Data.h"
 
 #include <SoftwareSerial.h>
+#include "Wifi.h"
+#include "Data.h"
+#define ESP8266 Serial2
+
 
 Data::Data() {
 
@@ -74,5 +77,27 @@ int Data::analyze(){
     else{
       return memory;
     }
+}
+Data Data::receiveData() {
+
+Data newData(0,0);
+  int power=0;
+  int angle=0;
+  if(ESP8266.available()) 
+     {
+        if(ESP8266.find("+IPD,"))
+        {
+            String action;
+            int connexionId = ESP8266.read()-48;
+            ESP8266.find("Pw=");
+           power=ESP8266.parseInt();
+            // delay(250);
+            ESP8266.find("Angle=");
+           angle=ESP8266.parseInt();
+          angle=(angle)/10;
+        }
+      newData.setData(angle,power);
+    }
+  return newData;
 }
 

@@ -20,6 +20,9 @@
 #include "Button.h"
 #include "Led.h"
 #include <Arduino.h>
+#include "Data.h"
+#include "Wifi.h"
+
 
 class Program {
 
@@ -52,7 +55,7 @@ class Program {
     void dodger(ControlPanel *const, Led *const, Led *const);			//obstacle doger program
     void lineFollower(ControlPanel *const, Led *const, Led  *const);	//lie follower program
     void joystick(ControlPanel *const , Led *const, Led *const);		//joystick program
-	void wifiJoystick(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack);												//joystick with wifi
+	void useWifi(ControlPanel *const buttonPanel, Led *const leds, Led *const, Data *const);		//joystick with wi fi
 
     //user programs
     void arduino();			//slot for the user program

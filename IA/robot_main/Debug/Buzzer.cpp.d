@@ -1,6 +1,6 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Buzzer.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Buzzer.cpp \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Buzzer.h \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Buzzer.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Buzzer.cpp \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Buzzer.h \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/vector \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/basic_definitions \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/system_configuration.h \

@@ -1,5 +1,5 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\ControlPanel.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\ControlPanel.cpp \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\ControlPanel.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\ControlPanel.cpp \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/map \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/memory \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/new \
@@ -48,6 +48,6 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Contr
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\Programes\ files\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\ControlPanel.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\ControlPanel.h \
  D:\Documents\Arduino\libraries\StandardCplusplus-master/StandardCplusplus.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega1280\Debug\Button.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\robot_main\mega_atmega2560\Debug\Button.h
