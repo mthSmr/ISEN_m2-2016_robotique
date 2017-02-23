@@ -22,12 +22,13 @@
 #include "Button.h"
 
 
+
 class Motor {
     
 private:
 
+
 	int motorNumber;
-	
     int pinInput1; // Commande de sens moteur, Input 1
     int pinInput2; // Commande de sens moteur, Input 2  
     int pinEnable;  // Commande de vitesse moteur, Output Enabled1
@@ -47,6 +48,8 @@ private:
 
 
 public:
+
+
     Motor::Motor(int, int, int);
     Motor::Motor(int, int, int, float, bool);
     Motor();
@@ -64,9 +67,9 @@ public:
 	float* getEk();
     
     //setter
-    void setSpeed(float);
+  void setSpeed(float);
 	void setRealSpeed(float);
-    void setDirection(bool);
+  void setDirection(bool);
 	void setEncoderPos(int);
 	void seta0(float);
 	void seta1(float);
@@ -81,6 +84,7 @@ public:
 	float percentPower();
 	void addPowerValue(float);
 	void addEkValue(float);
+
 	//void moveForward(int distance);
 	//void moveBackward(int distance);
 	//void stop();

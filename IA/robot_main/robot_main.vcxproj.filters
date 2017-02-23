@@ -57,6 +57,15 @@
     <ClInclude Include="Data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModulesExternes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dht.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PortType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp">
@@ -87,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulesExternes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

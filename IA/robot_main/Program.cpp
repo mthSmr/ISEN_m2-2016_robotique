@@ -446,7 +446,11 @@ void Program::updateSensor(String sensorToUpdate) {
 //  }
 
 void Program::testAsserv(int target_mm =1000) {
+	
 	avancer(target_mm);
+	attachInterrupt(5, motorList[0]->handleInterrupt, RISING);
+	attachInterrupt(4, motorList[1]->handleInterrupt, RISING);
+
 	/*for (int i = 0; i < 2; i++) {
 		Program::avancer(target_mm);
 		delay(500);
@@ -557,14 +561,7 @@ float Program::asservissement_vitesse_Motors(double desired_speed_RotPerSec, boo
 		desired_speed_RotPerSec = maxSpeed;
 	}
 
-	/*previous2Power_1 = previousPower_1;
-	previous2Power_2 = previousPower_2;
-
-	previousPower_1 = percentPower_1;
-	previousPower_2 = percentPower_2;*/
-
 	// Calcul de la commande :
-	//percentPower_1 = -1 * a1_1 * previousPower_1 + (-1) * a0_1 * previous2Power_1 + b1_1 * ek_1_Previous + b0_1 * ek_1_Previous2; percentPower_1 = -1 * a1_1 * previousPower_1 + (-1) * a0_1 * previous2Power_1 + b1_1 * ek_1_Previous + b0_1 * ek_1_Previous2;
 	float percentPower_1 = motorList[0]->percentPower();
 
 	// Calcul de la commande :

@@ -13,8 +13,14 @@
 #include "Led.h"
 #include "Buzzer.h"
 //#include "Wifi.h"
+#include "ModulesExternes.h"
+#include "dht.h"
 
+/* MODULE EXTERNE DEFINE */
 
+#define CAPTEURTOUCHE 3
+#define CAPTEURTEMPERATURE 1
+#define CAPTEURHUMIDITE 2
 
 
 using namespace std;
@@ -36,9 +42,9 @@ Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
 Sensor sensorLineRight = Sensor(42, A1, 500, SensorType::line, -1);
 
 //------LEDs-------://
-Led frontLeds = Led(44, 6);
+Led frontLeds = Led(44, 5);
 Led *const frontLeds_p = &frontLeds;
-Led backLeds = Led(12, 2);
+Led backLeds = Led(12, 5);
 Led *const backLeds_p = &backLeds;
 //------buttons-------://
 Button btn_up = Button(22);
@@ -99,7 +105,11 @@ void setup() {
 	robot.addLed(&backLeds);
 	robot.setControls(&controls);
 
-    frontLeds.setColor(0,0,0);
+    backLeds.setColor(255,255,255);
+
+	//------ModulesExternes------://
+	ModulesExternes Module1;
+	ModulesExternes Module2;
 
     //-------Son de bienvenu----://
     //speaker_main.playMelody(WELCOMSONG);
@@ -117,8 +127,7 @@ void loop() {
 	robot.testAsserv(1000);
 
   //------menu-------://
-  //menu.runMenu(&robot,&controls,&frontLeds, &backLeds,&speaker_main);
+  //menu.runMenu(&robot,&controls,&frontLeds, &backLeds, &speaker_main);
   //robot.dodger(&controls,&frontLeds);
-  
 
 }
