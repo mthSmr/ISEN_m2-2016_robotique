@@ -14,7 +14,7 @@
 #ifndef TYPE_H
 #define TYPE_H
 
-enum class SensorType {undefined, infraR, lum, line};
+enum class SensorType {undefined, infraR, lum, line};		//The types of sensors we can use with the robot
 
 
 #endif /* TYPE_H */

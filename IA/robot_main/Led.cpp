@@ -15,16 +15,25 @@
 #include <StandardCplusplus.h>
 #include <vector>
 #include "Led.h"
-//#include "Arduino.h"
 
+
+//************************************************************************
+//	Constructor with parameters
+//	Arguments : the pin attached to the leds; the number of leds in serie
+//	Return : nothig
+//************************************************************************
 
 Led::Led(int newPin, int newNumber) {
     this->pin = newPin;
     this->number = newNumber;
-    this->state = false;
-    this->blink = false;
     this->color = {0,0,0};
 }
+
+//************************************************************************
+//	Initialization function
+//	Arguments : none
+//	Return : nothing
+//************************************************************************
 
 bool Led::init(){
 
@@ -33,9 +42,17 @@ bool Led::init(){
     this->strip.show(); //display   
 }
 
+//************************************************************************
+//	Getters
+//************************************************************************
+
 std::vector<int> Led::getColor(){
    return this->color;
 }
+
+//************************************************************************
+//	Setters
+//************************************************************************
 
 void Led::setColor(int newR, int newV, int newB){
     this->color = {newR, newV, newB};

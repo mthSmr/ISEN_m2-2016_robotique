@@ -14,30 +14,32 @@
 #define CONTROLPANEL_H
 
 class ControlPanel {
- public: 
-    int btnNumber;
-    int btnNumberMax;
-    std::vector<Button> btnList;
+ 
+public: 
+    //int btnNumber;
+    int btnNumberMax;				//used to store	 the maximum number of button to resere memory for
+    std::vector<Button> btnList;	//used to store the button list
     
 public:
     
+	//Constructors
     ControlPanel();
     ControlPanel(int);
     
     //getter
     //std::vector::size_type getBtnNumber();
-    int getBtnNumberMax();
+    int getBtnNumberMax();					
     std::vector<Button> getBtnList();
     
     //setters
     void setBtnNumberMax(int);
       
     //l'utilitaire du boutton
-    void addButton(Button); 
-    void reserve(int);
-    void controlRead();
+    void addButton(Button);		//Add a button in the Button list
+    void reserve(int);			//Reserve memory for the list of buttons	
+    void controlRead();			//Read and store the status of the buttons of the control panel
     //int toBinary();
-    int analyze();
+    int analyze();				//Analyse the data stored with the previous read
 };
 
 #endif /* CONTROLPANEL_H */

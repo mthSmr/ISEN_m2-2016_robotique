@@ -15,9 +15,19 @@
 #include "Sensor.h"
 #include "SensorType.h"
 
+//************************************************************************
+//	Constructor
+//************************************************************************
+
 Sensor::Sensor() {
   setType(SensorType::undefined);
 }
+
+//*****************************************************************************************************************************************************************************************************
+//	Constructor with parameters
+//	Arguments : the digitam pin attached to the sensor, the analog pin attached to the sensor, the threshold of the analog pin to set the sensor, the sensor type, the position on the robot <0 if left
+//	Return : nothing
+//*****************************************************************************************************************************************************************************************************
 
 Sensor::Sensor(int newDigitalPin, int newAnalogPin, int newCap, SensorType type, int pos) {
   this->digitalPin = newDigitalPin;
@@ -25,7 +35,14 @@ Sensor::Sensor(int newDigitalPin, int newAnalogPin, int newCap, SensorType type,
   this->cap = newCap;
   this->position = pos;
   setType(type);
+  pinMode(this->digitalPin, OUTPUT);
 }
+
+//************************************************************************
+//	Read the value of the analog pin of the sensor
+//	Arguments : none
+//	Return : nothing
+//************************************************************************
 
 void Sensor::read() {
   int analog;
@@ -33,9 +50,12 @@ void Sensor::read() {
   digitalWrite(this->digitalPin, HIGH);
   delay(5);
   analog = analogRead(analogPin);
-//      Serial.print("capteur ");
-//      Serial.print(" = ");
-//      Serial.println(analog);
+  
+//  Serial.print("capteur ");
+//  Serial.print(" = ");
+//  Serial.println(analog);
+//  delay(1000);
+  
   delay(5);
   digitalWrite(this->digitalPin, LOW);
 
@@ -47,6 +67,10 @@ void Sensor::read() {
 
 }
 
+//************************************************************************
+//	Setter
+//************************************************************************
+
 void Sensor::setType(SensorType newType) {
   type = newType;
 }
@@ -55,13 +79,14 @@ void Sensor::setCap(int newCap) {
   this->cap = newCap;
 }
 
-/*  /!\should not exist/!\ --> you don't want to set a value for your sensor
+void Sensor::setPosition(int pos)
+{
+  this->position = pos;
+}
 
-   void Sensor::setValue(float newValue){
-  value = newValue;
-  }
-*/
-
+//************************************************************************
+//	Getters
+//************************************************************************
 
 SensorType Sensor::getType() {
   return this->type;
@@ -75,10 +100,6 @@ bool Sensor::getValue() {
   return this->value;
 }
 
-void Sensor::setPosition(int pos)
-{
-  this->position = pos;
-}
 
 int Sensor::getPosition()
 {

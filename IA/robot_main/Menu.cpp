@@ -16,13 +16,22 @@
 #include "ControlPanel.h"
 #include "Buzzer.h"
 
-
+//************************************************************************
+//	Constructor with parameters
+//************************************************************************
 
 Menu::Menu() {
+
     this->locations = 0;
     this->choice = 0;
     this->tempChoice = 0;
 }
+
+//************************************************************************
+//	Constructor with parameters
+//	Arguments : the number of choices of programs in the menu
+//	Return : nothing
+//************************************************************************
 
 Menu::Menu(int locationsNbr){
     this->locations = locationsNbr;
@@ -32,39 +41,48 @@ Menu::Menu(int locationsNbr){
 
 
 
-//getters / setters
+//************************************************************************
+//	Getters
+//************************************************************************
 
 int Menu::getLocations(){
     return this->locations;
 }
 
+//************************************************************************
+//	Setters
+//************************************************************************
+
 void Menu::setLocations(int locationsNbr){
     this->locations = locationsNbr;
 }
 
+//*************************************************************************************************************************
+//	Run choice
+//	Arguments : the robot object with all the functionalities, the control panel object, the leds strips for front and back
+//	Return : nothing
+//*************************************************************************************************************************
 
-
-//utilitary
-
-void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led *const leds){
+void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *const ledFront , Led *const ledBack){
         
         Serial.print("choice = ");
             Serial.println(this->choice);
         switch(this->choice){
             
             case 0 : // bleu:evitement d'obstacle
-                robot->dodger(buttonPanel, leds);
+                robot->dodger(buttonPanel, ledFront, ledBack);
                 break;
                 
             case 1 : // vert:joystick
-                robot->joystick(buttonPanel, leds);
+                robot->joystick(buttonPanel, ledFront, ledBack);
                 break;
                 
             case 2: //	orange:suivi de ligne
-				robot->lineFollower(buttonPanel, leds);
+				robot->lineFollower(buttonPanel, ledFront, ledBack);
                 break;
                 
-            case 3 : // scratch programmation
+            case 3 : // wi fi joystick
+				robot->wifiJoystick(buttonPanel, ledFront, ledBack);
                 break;
                 
             default:
@@ -74,7 +92,13 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel, Led 
     this->tempChoice = 0;
 }
 
-void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const leds, Buzzer *const buzzer ){
+//**************************************************************************************************************************
+//	Function to run the program selection
+//	Arguments : the robot object with all the functionalities, the control panel object, the leds strips for front and back
+//	Return : nothing
+//**************************************************************************************************************************
+
+void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack, Buzzer *const buzzer){
 
       
      switch(buttonPanel->analyze()){
@@ -103,7 +127,7 @@ void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *c
                 
             case 5 : // validateBtn
                 buzzer->playMelody(VALIDATE);
-                runChoice(robot,buttonPanel,leds);
+                runChoice(robot,buttonPanel,ledFront,ledBack);
                 break;
                 
             default:
@@ -113,15 +137,21 @@ void Menu::runMenu(Program *const robot, ControlPanel *const buttonPanel, Led *c
         choice = abs(this->tempChoice)%locations;
         
         if (choice == 0){
-          leds->setColor(0, 128, 255);//bleu:evitement d'obstacle
-          
+			ledFront->setColor(0, 128, 255);//bleu:evitement d'obstacle
+			ledBack->setColor(0, 128, 255);
         }
         else if(choice == 1){
-          leds->setColor(0, 25, 255);//vert:joystick
+          ledFront->setColor(0, 25, 255);//vert:joystick
+		  ledBack->setColor(0, 25, 255);
         }
-		    else if (choice == 2) {
-			    leds->setColor(255, 0, 50);//orange:suiveur de ligne
-		    }
+		else if (choice == 2) {
+			ledFront->setColor(255, 0, 50);//orange:suiveur de ligne
+			ledBack->setColor(255, 0, 50);
+		}
+		else if (choice == 3){//rose wi fi
+			ledFront->setColor(253, 108, 158);
+			ledBack->setColor(253, 108, 158);
+		}
     
 }
 

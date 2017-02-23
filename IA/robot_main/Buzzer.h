@@ -25,13 +25,13 @@ private:
 	int delayRythme = 300;			//Used to ...
 	int delayAttente = 100;			//Used to ...
 
-	std::vector<float> welcomeSong; //
-	std::vector<float> menuNext;
-	std::vector<float> validate;
+	std::vector<float> welcomeSong; //Vector of notes constituing the Welcome melody
+	std::vector<float> menuNext;	//Vector of notes constituing the Menu next melody
+	std::vector<float> validate;	//Vector of notes constituing the Valifdate melody
     
 public:
 
-	float doo = 523.25;
+	float doo = 523.25;				//The notes and the corresponding frequencies
 	float doH = 554.37;
 	float ree = 587.33;
 	float reH = 622.25;
@@ -44,15 +44,14 @@ public:
 	float laH = 932.33;
 	float sii = 987.77;
 
+    Buzzer();						//Buzzer constructor
+    Buzzer(int);					//Buzzer constructor with pin assignement
 
-    //Son ne pas oublier la fonction qui défini le pin
-    //Les fonctions qui jour les Buzzer.
-    Buzzer();
-    Buzzer(int); //definition du pin speaker
-
-	void setDelayRythme(int time);
+	void setDelayRythme(int time);	//Setters
 	void setDelayAttente(int time);
     
+	//Custom method
+
     void playSon(float);
 	void playSon(float frequency, int time);
 	void linkKey(char key); //TODO
