@@ -1,5 +1,4 @@
 ﻿#include "Emotions.h"
-
 #include "Arduino.h"
 
 /*
@@ -39,9 +38,10 @@ void Emotions::maxAll(int reg, int col) {    // initialize  all  MAX7219's in th
 	digitalWrite(load, HIGH);
 }
 
-void Emotions::maxOne(int maxNr, int reg, int col) {    //MaxNr = Number of the MAX  | reg = Value in the line | col | wich column ?
-												 //maxOne is for adressing different MAX7219's, 
-												 //whilele having a couple of them cascaded
+//MaxNr = Number of the MAX  | reg = Value in the line | col | wich column ?
+//maxOne is for adressing different MAX7219's, 
+//whilele having a couple of them cascaded
+void Emotions::maxOne(int maxNr, int reg, int col) {    
 
 	int c = 0;
 	digitalWrite(load, LOW);  // begin     
@@ -79,5 +79,5 @@ void Emotions::putByte(int data) {
 		--i;                         // move to lesser bit
 	}
 } 
-
 */
+

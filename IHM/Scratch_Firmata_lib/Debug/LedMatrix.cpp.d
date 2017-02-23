@@ -1,5 +1,6 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\EmotionSprite.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\EmotionSprite.cpp \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\LedMatrix.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\LedMatrix.cpp \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\LedMatrix.h \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/StandardCplusplus.h \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/vector \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/basic_definitions \
@@ -20,8 +21,6 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Em
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/functional \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/type_traits \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/initializer_list \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\EmotionSprite.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\LedMatrix.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -33,4 +32,6 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Em
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\TabPattern.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\EmotionSprite.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\TabPattern.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h

@@ -9,29 +9,6 @@
 #define Filter_gain 0.95             // e.g.  angle = angle_gyro*Filter_gain + angle_accel*(1-Filter_gain)
 #define BUFFER_SIZE 32
 
-//LED
-#define dataIn  30 //DIN 
-#define load  31   //CS  
-#define clock  32  //CLK 
-#define maxInUse  1    //change this variable to set how many MAX7219's you'll use
-#define e  0
-
-// define max7219 registers
-#define max7219_reg_noop  0x00
-#define max7219_reg_digit0  0x01
-#define max7219_reg_digit1  0x02
-#define max7219_reg_digit2  0x03
-#define max7219_reg_digit3  0x04
-#define max7219_reg_digit4  0x05
-#define max7219_reg_digit5  0x06
-#define max7219_reg_digit6  0x07
-#define max7219_reg_digit7  0x08
-#define max7219_reg_decodeMode  0x09
-#define max7219_reg_intensity  0x0a
-#define max7219_reg_scanLimit  0x0b
-#define max7219_reg_shutdown  0x0c
-#define max7219_reg_displayTest  0x0f
-
 // Tableau à double dimensions des differents pattern possibles des yeux 
 int Eyes[55][8] = {
 	{ 60,66,129,153,153,129,66,60 }, //0
@@ -91,16 +68,12 @@ int Eyes[55][8] = {
 	{ 255,255,255,255,255,255,255,255 }, //54
 };
 
-*/
 
-class Emotions {
+class Emotions : LedMatrix {
 
 private: 
 
-
 public:
-
-	/*
 
 	//	VARIABLES
 	int patternNumber;
@@ -114,8 +87,8 @@ public:
 	void maxOne(int maxNr, int reg, int col);
 	void putByte(int data);
 
-	*/
+	
 
 };
-
+*/
 #endif /* EMOTIONS_H */

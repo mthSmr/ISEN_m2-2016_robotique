@@ -16,20 +16,6 @@
 #include <vector> 
 #include <Adafruit_NeoPixel.h>
 
-const int tabColor[10][3] = {
-	{255,255,255},
-	{255,0,0},
-	{0,255,0},
-	{0,0,255},
-	{37,253,233},
-	{223,109,20},
-	{96,96,96},
-	{255,255,0},
-	{255,0,255},
-	{102,0,153}
-};
-
-
 class Led {
 
 public:
@@ -44,6 +30,18 @@ public:
       int r; 
       int v;
       int b;
+	  const int tabColor[10][3] = {
+		  { 255,255,255 },
+		  { 255,0,0 },
+		  { 0,255,0 },
+		  { 0,0,255 },
+		  { 37,253,233 },
+		  { 223,109,20 },
+		  { 96,96,96 },
+		  { 255,255,0 },
+		  { 255,0,255 },
+		  { 102,0,153 }
+	  };
     //TODO: classe color ac nom, code rvb convertisseur hexa
 
      

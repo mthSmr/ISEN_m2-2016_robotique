@@ -23,10 +23,8 @@ See file LICENSE.txt for further informations on licensing terms.
 Last updated by Jeff Hoefs: August 9th, 2015
 */
 
-#include "EmotionSprite.h"
-#include "EmotionSprite.h"
-#include "EmotionSprite.h"
-
+#include "TabPattern.h"
+#include "LedMatrix.h"
 #include <Wire.h>
 #include <Firmata.h>
 #include <Boards.h>
@@ -47,35 +45,8 @@ Last updated by Jeff Hoefs: August 9th, 2015
 #include "Button.h"
 #include "Led.h"
 #include "Buzzer.h"
-
-
-using namespace std;
-int choice = -1;
-int locations = 2;
-
-//------Motors-------://
-Motor motor_l = Motor(9, 8, 10);
-Motor motor_r = Motor(7, 6, 5);
-
-
-//------Sensors-------://
-Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1);
-Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
-Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
-
-//------LEDs-------://
-Led frontLeds = Led(44, 6);
-Led *const frontLeds_p = &frontLeds;
-
-//------buttons-------://
-Button btn_up = Button(22);
-Button btn_left = Button(23);
-Button btn_right = Button(24);
-Button btn_down = Button(25);
-Button btn_valid = Button(26);
-
-//------Son------------://
-Buzzer speaker_main = Buzzer(11);
+#include "Emotions.h"
+#include "EmotionSprite.h"
 
 
 #define I2C_WRITE                   B00000000
@@ -93,10 +64,65 @@ Buzzer speaker_main = Buzzer(11);
 #define BUZZER 0xA3
 #define EMOTIONS 0xA4
 
-Buzzer buzzer(11);
-
 // the minimum interval for sampling analog input
 #define MINIMUM_SAMPLING_INTERVAL 10
+
+using namespace std;
+int choice = -1;
+int locations = 2;
+
+//------Motors--------://
+Motor motor_l = Motor(9, 8, 10);
+Motor motor_r = Motor(6, 7, 5);
+
+
+//------Sensors-------://
+Sensor sensorAvG = Sensor(37, A10, 130, SensorType::infraR, -1);
+Sensor sensorAvM = Sensor(39, A11, 130, SensorType::infraR, 0);
+Sensor sensorAvD = Sensor(41, A12, 130, SensorType::infraR, 1);
+
+//------LEDs----------://
+Led frontLeds = Led(44, 6);
+
+//------buttons-------://
+Button btn_up = Button(22);
+Button btn_left = Button(23);
+Button btn_right = Button(24);
+Button btn_down = Button(25);
+Button btn_valid = Button(26);
+
+//------Buzzer---------://
+Buzzer buzzer(11);
+
+//------Son------------://
+Buzzer speaker_main = Buzzer(11);
+
+//------Init-Emotions--://
+
+TabPattern tabPattern;
+LedMatrix ledMatrix = LedMatrix(30,31,32,2);
+
+std::vector<int> 
+	indexOfHappyEye1 { 0,1,2,1,0,3,4,3,0 },
+	indexOfInLoveEye1 { 0,9,10,10,11,11,10,10,11,11,10,10,11,11,10,10,11,11,10,10,10,9,0 },
+	indexOfEyeClosesEye1 { 0,5,6,7,8,8,8,8,8,8,8,7,6,5,0 },
+	indexOfCrazyEye1 { 0,3,4,19,20,21,22,23,24,25,26,27,28,29,4,3,0 },
+	indexOfDeadEye1 { 0,6,7,44,45,45,45,45,45,44,7,6,0 },
+	indexOfSnowEye1 { 47,48,49,46,46,46,46,49,48,47 },
+	indexOfStarEye1 { 51,51,52,52,53,53,52,52 },
+	indexOfALLREDEye1 { 54 };
+
+EmotionSprite 
+	 happy("happy", sizeof(indexOfHappyEye1), 150, indexOfHappyEye1, &ledMatrix, &tabPattern),
+	 inLove("inLove", sizeof(indexOfInLoveEye1), 150, indexOfInLoveEye1, &ledMatrix, &tabPattern),
+	 eyeCloses("inLove", sizeof(indexOfEyeClosesEye1), 150, indexOfEyeClosesEye1, &ledMatrix, &tabPattern),
+	 crazyEye("crazyEye", sizeof(indexOfCrazyEye1), 150, indexOfCrazyEye1, &ledMatrix, &tabPattern),
+	 deadEye("deadEye", sizeof(indexOfDeadEye1), 150, indexOfDeadEye1, &ledMatrix, &tabPattern),
+	 snowEye("inLove", sizeof(indexOfSnowEye1), 150, indexOfSnowEye1, &ledMatrix, &tabPattern),
+	 starEye("starEye", sizeof(indexOfStarEye1), 150, indexOfStarEye1, &ledMatrix, &tabPattern),
+	 ALLREDEye("inLove", sizeof(indexOfALLREDEye1), 150, indexOfALLREDEye1, &ledMatrix, &tabPattern);
+
+std::vector<EmotionSprite> emotionsTab {happy,inLove,eyeCloses,crazyEye,deadEye,snowEye,starEye,ALLREDEye};
 
 
 /*==============================================================================
@@ -578,7 +604,36 @@ void sysexCallback(byte command, byte argc, byte *argv)
 *============================================================================*/
 
 	case MOTOR:
-
+		switch (argv[0]){
+			case 1:
+				switch (argv[1]){
+					case 1: motor_l.move(argv[2], argv[3]);
+						break;
+					case 2: motor_r.move(argv[2], argv[3]);
+						break;
+					case 3: motor_r.move(argv[2], argv[3]);
+						      motor_l.move(argv[2], argv[3]);
+						break;
+					default:
+						break;
+				}
+				break;
+      case 2:
+        switch (argv[1]){
+          case 1: motor_l.stop();
+            break;
+          case 2: motor_r.stop();
+            break;
+          case 3: motor_r.stop();
+                  motor_l.stop();
+            break;
+          default:
+            break;
+        }
+        break;
+			default:
+				break;
+		}
 
 		break;
 	case LED:
@@ -624,7 +679,28 @@ void sysexCallback(byte command, byte argc, byte *argv)
 		break;
 	case EMOTIONS:
 
-
+		switch (argv[0]) {
+			case 1: happy.printSprite(argv[1]);
+				happy.clear();
+				break;
+			case 2: inLove.printSprite(argv[1]);
+				inLove.clear();
+				break;
+			case 3: crazyEye.printSprite(argv[1]);
+				crazyEye.clear();
+				break;
+			case 4: deadEye.printSprite(argv[1]);
+				deadEye.clear();
+				break;
+			case 5: snowEye.printSprite(argv[1]);
+				snowEye.clear();
+				break;
+			case 6: starEye.printSprite(argv[1]);
+				starEye.clear();
+				break;
+			default:
+				break;
+		}
 		break;
 	}
 }
@@ -706,10 +782,12 @@ void systemResetCallback()
 
 void setup() {
 
+	
+
 	//------motor init-------://
 	motor_l.init();
 	motor_r.init();
-
+ 
 	//------LEDs init-------://
 	frontLeds.init();
 
@@ -728,9 +806,6 @@ void setup() {
 	Firmata.attach(SET_PIN_MODE, setPinModeCallback);
 	Firmata.attach(START_SYSEX, sysexCallback);
 	Firmata.attach(SYSTEM_RESET, systemResetCallback);
-	//  Firmata.attach(MOTOR, systemMotorCallback);
-	//  Firmata.attach(LED, systemLedCallback);
-
 
 	// to use a port other than Serial, such as Serial1 on an Arduino Leonardo or Mega,
 	// Call begin(baud) on the alternate serial port and pass it to Firmata to begin like this:
@@ -738,19 +813,69 @@ void setup() {
 	// Firmata.begin(Serial1);
 	// then comment out or remove lines 701 - 704 below
 
+	
+
 	Firmata.begin(57600);
 	while (!Serial) {
 		; // wait for serial port to connect. Only needed for ATmega32u4-based boards (Leonardo, etc).
 	}
 	systemResetCallback();  // reset to default config
 
+	
+/*
+	
+	Serial.begin(115200);
+	while (!Serial) {
+		// wait for serial port to connect. Only needed for ATmega32u4-based boards (Leonardo, etc).
+	}
+	digitalWrite(13, HIGH);
+*/
+	int e = 0;
+	//initiation of the max 7219
+	ledMatrix.maxAll(max7219_reg_scanLimit, 0x07);
+	ledMatrix.maxAll(max7219_reg_decodeMode, 0x00);  // using a led matrix (not digits)
+	ledMatrix.maxAll(max7219_reg_shutdown, 0x01);    // not in shutdown mode
+	ledMatrix.maxAll(max7219_reg_displayTest, 0x00); // no display test
+	for (e = 1; e <= 8; e++) {    // empty registers, turn all LEDs off 
+		ledMatrix.maxAll(e, 0);
+	}
+	ledMatrix.maxAll(max7219_reg_intensity, 0x0f & 0x0f);    // the first 0x0f is the value you can set
+															 // range: 0x00 to 0x0f 
+
 }
+
 
 /*==============================================================================
 * LOOP()
 *============================================================================*/
 
 void loop() {
+/*
+//digitalWrite(7,HIGH);
+//digitalWrite(6,LOW);
+//analogWrite(5,200);
+
+delay(1000);
+
+//digitalWrite(7,HIGH);
+//digitalWrite(6,LOW);
+//analogWrite(5,0);
+
+delay(1000);
+
+motor_r.setDirection(true);
+motor_r.setSpeed(255);
+
+delay(1000);
+
+motor_r.setSpeed(0);
+
+delay(1000);
+
+//motor_l.setDirection(true);
+//motor_l.setSpeed(200);
+//Serial.println(motor_l.getSpeed());
+*/
 	// put your main code here, to run repeatedly:
 
 	//------Partie de CrashTEST------//

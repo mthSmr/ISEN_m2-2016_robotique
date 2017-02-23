@@ -1,6 +1,6 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Motor.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Motor.cpp \
- D:\Documents\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Motor.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Motor.cpp \
+ C:\Program\ Files\ (x86)\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -12,5 +12,5 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Mo
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Motor.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Button.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Motor.h \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Button.h

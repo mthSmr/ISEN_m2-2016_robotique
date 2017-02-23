@@ -1,6 +1,7 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Sensor.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Sensor.cpp \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\TabPattern.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\TabPattern.cpp \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\TabPattern.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
@@ -10,6 +11,4 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Se
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Sensor.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\SensorType.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h

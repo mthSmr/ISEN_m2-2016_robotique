@@ -36,7 +36,7 @@ public:
     
     Motor(int, int, int);
     Motor(int, int, int, float, bool);
-    
+
     //getter
     float getSpeed();
     bool getDirection();
@@ -47,9 +47,8 @@ public:
 
 	//utilitary 
 	bool init();
-	//void moveForward(int distance);
-	//void moveBackward(int distance);
-	//void stop();
+	void move(int direction, int speed);
+	void stop();
 
 };
 

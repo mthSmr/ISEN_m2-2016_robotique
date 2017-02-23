@@ -1,5 +1,5 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Button.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Button.cpp \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Button.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Button.cpp \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/StandardCplusplus.h \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/vector \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/basic_definitions \
@@ -31,4 +31,4 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Bu
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Button.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Button.h

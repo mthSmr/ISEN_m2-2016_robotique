@@ -30,10 +30,12 @@
             CAPABILITY_QUERY = 0x6B,
             CAPABILITY_RESPONSE = 0x6C;
 
-
         var MOTOR = 0xA1,
             LED = 0xA2,
-            BUZZER = 0xA3;
+            BUZZER = 0xA3,
+            EMOTION = 0xA4;
+			BUTTON = 0xA5;
+			SENSOR = 0xA6;
 
         var INPUT = 0x00,
             OUTPUT = 0x01,
@@ -85,22 +87,8 @@
         var pinging = false;
         var pingCount = 0;
         var pinger = null;
-
-        //var hwList = new HWList();
         
-        var buttonList = ["bouton 1", 22, "bouton 2", 24, "bouton 3", 25, "bouton 4", 23, "bouton 5", 26];
-
-        //  COULEURS
-        /*var blanc = 0,
-            rouge = 1,
-            vert = 2,
-            bleu = 3,
-            turquoise = 4,
-            orange = 5,
-            gris = 6,
-            jaune = 7,
-            magenta = 8,
-            violet = 9;*/
+        var buttonList = ["avant", 22, "droit", 24, "arriere", 25, "gauche", 23, "milieu", 26];
 
     /*==============================================================================
     * INIT FONCTION
@@ -244,35 +232,46 @@
     * MOTOR FONCTIONS
     *============================================================================*/
 
-        function motor(moteur, direction, pwmMot, temps){
-            var msg = new Uint8Array([START_SYSEX, MOTOR, 1, moteur, direction, pwmMot, temps, END_SYSEX]);
+        function motor(moteur, direction, pwmMot){
+            var msg = new Uint8Array([START_SYSEX, MOTOR,1,moteur, direction, pwmMot, END_SYSEX]);
             console.log(msg);
             device.send(msg.buffer);
         }
 
-        ext.motor = function(quelMoteur, direction, pwmMot, temps){
-            //var moteur;
-            //var dir;
-            if (quelMoteur == 'gauche'){
-                moteur = 0;
-            }
-            else if (quelMoteur == 'droit'){
-                moteur = 1;
-            }
+        ext.motor = function(quelMoteur, direction, pwmMot){
+            
+            var threshold = 100;
+            var moteur = 3;
+            var dir = 1;
 
-            if (direction == 'avance'){
-                dir = 0;
-            }
-            else if (direction == 'recule'){
-                dir = 1;
-            }
-            var threshold = 255;
-            if (pwm > threshold) pwmMot = 255;
-            if (pwm < 0) pwmMot = 0;
-            if (temps > 120) temps = 120;        
-            if (temps < 0) temps = 0;  
+            if (quelMoteur == 'gauche') moteur = 1;
+            else if (quelMoteur == 'droit') moteur = 2;
+            else if (quelMoteur == 'gauche et droit') moteur = 3;
 
-            motor(moteur, dir, pwmMot, temps); 
+            if (direction == 'avance') dir = 0;
+            else if (direction == 'recule') dir = 1;
+
+            if (pwmMot > threshold) pwmMot = 100;
+            if (pwmMot < 0) pwmMot = 0;
+
+            motor(moteur, dir, pwmMot); 
+        }
+
+        //----------------------------------------------------------------------------
+
+        function stop(moteur) {
+            var msg = new Uint8Array([START_SYSEX, MOTOR, 2, moteur, END_SYSEX]);
+            console.log(msg);
+            device.send(msg.buffer);
+        }
+
+        ext.stop = function(quelMoteur) {
+            var moteur = 3;
+            if (quelMoteur == 'gauche') moteur = 1;
+            else if (quelMoteur == 'droit') moteur = 2;
+            else if (quelMoteur == 'gauche et droit') moteur = 3;
+
+            stop(moteur); // 
         }
 
         //----------------------------------------------------------------------------
@@ -325,6 +324,8 @@
         ext.tourner = function(angle) {
             tourner(angle); // Repasse à 0 si l'angle est supérieur à 256. Allez savoir pourquoi
         }
+
+        //----------------------------------------------------------------------------
 
     /*==============================================================================
     * LED FONCTIONS     VALIDEES
@@ -430,14 +431,30 @@
 
         //----------------------------------------------------------------------------
 
-        function expression(emotion) {
-            var msg = new Uint8Array([START_SYSEX,LED, 5, emotion,END_SYSEX]);
+    /*==============================================================================
+    * EMOTION FONCTIONS
+    *============================================================================*/
+
+        function expression(emotionNbr,matrixNbr) {
+            var msg = new Uint8Array([START_SYSEX,EMOTION,emotionNbr,matrixNbr,END_SYSEX]);
             console.log(msg);
             device.send(msg.buffer);
         }
+        ext.expression = function(emotion,wichMatrix) {
+            var emotionNbr = 0;
+            var matrixNbr = 0;
+            if (emotion == 'happy')         emotionNbr = 1;
+            else if (emotion == 'inLove')   emotionNbr = 2;
+            else if (emotion == 'crazyEye') emotionNbr = 3;
+            else if (emotion == 'deadEye')  emotionNbr = 4;
+            else if (emotion == 'snowEye')  emotionNbr = 5;
+            else if (emotion == 'starEye')  emotionNbr = 6;
 
-        ext.expression = function(emotion) {
-            expression(emotion);
+            if (wichMatrix == "l'oeil gauche")      matrixNbr = 1;
+            else if (wichMatrix == "l'oeil droit")  matrixNbr = 2;
+            else if (wichMatrix == "les 2 yeux")    matrixNbr = 3;
+
+            expression(emotionNbr,matrixNbr);
         }
 
     /*==============================================================================
@@ -451,6 +468,10 @@
         }
 
         ext.playSon = function(frequency)  {
+            var threshold_d = 80;
+            var threshold_u = 8000;           
+            if (frequency < threshold_d) frequency = 80;
+            if (frequency > threshold_u) frequency = 8000;
             playSon(frequency);
         }
 
@@ -504,6 +525,10 @@
         }
 
         ext.playSonDelay = function(frequency,time)    {
+            var threshold_d = 80;
+            var threshold_u = 8000; 
+            if (frequency < threshold_d) frequency = 80;
+            if (frequency > threshold_u) frequency = 8000;
             var timeBis = 1;
             if (time == 0) time = timeBis;
             playSonDelay(frequency,time);
@@ -585,22 +610,34 @@
     * BUTTON FONCTIONS
     *============================================================================*/
 
-        ext.quandBouton = function(bouton, etatBouton){
+        ext.whenButton = function(bouton, etatBouton){
             var indice = buttonList.indexOf(bouton); 
             var pin = buttonList[indice+1];
             if (!pin) return;
-            if (etatBouton === 'pressé')
-                return digitalRead(pin);
-            else if (etatBouton === 'relaché')
-                return !digitalRead(pin);
+            if (etatBouton === 'pressé') {
+                if (digitalRead(pin) == 0) 
+    				return true; 
+    			else return false;
+    		}
+            else if (etatBouton === 'relaché') {
+                if (digitalRead(pin) == 1)
+    				return true;
+    			else return false;
+    		}
         }
-        
-        ext.boutonPresse = function(bouton) {
+      
+       //----------------------------------------------------------------------------
+
+        ext.buttonPressed = function(bouton) {
             var indice = buttonList.indexOf(bouton); 
             var pin = buttonList[indice+1];
             if (!pin) return;
-            return digitalRead(pin);
+            return !digitalRead(pin);
         }
+    
+	/*==============================================================================
+    * SENSOR FONCTIONS
+    *============================================================================*/
 
     /*==============================================================================
     * OTHER FONCTIONS
@@ -829,101 +866,72 @@
 
     var blocks = {
         fr: [
-
-            /*==============================================================================
-            * BLOCKS LIB PRIMAIRE
-            *============================================================================*/
-
-                /*
-                // MOTOR BLOCKS
-                    [' ', '%m.direction de %n cm', 'mouvementDistance', 'avance', 20],
-                    [' ', 'Tourner de %n degrés', 'tourner', 90],
-                // LED BLOCKS
-                    [' ', 'Régler la LED %m.numLed à R: %n G: %n B: %n', 'couleurLed', 1],
-                    [' ', "Mettre l'expression faciale n°%m.emotion", 'expression', 1],
-                // BUZZER BLOCKS
-                    [' ', 'Jouer la mélodie %m.melodie', 'playMelody', 1],
-
-                // OTHER
-                    ['h', "Quand l'appareil est connecté", 'whenConnected'],
-                    ['h', 'Quand le %m.bouton est %m.etatBouton', 'quandBouton', 'bouton 1', 'pressé'],
-                    ['b', '%m.bouton pressé?', 'boutonPresse', 'bouton 1']
-                */
                     
             /*==============================================================================
             * BLOCKS LIB GENERALE
             *============================================================================*/
 
                 //  VALIDES
+
                     // MOTOR BLOCKS
-                    
+                        [' ','Le moteur %m.quelMoteur %m.direction avec une vitesse de %n %','motor','gauche','avance',70],
+                        [' ','Stop %m.quelMoteur','stop','gauche'],
+
                     // LED BLOCKS
                         [' ','Régler la LED %m.numLed à R: %n G: %n B: %n', 'setColorUnit', 1],
-                        [' ','Allumer les LED à R: %n G: %n B: %n', 'setColorAll','0','0','0'],
+                        [' ','Allumer les LED à R: %n G: %n B: %n', 'setColorAll','10','10','10'],
                         [' ','Etat led : %m.onOff','ledOnOff','Off'],
+                        [' ','Mettre expression faciale %m.emotion sur %m.wichMatrix', 'expression','happy', "les 2 yeux"],
+
                     // BUZZER BLOCKS
                         [' ','Rythme du buzzer : %n s','setDelayRythme','1'],
                         [' ','Buzzer : %m.onOff','buzzerOnOff','Off'],   
-                        [' ','Buzzer : %m.onOff pendant %n sc','buzzerOnOffDelay','Off',1], 
-
-                // EN ATTENTE DE VALIDATION
-                    /*
-                    // MOTOR BLOCKS
-                        [' ','%m.direction de %n cm', 'mouvementDistance', 'avance', 20],
-                        [' ','Le moteur %m.quelMoteur %m.direction avec un PWM à %n pendant %n', 'motor','gauche','avance',20,5],
-                        [' ','Tourner de %n degrés', 'tourner', 90], 
-
-                    // LED BLOCKS
-                        [' ','choisir couleur led : %m.couleur ','setColor','null'],
-                        [' ','Mettre expression faciale n°%m.emotion', 'expression', 1],
-                    // BUZZER BLOCKS
-                        [' ','Frequency : %n Hz time : %n','playSonDelay','500','1'],
-                        [' ','Jouer la mélodie %m.melodie', 'playMelody', 1],
+                        [' ','Buzzer : %m.onOff pendant %n sc','buzzerOnOffDelay','Off',1],
                         [' ','Attente buzzer : %n s','setDelayAttente','1'],
                         [' ','Octave : %m.octave note : %m.note','playNote','4','do'],
-                    */
-                // OTHER
-                    ['h',"Quand l'appareil est connecté", 'whenConnected'],
-                    ['h','Quand le %m.bouton est %m.etatBouton', 'quandBouton', 'bouton 1', 'pressé'],
-                    ['b','%m.bouton pressé?', 'boutonPresse', 'bouton 1']
-                
-            /*==============================================================================
-            * BLOCKS OTHER
-            *============================================================================*/
+                        [' ','Frequency : %n Hz time : %n','playSonDelay','500','1'],
 
-                //[' ', 'set %m.leds brightness to %n%', 'setLED', 'led A', 100],
-                //[' ', 'change %m.leds brightness by %n%', 'changeLED', 'led A', 20],
+                    // BUTTONS
+                        ['h','Quand le %m.bouton est %m.etatBouton', 'whenButton', 'avant', 'pressé'],    
+                        ['b','%m.bouton pressé ?', 'buttonPressed', 'avant'], 
 
-                //[' ', 'rotate %m.servos to %n degrees', 'rotateServo', 'servo A', 180],
-                //[' ', 'rotate %m.servos by %n degrees', 'changeServo', 'servo A', 20],
-                //[' ', 'Mouvement du robot: %m.mvt avec un PWM à %n', 'mouvementVitesse', 'avancer',20],
+                    // OTHER
+                        ['h',"Quand l'appareil est connecté", 'whenConnected'],             
 
-                //['h', 'Quand le %m.bouton est %m.etatBouton', 'whenButton', 'bouton 1', 'pressé'],
-                //['b', '%m.bouton pressé?', 'isButtonPressed', 'bouton 1'],
 
-        ]
+                // EN ATTENTE DE VALIDATION
+                    
+                    // MOTOR BLOCKS
+                        //[' ','Tourner de %n degrés', 'tourner', 90], 
+
+                    // LED BLOCKS
+                        [' ','choisir couleur led : %m.couleur ','setColor','null'], // bleu et vert inversé
+                    // BUZZER BLOCKS
+                        [' ','Jouer la mélodie %m.melodie', 'playMelody', 1],  // la trame ne s'envoie pas
+            ]
     };
 
     var menus = {
         fr: {
             //  BOUTON
-            bouton: ['bouton 1', 'bouton 2', 'bouton 3', 'bouton 4', 'bouton 5'],
+            bouton: ['avant', 'droit', 'arriere', 'gauche', 'milieu'],
             etatBouton: ['pressé', 'relaché'],
             onOff: ['On', 'Off'],
 
             //  LED
             numLed: ['1','2','3','4','5','6'],
             couleur: ['blanc','rouge','vert','bleu','turquoise','orange','gris','jaune','magenta','violet'],
-            emotion: [1,2,3],
+            emotion: ['happy','inLove','crazyEye','deadEye','snowEye','starEye'],
+            wichMatrix : ["l'oeil gauche","l'oeil droit","les 2 yeux"],
 
             //  MOTEUR
-            quelMoteur: ['gauche', 'droit'],
+            quelMoteur: ['gauche', 'droit','gauche et droit'],
             direction: ['avance', 'recule'],
             mvt: ['avancer', 'reculer', 'tourner', 'arrêt'],
 
             //  BUZZER
             melodie: [1,2,3], // même si y'en a qu'une
-            octave: [1,2,3,4,5,6,7],
+            octave: [4,5,6,7],
             note: ['do','do#','re','re#','mi','fa','fa#','sol','sol#','la','la#','si']
         }
     };

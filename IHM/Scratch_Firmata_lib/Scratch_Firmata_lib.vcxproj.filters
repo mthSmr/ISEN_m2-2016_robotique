@@ -45,6 +45,12 @@
     <ClInclude Include="EmotionSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LedMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TabPattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp">
@@ -66,6 +72,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EmotionSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LedMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TabPattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

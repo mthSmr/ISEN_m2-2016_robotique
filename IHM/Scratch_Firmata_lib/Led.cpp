@@ -60,9 +60,9 @@ void Led::setColorUnit(int ledNbr, int newR, int newV, int newB) {
 }
 
 void Led::setColor(int couleur) {
-	this->r = tabColor[couleur][0];
-	this->v = tabColor[couleur][1];
-	this->b = tabColor[couleur][2];
+	this->r = this->tabColor[couleur][0];
+	this->v = this->tabColor[couleur][1];
+	this->b = this->tabColor[couleur][2];
 }
 
 void Led::ledOnOff(bool state) {

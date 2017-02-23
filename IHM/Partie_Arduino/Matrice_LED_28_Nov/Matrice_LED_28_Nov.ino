@@ -18,10 +18,10 @@ Ver: 0.2 beta --- Bug fixed for calculating "angle_y_accel" and "angle_x_accel" 
 
 
 //LED
-int dataIn = 30; //DIN 
-int load = 31;   //CS  
-int clock = 32;  //CLK 
-int maxInUse = 1;    //change this variable to set how many MAX7219's you'll use
+int dataIn = 10; //DIN 
+int load = 9;   //CS  
+int clock = 8;  //CLK 
+int maxInUse = 2;    //change this variable to set how many MAX7219's you'll use
 int e = 0;    
 //Variable globales : 
 
@@ -221,7 +221,7 @@ int printPattern(Emotion emotionInAction, int patternCounter, int partFace) {
   printOnePattern(arrayEye1,1);
   
   if (emotionInAction.name!="sad" and emotionInAction.name!="crazy") {
-    printOnePattern(arrayEye1,4);
+    printOnePattern(arrayEye1,2);
   }
   else {
     if (emotionInAction.name=="crazy") {
@@ -234,7 +234,7 @@ int printPattern(Emotion emotionInAction, int patternCounter, int partFace) {
         arrayEye2[i]=Eyes[indexOfSadEye2[patternCounter]][i];
       }
     }
-    printOnePattern(arrayEye2,4);
+    printOnePattern(arrayEye2,2);
   }
 
   

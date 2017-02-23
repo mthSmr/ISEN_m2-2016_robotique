@@ -1,6 +1,6 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Emotions.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Emotions.cpp \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Emotions.h \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Emotions.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Emotions.cpp \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Emotions.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \

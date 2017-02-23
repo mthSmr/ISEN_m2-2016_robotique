@@ -1,5 +1,5 @@
-C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Buzzer.cpp.o: \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Buzzer.cpp \
+C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Buzzer.cpp.o: \
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Buzzer.cpp \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/StandardCplusplus.h \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/vector \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/basic_definitions \
@@ -20,7 +20,7 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Bu
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/functional \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/type_traits \
  C:\Program\ Files\ (x86)\Arduino\libraries\StandardCplusplus-master/initializer_list \
- D:\Documents\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
+ C:\Program\ Files\ (x86)\Arduino\libraries\Adafruit_NeoPixel-master/Adafruit_NeoPixel.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -32,4 +32,4 @@ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Bu
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega2560\Buzzer.h
+ C:\Users\isen\AppData\Local\Temp\VMBuilds\Scratch_Firmata_lib\mega_atmega1280\Buzzer.h
