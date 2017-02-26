@@ -82,7 +82,7 @@ void Menu::runChoice(Program *const robot, ControlPanel *const buttonPanel,Led *
                 break;
                 
             case 3 : // wi fi joystick
-				robot->wifiJoystick(buttonPanel, ledFront, ledBack);
+				robot->useWifi(buttonPanel, ledFront, ledBack);
                 break;
                 
             default:

@@ -16,7 +16,7 @@
 #include "Motor.h"
 
 
-static void (Motor::*interruptFunction_p)();
+
 
 //************************************************************************
 //	Constructor with parameters
@@ -196,19 +196,12 @@ void Motor::initControl(int interrupt, float newa0, float newa1, float newb0, fl
 		setb0(newb0);
 		setb1(newb1);
 
-		// Interruption de l'encodeur A en sortie 5 (pin 18)
-		//attachInterrupt(interrupt, handleInterrupt, RISING);		// increase counter of Motor when speed sensor pin goes High
 
 		// Initialisation sortie moteur à 0
 		setSpeed(0);
 		delay(300);                // Pause de 0,3 sec pour laisser le temps au moteur de s'arréter si celui-ci est en marche
 
 	}
-}
-
-void Motor::handleInterrupt()
-{
-	interruptFunction_p;
 }
 
 void Motor::doCount()

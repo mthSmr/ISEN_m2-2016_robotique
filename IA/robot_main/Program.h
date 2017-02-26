@@ -19,15 +19,20 @@
 #include "Sensor.h"
 #include "Button.h"
 #include "Led.h"
+#include "Buzzer.h"
+#include "Data.h"
 #include <Arduino.h>
 
 class Program {
 
 private:
-    std::vector<Motor*> motorList;    //used to store the motor list
-    std::vector<Sensor*> sensorList;  //used to store the sensor list
-    std::vector<Led*> ledList;      //used to store the led strips list
-    ControlPanel* controls;       //used to store the control panel
+    std::vector<Motor*> motorList;		//used to store the motor list
+    std::vector<Sensor*> sensorList;	//used to store the sensor list
+    std::vector<Led*> ledList;			//used to store the led strips list
+    ControlPanel* controls;				//used to store the control panel
+	Data* data;							//used to store the data
+	Buzzer* speaker;					//used to store the buzzer
+
 	static const int nbOfTicksPerRotation = 20;
 	static const int samplingPeriodMillis = 50;
 	static const int gain = 4;
@@ -52,7 +57,8 @@ private:
 
     //setters
     void setControls(ControlPanel* newControlPanel);
-
+	void setData(Data* newData);
+	void setBuzzer(Buzzer* newBuzzer);
     //utilitaire
     void addMotor(Motor *const);		//add a motor object in the motor vector
     void addSensor(Sensor *const);		//add a sensor object in the sensor vector
@@ -62,7 +68,7 @@ private:
     void dodger(ControlPanel *const, Led *const, Led *const);			//obstacle doger program
     void lineFollower(ControlPanel *const, Led *const, Led  *const);	//lie follower program
     void joystick(ControlPanel *const , Led *const, Led *const);		//joystick program
-	void wifiJoystick(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack);												//joystick with wifi
+	void useWifi(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack);												//joystick with wifi
 
     //user programs
     void arduino();			//slot for the user program

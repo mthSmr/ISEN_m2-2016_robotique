@@ -1,4 +1,5 @@
 
+#include "Interrupt.h"
 #include "StandardCplusplus.h"
 #include "vector"
 
@@ -12,7 +13,7 @@
 #include "Menu.h"
 #include "Led.h"
 #include "Buzzer.h"
-//#include "Wifi.h"
+#include "Wifi.h"
 #include "ModulesExternes.h"
 #include "dht.h"
 
@@ -33,6 +34,8 @@ int locations = 4;
 
 
 //------Sensors-------://
+/*	V2	*/
+/*
 Sensor sensorAvG = Sensor(37, A10, 100, SensorType::infraR, 1); 
 Sensor sensorAvM = Sensor(39, A11, 100, SensorType::infraR, 0);
 Sensor sensorAvD = Sensor(41, A12, 100, SensorType::infraR, -1);
@@ -40,12 +43,28 @@ Sensor sensorArG = Sensor(45, A14, 100, SensorType::infraR, 10);
 Sensor sensorArD = Sensor(47, A15, 100, SensorType::infraR, -10);
 Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
 Sensor sensorLineRight = Sensor(42, A1, 500, SensorType::line, -1);
+*/
+/*	V3	*/	
+Sensor sensorAvD = Sensor(37, A9, 300, SensorType::infraR, -2);		//r�el digital = 35
+Sensor sensorAvMD = Sensor(35, A10, 300, SensorType::infraR, -1);	//r�el digital = 37
+Sensor sensorAvM = Sensor(39, A11, 300, SensorType::infraR, 0);		//r�el digital = 39
+Sensor sensorAvMG = Sensor(41, A12, 300, SensorType::infraR, 1);	//r�el digital = 41
+Sensor sensorAvG = Sensor(43, A13, 300, SensorType::infraR, 2);		//r�el digital = 43
+Sensor sensorArG = Sensor(47, A14, 300, SensorType::infraR, 10);
+Sensor sensorArD = Sensor(49, A15, 300, SensorType::infraR, -10);
+Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
+Sensor sensorLineRight = Sensor(42, A1, 500, SensorType::line, -1);
 
 //------LEDs-------://
+/*	V2	*/
+/*
 Led frontLeds = Led(44, 5);
-Led *const frontLeds_p = &frontLeds;
 Led backLeds = Led(12, 5);
-Led *const backLeds_p = &backLeds;
+*/
+/*	V3	*/
+Led frontLeds = Led(12, 6);
+Led backLeds = Led(44, 5);
+
 //------buttons-------://
 Button btn_up = Button(22);
 Button btn_left = Button(23);
@@ -57,7 +76,7 @@ Button btn_valid = Button(26);
 ControlPanel controls(5);
 
 //------Son------------://
-Buzzer speaker_main = Buzzer(11);
+Buzzer speaker = Buzzer(11);
 
 //------menu-------://
 Menu menu = Menu(locations);
@@ -66,14 +85,15 @@ Menu menu = Menu(locations);
 Program robot = Program(2,7);
 
 //------wi-fi-------://
-//Wifi wifi = Wifi();
-//Data data = Data(0, 0);
+Wifi wifi = Wifi();
+Data data = Data(0, 0);
 
 
 void setup() {
     
-//	wifi.init();
-//	wifi.createWifiAccessPoint("Robot_Thoma", "txrobotic");
+	//------Wifi init-------://
+	wifi.init();
+	wifi.createWifiAccessPoint("Robot_Thoma", "txrobotic");
 
     //------motor init-------://
     motor_l.init();
@@ -85,7 +105,7 @@ void setup() {
     frontLeds.init();
 	backLeds.init();
     
-    //------Controls init-------://
+    //------Add component to robot-------://
     controls.addButton(btn_right);
     controls.addButton(btn_left);
     controls.addButton(btn_down);
@@ -94,6 +114,7 @@ void setup() {
 
     robot.addMotor(&motor_l);
     robot.addMotor(&motor_r);
+
     robot.addSensor(&sensorAvG);
     robot.addSensor(&sensorAvM);
     robot.addSensor(&sensorAvD);
@@ -101,10 +122,15 @@ void setup() {
 	robot.addSensor(&sensorArD);
 	robot.addSensor(&sensorLineLeft);
 	robot.addSensor(&sensorLineRight);
+
 	robot.addLed(&frontLeds);
 	robot.addLed(&backLeds);
-	robot.setControls(&controls);
 
+	robot.setControls(&controls);
+	robot.setData(&data);
+	robot.setBuzzer(&speaker);
+
+	//------turning bot-------://
     backLeds.setColor(255,255,255);
 
 	//------ModulesExternes------://
@@ -127,7 +153,7 @@ void loop() {
 	robot.testAsserv(1000);
 
   //------menu-------://
-  //menu.runMenu(&robot,&controls,&frontLeds, &backLeds, &speaker_main);
+  menu.runMenu(&robot,&controls,&frontLeds, &backLeds, &speaker);
   //robot.dodger(&controls,&frontLeds);
 
 }

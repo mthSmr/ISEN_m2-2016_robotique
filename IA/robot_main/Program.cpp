@@ -76,6 +76,16 @@ void Program::setControls(ControlPanel* newControlPanel)
   this->controls = newControlPanel;
 }
 
+void Program::setData(Data * newData)
+{
+	this->data = newData;
+}
+
+void Program::setBuzzer(Buzzer * newBuzzer)
+{
+	this->speaker = newBuzzer;
+}
+
 void Program::addMotor(Motor *const newMotor)
 {
   this->motorList.push_back(newMotor);
@@ -102,40 +112,85 @@ void Program::dodger(ControlPanel *const buttonPanel, Led *const ledFront, Led *
   ledFront->setColor(1, 250, 49);//bleu foncé
   ledBack->setColor(1, 250, 49);
   delay(250);
+  int speed = 110;
 
   do {
 
     this->updateSensor("distance");
     for (int i = 0; i < this->sensorList.size(); i++) {
       if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 0 && this->sensorList[i]->getValue() == true) {
+        //Serial.println("Reculer");
         motorList[0]->setDirection(true);
         motorList[1]->setDirection(false);
-		motorList[1]->setSpeed(255);
-		delay(20);
         motorList[0]->setSpeed(0);
-        motorList[1]->setSpeed(150);
-        //delay(1000);
+		    motorList[1]->setSpeed(255);
+		    delay(20);
+        motorList[1]->setSpeed(speed);
+        //i = 20; <<<<<<<<<<<<<<<<< Pourquoi utiliser un for pour en sortir à la fin du premier tour?
       }
       else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 1 && this->sensorList[i]->getValue() == true) {
-
-		motorList[1]->setSpeed(0);
-        //delay(250);
+        //Serial.println("tourner droite");
+        motorList[0]->setDirection(true);
+        motorList[1]->setDirection(true);
+        motorList[1]->setSpeed(0);
+        motorList[0]->setSpeed(150);
+        delay(20);
+        motorList[0]->setSpeed(speed);
+        //i = 20;
       }
+      else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == 2 && this->sensorList[i]->getValue() == true) {
+        //Serial.println("tourner fort droite");
+        motorList[0]->setDirection(true);
+        motorList[1]->setDirection(false);
+        motorList[0]->setSpeed(255);
+        motorList[1]->setSpeed(250);
+        delay(20);
+        motorList[0]->setSpeed(speed);
+        motorList[1]->setSpeed(speed);
+        //i = 20;
+        }
+        
       else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == -1 && this->sensorList[i]->getValue() == true) {
-       
-		motorList[0]->setSpeed(0);
-        //delay(250);
+        //Serial.println("tourner gauche");
+        motorList[0]->setDirection(true);
+        motorList[1]->setDirection(true);
+        motorList[0]->setSpeed(0);
+        motorList[1]->setSpeed(255);
+        delay(20);
+        motorList[1]->setSpeed(speed);
+        i = 20;;
+      }
+      
+        else if (this->sensorList[i]->getType() == SensorType::infraR && this->sensorList[i]->getPosition() == -2 && this->sensorList[i]->getValue() == true) {
+        //Serial.println("tourner fort gauche");
+        motorList[0]->setDirection(false);
+        motorList[1]->setDirection(true);
+        motorList[0]->setSpeed(255);
+        motorList[1]->setSpeed(255);
+        delay(20);
+        motorList[0]->setSpeed(speed);
+        motorList[1]->setSpeed(speed);
+        i = 20;
+      }
+      else if (this->sensorList[i]->getType() == SensorType::infraR && (this->sensorList[i]->getPosition() == 10 || this->sensorList[i]->getPosition() == -10)  && this->sensorList[i]->getValue() == true) {
+        //Serial.println("aller avant");
+        motorList[0]->setDirection(true);
+        motorList[1]->setDirection(true);
+        motorList[0]->setSpeed(255);
+        motorList[1]->setSpeed(255);
+        delay(20);
+        i = 20;
       }
 
       else if (this->sensorList[0]->getValue() == false && this->sensorList[1]->getValue() == false && this->sensorList[2]->getValue() == false ){
-
+        //Serial.println("Tout droit");
         motorList[0]->setDirection(true);
         motorList[1]->setDirection(true);
-        motorList[0]->setSpeed(200);
-        motorList[1]->setSpeed(200);
-		delay(20);
-		motorList[0]->setSpeed(80);
-		motorList[1]->setSpeed(80);
+        motorList[0]->setSpeed(150);
+        motorList[1]->setSpeed(150);
+    		delay(20);
+    		motorList[0]->setSpeed(speed);
+        motorList[1]->setSpeed(speed);
       }
       delay(70);
     }
@@ -341,9 +396,102 @@ void Program::joystick(ControlPanel *const buttonPanel, Led *const ledFront, Led
 //	Return : nothing
 //************************************************************************
 
-void Program::wifiJoystick(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack) {
-  ledFront->setColor(255, 0, 255);
-  ledBack->setColor(255, 0, 255);
+void Program::useWifi(ControlPanel *const buttonPanel, Led *const ledFront, Led *const ledBack) {
+  ledFront->setColor(255, 10, 255);
+  ledBack->setColor(255, 10, 255);
+
+  while (buttonPanel->analyze() != 5) {
+    //*data = data->receiveData();
+    int a = data->getA();
+    int p = data->getP();
+    switch (data->analyze()) {
+    case 0: // sleep
+      delay(5);
+      this->motorList[0]->setDirection(true);
+      this->motorList[1]->setDirection(true);
+      this->motorList[1]->setSpeed(0);
+      this->motorList[0]->setSpeed(0);
+
+      // Print pour test 
+      //Serial.println("ARRET");
+      break;
+    case 1: // up
+      delay(5);
+      this->motorList[0]->setDirection(true);
+      this->motorList[1]->setDirection(true);
+      this->motorList[1]->setSpeed(240);
+      this->motorList[0]->setSpeed(240);
+
+      // Print pour test 
+      //Serial.println("up");
+      break;
+    case 2:
+      delay(5);
+      this->motorList[0]->setDirection(true);
+      this->motorList[1]->setDirection(true);
+      this->motorList[0]->setSpeed(240);
+      this->motorList[1]->setSpeed(200);
+      // Print pour test 
+      //Serial.println("up right");
+      break;
+    case 3:
+      delay(5);
+      this->motorList[0]->setDirection(true);
+      this->motorList[1]->setDirection(true);
+      this->motorList[0]->setSpeed(200);
+      this->motorList[1]->setSpeed(100);
+      //Serial.println("droite"); 
+      break;
+    case 4:
+      delay(5);
+      this->motorList[0]->setDirection(false);
+      this->motorList[1]->setDirection(false);
+      this->motorList[0]->setSpeed(240);
+      this->motorList[1]->setSpeed(200);
+      //Serial.println(" down right");
+      break;
+    case 5:
+      delay(5);
+      this->motorList[0]->setDirection(false);
+      this->motorList[1]->setDirection(false);
+      this->motorList[0]->setSpeed(240);
+      this->motorList[1]->setSpeed(240);
+      //Serial.println("down");
+      break;
+    case 6:
+      delay(5);
+      this->motorList[0]->setDirection(false);
+      this->motorList[1]->setDirection(false);
+      this->motorList[0]->setSpeed(200);
+      this->motorList[1]->setSpeed(240);
+      //Serial.println("down left");
+      break;
+    case 7:
+      delay(5);
+      this->motorList[0]->setDirection(true);
+      this->motorList[1]->setDirection(true);
+      this->motorList[0]->setSpeed(100);
+      this->motorList[1]->setSpeed(200);
+      //Serial.println("left");
+      break;
+    case 8:
+      delay(5);
+      this->motorList[0]->setDirection(true);
+      this->motorList[1]->setDirection(true);
+      this->motorList[0]->setSpeed(200);
+      this->motorList[1]->setSpeed(240);
+      //Serial.println("upleft");
+      break;
+    default:
+      this->motorList[0]->setDirection(true);
+      this->motorList[1]->setDirection(true);
+      this->motorList[1]->setSpeed(0);
+      this->motorList[0]->setSpeed(0);
+      break;
+    }
+  }
+  motorList[0]->setSpeed(0);
+  motorList[1]->setSpeed(0);
 }
 
 //************************************************************************
@@ -448,8 +596,6 @@ void Program::updateSensor(String sensorToUpdate) {
 void Program::testAsserv(int target_mm =1000) {
 	
 	avancer(target_mm);
-	attachInterrupt(5, motorList[0]->handleInterrupt, RISING);
-	attachInterrupt(4, motorList[1]->handleInterrupt, RISING);
 
 	/*for (int i = 0; i < 2; i++) {
 		Program::avancer(target_mm);

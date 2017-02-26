@@ -51,12 +51,16 @@ void Sensor::read() {
   delay(5);
   analog = analogRead(analogPin);
   
-//  Serial.print("capteur ");
-//  Serial.print(" = ");
-//  Serial.println(analog);
-//  delay(1000);
+  //Serial.print("capteur ");
+  //Serial.println(this->position);
+  //Serial.print(" = ");
+  //Serial.println(analog);
+  //delay(1000);
+  //Serial.println(this->digitalPin);
+  //Serial.print("Capteur gauche: ");
+  //Serial.println(analogRead(A13));
+  //delay(5);
   
-  delay(5);
   digitalWrite(this->digitalPin, LOW);
 
   if (analog >= this->cap) {

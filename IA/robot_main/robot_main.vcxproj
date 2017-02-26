@@ -93,6 +93,7 @@
     </ClInclude>
     <ClInclude Include="Data.h" />
     <ClInclude Include="dht.h" />
+    <ClInclude Include="Interrupt.h" />
     <ClInclude Include="Led.h">
       <FileType>CppCode</FileType>
     </ClInclude>
@@ -123,6 +124,7 @@
     <ClCompile Include="Buzzer.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Interrupt.cpp" />
     <ClCompile Include="Led.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ModulesExternes.cpp" />

@@ -66,6 +66,9 @@
     <ClInclude Include="PortType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Interrupt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModulesExternes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interrupt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
