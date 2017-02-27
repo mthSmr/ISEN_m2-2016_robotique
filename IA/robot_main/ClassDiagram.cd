@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Button">
+    <Position X="23.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAACIAAAAAAAAAAAAAACAAAAAEAAAAAAA=</HashCode>
+      <FileName>Button.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Buzzer">
+    <Position X="20.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACAIIYAAAAQgAYAAwIIQAABAQAAAAAAEAEBBAAIAAI=</HashCode>
+      <FileName>Buzzer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlPanel">
+    <Position X="4.75" Y="10.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAhABAAIACAAAAAAAAAAAAAAIAgAAAAEAAAAA=</HashCode>
+      <FileName>ControlPanel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data">
+    <Position X="7" Y="10.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAACAAIABAAAAAAAABAgAEAAAAJAACA=</HashCode>
+      <FileName>Data.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dht">
+    <Position X="9" Y="10.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAYAMAACAAAAAAAAAQAAAAAAQAAAABAAA=</HashCode>
+      <FileName>dht.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Led">
+    <Position X="18.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAQIIAAAAAAAAAAAAAAAKAARABgAAIAAA=</HashCode>
+      <FileName>Led.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Menu">
+    <Position X="0.5" Y="10.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAQAAAAAAABAKACAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Menu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModulesExternes">
+    <Position X="15" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>CoBAiAIUAAkAAAIAgCAAABRoAAEAAQASEBUIBAAAAAA=</HashCode>
+      <FileName>ModulesExternes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Motor">
+    <Position X="6" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>ABIQEGoDAAAEKCCSAAAgAQAzAQE4AYIBAAEgAQAgAQQ=</HashCode>
+      <FileName>Motor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Program">
+    <Position X="0.5" Y="0.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>EQWAEQQAEAUqEAYIAADACwAAACABAzAIASBQAwQABgA=</HashCode>
+      <FileName>Program.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sensor">
+    <Position X="9.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEJAAAAQQAACAAACAAIAACARBBACACAAAAAAAAAAA=</HashCode>
+      <FileName>Sensor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TwoWire">
+    <Position X="12.5" Y="10.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAcKAAgCAAAAEGAAAAUQAAAAAQAAAUgAAIhHEQA=</HashCode>
+      <FileName>Lib\Wire\Wire.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wifi">
+    <Position X="12" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AQAAgAAAQAAAAAECAAAAAAAAAAAAAAIAAACAAAQAAAA=</HashCode>
+      <FileName>Wifi.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PortType">
+    <Position X="16.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>PortType.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SensorType">
+    <Position X="18.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAIIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SensorType.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

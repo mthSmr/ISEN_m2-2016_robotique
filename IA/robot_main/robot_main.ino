@@ -45,11 +45,11 @@ Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
 Sensor sensorLineRight = Sensor(42, A1, 500, SensorType::line, -1);
 */
 /*	V3	*/	
-Sensor sensorAvD = Sensor(37, A9, 300, SensorType::infraR, -2);		//r�el digital = 35
-Sensor sensorAvMD = Sensor(35, A10, 300, SensorType::infraR, -1);	//r�el digital = 37
-Sensor sensorAvM = Sensor(39, A11, 300, SensorType::infraR, 0);		//r�el digital = 39
-Sensor sensorAvMG = Sensor(41, A12, 300, SensorType::infraR, 1);	//r�el digital = 41
-Sensor sensorAvG = Sensor(43, A13, 300, SensorType::infraR, 2);		//r�el digital = 43
+Sensor sensorAvD = Sensor(37, A9, 300, SensorType::infraR, -2);		
+Sensor sensorAvMD = Sensor(35, A10, 300, SensorType::infraR, -1);	
+Sensor sensorAvM = Sensor(39, A11, 300, SensorType::infraR, 0);		
+Sensor sensorAvMG = Sensor(41, A12, 300, SensorType::infraR, 1);	
+Sensor sensorAvG = Sensor(43, A13, 300, SensorType::infraR, 2);		
 Sensor sensorArG = Sensor(47, A14, 300, SensorType::infraR, 10);
 Sensor sensorArD = Sensor(49, A15, 300, SensorType::infraR, -10);
 Sensor sensorLineLeft = Sensor(40, A0, 500, SensorType::line, 1);
@@ -62,8 +62,8 @@ Led frontLeds = Led(44, 5);
 Led backLeds = Led(12, 5);
 */
 /*	V3	*/
-Led frontLeds = Led(12, 6);
-Led backLeds = Led(44, 5);
+Led backLeds = Led(12, 5);
+Led frontLeds = Led(44, 6);
 
 //------buttons-------://
 Button btn_up = Button(22);
@@ -132,6 +132,7 @@ void setup() {
 
 	//------turning bot-------://
     backLeds.setColor(255,255,255);
+	frontLeds.setColor(255, 255, 255);
 
 	//------ModulesExternes------://
 	ModulesExternes Module1;
